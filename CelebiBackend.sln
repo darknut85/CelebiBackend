@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objects", "Objects\Objects.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "PokemonService\Services.csproj", "{BD369EBE-583E-4B46-8A29-423BCDF1E271}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unittests", "Unittests", "{CB629D09-A08A-43BB-A030-F782F9E3048F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logic", "logic", "{D6A570D3-8E89-466E-85CF-AA6E0B0BEF6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unittests", "Unittests\Unittests.csproj", "{39F2ECD8-2BAD-4505-9A17-F53A914C55C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +35,10 @@ Global
 		{BD369EBE-583E-4B46-8A29-423BCDF1E271}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD369EBE-583E-4B46-8A29-423BCDF1E271}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD369EBE-583E-4B46-8A29-423BCDF1E271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39F2ECD8-2BAD-4505-9A17-F53A914C55C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39F2ECD8-2BAD-4505-9A17-F53A914C55C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39F2ECD8-2BAD-4505-9A17-F53A914C55C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39F2ECD8-2BAD-4505-9A17-F53A914C55C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
