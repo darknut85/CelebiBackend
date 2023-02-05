@@ -1,5 +1,8 @@
-﻿namespace Objects
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Objects
 {
+    [ExcludeFromCodeCoverage]
     public class Pokemon
     {
         public int Id { get; set; }

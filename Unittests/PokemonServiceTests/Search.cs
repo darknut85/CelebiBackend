@@ -1,9 +1,11 @@
 using Objects;
 using Services;
+using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
 namespace Unittests.PokemonServiceTests
 {
+    [ExcludeFromCodeCoverage]
     public class Search
     {
         [Theory]

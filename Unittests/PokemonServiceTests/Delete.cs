@@ -1,12 +1,12 @@
 using Objects;
 using Services;
+using System.Diagnostics.CodeAnalysis;
 using Xunit;
 namespace Unittests.PokemonServiceTests
 {
+    [ExcludeFromCodeCoverage]
     public class Delete
     {
-
-
         [Fact]
         public void Delete_Should_DeletePokemon()
         {
