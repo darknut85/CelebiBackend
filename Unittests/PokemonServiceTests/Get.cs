@@ -8,7 +8,7 @@ namespace Unittests.PokemonServiceTests
         [Fact]
         public void Get_Should_ReturnList()
         {
-            //arranger
+            //arrange
             PokemonService pokemonService = new();
 
             //act

@@ -1,6 +1,5 @@
 using Objects;
 using Services;
-using System.Diagnostics;
 using Xunit;
 namespace Unittests.PokemonServiceTests
 {

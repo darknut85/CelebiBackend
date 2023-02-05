@@ -52,7 +52,7 @@ namespace Services
             throw new NotImplementedException();
         }
 
-        public Pokemon Delete(int id)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
