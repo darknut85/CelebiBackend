@@ -5,23 +5,59 @@ namespace Services
 {
     public class PokemonService : IPokemonService
     {
+        List<Pokemon> pokemonList;
+
+        public PokemonService() 
+        { 
+            pokemonList = new();
+            MakePokemonList();
+        }
 
         public Pokemon Get(int id)
         {
-            Pokemon? pokemon = MakePokemonList().Where(x => x.Id == id).FirstOrDefault();
+            Pokemon? pokemon = pokemonList.Where(x => x.Id == id).FirstOrDefault();
             if (pokemon == null)
                 return new Pokemon();
             return pokemon;
         }
 
-        public List<Pokemon> Get() => MakePokemonList();
+        public List<Pokemon> Get()
+        {
+           return pokemonList;
+        }
 
-        public List<Pokemon> Search(string query) => MakePokemonList().Where(x => x.Name.Contains(query) || x.PokedexEntry.Contains(query) || x.Type1 == query || x.Type2.Contains(query)).ToList();
+        public List<Pokemon> Search(string query) => pokemonList.Where(x => x.Name.Contains(query) || x.PokedexEntry.Contains(query) || x.Type1 == query || x.Type2.Contains(query)).ToList();
 
+
+        public Pokemon Create(Pokemon pokemon)
+        {
+            Pokemon? newPokemon = pokemonList.Where(x => x.Name == pokemon.Name).FirstOrDefault();
+            if (newPokemon != null)
+                return new Pokemon();
+            pokemonList.Add(pokemon);
+            return pokemon;
+        }
+
+        public bool Delete(int id)
+        {
+            Pokemon? deletedPokemon = pokemonList.Where(x => x.Id == id).FirstOrDefault();
+            return pokemonList.Remove(deletedPokemon);
+        }
+
+        public Pokemon Update(Pokemon pokemon)
+        {
+            var index = pokemonList.FindIndex(x => x.Id == pokemon.Id);
+            if (index > -1)
+            {
+                pokemonList[index] = pokemon;
+                return pokemon;
+            }
+            return new Pokemon();
+        }
 
         private List<Pokemon> MakePokemonList()
         {
-            List<Pokemon>? pokemonList = new List<Pokemon>
+            pokemonList = new()
             {
                 new Pokemon()
                 {
@@ -45,21 +81,6 @@ namespace Services
                 }
             };
             return pokemonList;
-        }
-
-        public Pokemon Create(Pokemon pokemon)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Pokemon Update(Pokemon pokemon)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -48,8 +48,12 @@ namespace Unittests.PokemonServiceTests
             //arrange
             PokemonService pokemonService = new();
 
-            //act & assert
-            Assert.Throws<NullReferenceException>(() => pokemonService.Update(emptyPokemon));
+            //act
+            Pokemon updatedPokemon = pokemonService.Update(emptyPokemon);
+
+            //assert
+            Assert.True(updatedPokemon.Id == 0);
+            Assert.True(updatedPokemon.Name == null);
         }
 
         [Fact]

@@ -6,12 +6,14 @@ namespace Unittests.PokemonServiceTests
     public class Create
     {
         Pokemon pokemon;
+        Pokemon existingPokemon;
         Pokemon emptyPokemon;
         Pokemon? nullPokemon;
 
         public Create() 
         { 
             pokemon = new Pokemon() { Id = 150, Name = "Mewtwo", DexEntry = 150, Type1 = "Psychic", Type2 = "", Height = 2, Weight = 2, Classification = "???", PokedexEntry = "..." };
+            existingPokemon = new Pokemon() { Id = 1, Name = "Bulbasaur" };
             emptyPokemon = new Pokemon();
             nullPokemon = null;
         }
@@ -28,6 +30,19 @@ namespace Unittests.PokemonServiceTests
             //assert
             Assert.True(newPokemon.Id == pokemon.Id);
             Assert.True(newPokemon.Name == pokemon.Name);
+        }
+
+        [Fact]
+        public void Create_ShouldNot_MakePokemon_IfPokemonExists()
+        {
+            //arrange
+            PokemonService pokemonService = new();
+
+            //act
+            Pokemon newPokemon = pokemonService.Create(existingPokemon);
+
+            //assert
+            Assert.True(newPokemon.Id == 0);
         }
 
         [Fact]

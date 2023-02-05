@@ -21,7 +21,7 @@ namespace Unittests.PokemonServiceTests
         }
 
         [Fact]
-        public void Create_Should_NotDeletePokemon()
+        public void Delete_Should_NotDeletePokemon()
         {
             //arrange
             PokemonService pokemonService = new();

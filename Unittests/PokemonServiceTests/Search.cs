@@ -1,7 +1,6 @@
 using Objects;
 using Services;
 using Xunit;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Unittests.PokemonServiceTests
 {
@@ -48,6 +47,16 @@ namespace Unittests.PokemonServiceTests
 
             //assert
             Assert.True(pokemonList.Count() == 3);
+        }
+
+        [Fact]
+        public void Search_Should_ThrowArgumentNullException()
+        {
+            //arrange
+            PokemonService pokemonService = new();
+
+            //act & assert
+            Assert.Throws<ArgumentNullException>(() => pokemonService.Search(null));
         }
     }
 }
