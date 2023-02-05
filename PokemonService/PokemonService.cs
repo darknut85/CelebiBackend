@@ -5,6 +5,7 @@ namespace Services
 {
     public class PokemonService : IPokemonService
     {
+
         public Pokemon Get(int id)
         {
             Pokemon? pokemon = MakePokemonList().Where(x => x.Id == id).FirstOrDefault();
@@ -16,6 +17,7 @@ namespace Services
         public List<Pokemon> Get() => MakePokemonList();
 
         public List<Pokemon> Search(string query) => MakePokemonList().Where(x => x.Name.Contains(query) || x.PokedexEntry.Contains(query) || x.Type1 == query || x.Type2.Contains(query)).ToList();
+
 
         private List<Pokemon> MakePokemonList()
         {
@@ -43,6 +45,21 @@ namespace Services
                 }
             };
             return pokemonList;
+        }
+
+        public Pokemon Create(Pokemon pokemon)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Pokemon Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Pokemon Update(Pokemon pokemon)
+        {
+            throw new NotImplementedException();
         }
     }
 }
