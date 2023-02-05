@@ -1,8 +1,9 @@
-﻿using Objects;
+﻿using Interfaces;
+using Objects;
 
 namespace Services
 {
-    public class PokemonService
+    public class PokemonService : IPokemonService
     {
         public Pokemon Get(int id)
         {

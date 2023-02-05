@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Celebi.Console", "CelebiBackend\Celebi.Console.csproj", "{BBC47A88-D12F-4544-94E7-0CE4F10D03FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Celebi.Console", "CelebiBackend\Celebi.Console.csproj", "{BBC47A88-D12F-4544-94E7-0CE4F10D03FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{5263C410-4660-4CDA-98A0-D4041644CFD4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{73734579-7A7B-4D65-BF51-7C0319595767}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objects", "Objects\Objects.csproj", "{DAC2474D-813C-4AC5-869E-91F6B54E7367}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Objects", "Objects\Objects.csproj", "{DAC2474D-813C-4AC5-869E-91F6B54E7367}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "PokemonService\Services.csproj", "{BD369EBE-583E-4B46-8A29-423BCDF1E271}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "PokemonService\Services.csproj", "{BD369EBE-583E-4B46-8A29-423BCDF1E271}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logic", "logic", "{D6A570D3-8E89-466E-85CF-AA6E0B0BEF6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unittests", "Unittests\Unittests.csproj", "{39F2ECD8-2BAD-4505-9A17-F53A914C55C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unittests", "Unittests\Unittests.csproj", "{39F2ECD8-2BAD-4505-9A17-F53A914C55C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{375A1FBA-5821-4744-B9CD-8F201CE20213}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{39F2ECD8-2BAD-4505-9A17-F53A914C55C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39F2ECD8-2BAD-4505-9A17-F53A914C55C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39F2ECD8-2BAD-4505-9A17-F53A914C55C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{375A1FBA-5821-4744-B9CD-8F201CE20213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{375A1FBA-5821-4744-B9CD-8F201CE20213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{375A1FBA-5821-4744-B9CD-8F201CE20213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{375A1FBA-5821-4744-B9CD-8F201CE20213}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +53,7 @@ Global
 		{BBC47A88-D12F-4544-94E7-0CE4F10D03FB} = {5263C410-4660-4CDA-98A0-D4041644CFD4}
 		{DAC2474D-813C-4AC5-869E-91F6B54E7367} = {73734579-7A7B-4D65-BF51-7C0319595767}
 		{BD369EBE-583E-4B46-8A29-423BCDF1E271} = {D6A570D3-8E89-466E-85CF-AA6E0B0BEF6C}
+		{375A1FBA-5821-4744-B9CD-8F201CE20213} = {73734579-7A7B-4D65-BF51-7C0319595767}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD383CE9-F2A0-43AF-A72F-3806E9625793}
