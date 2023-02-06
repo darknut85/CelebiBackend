@@ -6,9 +6,12 @@ namespace Migrations
     {
         public DbSet<Pokemon> Pokemons { get; set; }
 
-        public DataContext() { }
+        //public DataContext() { }
 
-        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+        public DataContext(DbContextOptions<DataContext> options) : base(options) 
+        { 
+        
+        }
 
         string cs = @"Host=localhost;Username=postgres;Port=1700;Password=Soraheliatos2@;Database=pokemon";
 

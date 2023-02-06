@@ -15,5 +15,7 @@ namespace Interfaces
         Pokemon Update(Pokemon pokemon);
 
         bool Delete(int id);
+
+        void SaveChanges();
     }
 }

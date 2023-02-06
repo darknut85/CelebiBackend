@@ -1,4 +1,8 @@
-﻿using Objects;
+﻿using Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Migrations;
+using Objects;
 using Services;
 
 namespace CelebiBackend
@@ -7,8 +11,16 @@ namespace CelebiBackend
     {
         static void Main(string[] args)
         {
+            ServiceCollection serviceProvider = new ServiceCollection();
+
+            IServiceProvider provider = serviceProvider.AddDbContext<DataContext>
+                (options => { options.UseNpgsql(@"Host=localhost;Username=postgres;Port=1700;Password=Soraheliatos2@;Database=pokemon"); }, ServiceLifetime.Transient)
+                .AddScoped<IPokemonService, PokemonService>().BuildServiceProvider();
+
+            var pokemonService = provider.GetRequiredService<IPokemonService>();
+
             Pokedex pokedex = new();
-            pokedex.MainMenu();
+            pokedex.MainMenu(pokemonService);
         }
     }
 
@@ -16,9 +28,8 @@ namespace CelebiBackend
     { 
         List<Pokemon>? pokemonList;
 
-        public void MainMenu()
+        public void MainMenu(IPokemonService pokemonService)
         {
-            PokemonService pokemonService = new();
             pokemonList = pokemonService.Get();
             while (true)
             {

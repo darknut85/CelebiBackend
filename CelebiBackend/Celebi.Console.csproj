@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\Migrations\Migrations.csproj" />
     <ProjectReference Include="..\Objects\Objects.csproj" />
     <ProjectReference Include="..\PokemonService\Services.csproj" />
   </ItemGroup>

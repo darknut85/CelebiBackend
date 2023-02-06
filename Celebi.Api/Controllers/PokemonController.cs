@@ -1,9 +1,6 @@
 using Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Migrations;
 using Objects;
-using Services;
 
 namespace Celebi.Api.Controllers
 {
@@ -11,46 +8,44 @@ namespace Celebi.Api.Controllers
     [Route("[controller]")]
     public class PokemonController : ControllerBase
     {
-        PokemonService pokemonService;
-        DataContext dataContext;
+        IPokemonService _pokemonService;
 
-        public PokemonController(IPokemonService pokemonService, DbContext dataContext)
+        public PokemonController(IPokemonService pokemonService)
         {
-            pokemonService = this.pokemonService;
-            dataContext = this.dataContext;
+            _pokemonService = pokemonService;
         }
 
         [HttpGet]
         public IEnumerable<Pokemon> Get()
         {
-            return pokemonService.Get();
+            return _pokemonService.Get();
         }
 
         [HttpGet("id")]
         public Pokemon Get(int id)
         {
-            return pokemonService.Get(id);
+            return _pokemonService.Get(id);
         }
 
         [HttpPost]
         public void Create(Pokemon pokemon) 
         { 
-            pokemonService.Create(pokemon);
-            pokemonService.SaveChanges();
+            _pokemonService.Create(pokemon);
+            _pokemonService.SaveChanges();
         }
 
         [HttpDelete("id")]
         public void Delete(int id) 
         { 
-            pokemonService.Delete(id);
-            pokemonService.SaveChanges();
+            _pokemonService.Delete(id);
+            _pokemonService.SaveChanges();
         }
 
         [HttpPut]
         public void Put(Pokemon pokemon) 
         { 
-            pokemonService.Update(pokemon);
-            pokemonService.SaveChanges();
+            _pokemonService.Update(pokemon);
+            _pokemonService.SaveChanges();
         }
     }
 }
