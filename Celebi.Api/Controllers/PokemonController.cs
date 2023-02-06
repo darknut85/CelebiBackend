@@ -1,4 +1,7 @@
+using Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Migrations;
 using Objects;
 using Services;
 
@@ -9,13 +12,12 @@ namespace Celebi.Api.Controllers
     public class PokemonController : ControllerBase
     {
         PokemonService pokemonService;
+        DataContext dataContext;
 
-        private readonly ILogger<PokemonController> _logger;
-
-        public PokemonController(ILogger<PokemonController> logger)
+        public PokemonController(IPokemonService pokemonService, DbContext dataContext)
         {
-            _logger = logger;
-            pokemonService = new PokemonService();
+            pokemonService = this.pokemonService;
+            dataContext = this.dataContext;
         }
 
         [HttpGet]

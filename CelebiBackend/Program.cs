@@ -7,7 +7,6 @@ namespace CelebiBackend
     {
         static void Main(string[] args)
         {
-            
             Pokedex pokedex = new();
             pokedex.MainMenu();
         }
