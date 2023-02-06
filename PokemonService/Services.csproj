@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\Migrations\Migrations.csproj" />
     <ProjectReference Include="..\Objects\Objects.csproj" />
   </ItemGroup>
 
