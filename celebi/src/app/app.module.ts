@@ -12,12 +12,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonService } from './components/pokedexRedBlue/pokedexRedBlue.service';
+import { PokedexPageComponent } from './components/pokedex-page/pokedex-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PokedexRedBlueComponent,
-    HomeComponent
+    HomeComponent,
+    PokedexPageComponent
   ],
   imports: [
     BrowserModule,

@@ -26,7 +26,7 @@ export class PokemonService {
     }
 
     getPokemonByID(id: number): Observable < Pokemon > {
-        return this.httpClient.get < Pokemon > (this.apiURL + '/pokemon/' + id).pipe(catchError(this.errorHandler))
+        return this.httpClient.get < Pokemon > (this.apiURL + '/pokemon/id?id=' + id).pipe(catchError(this.errorHandler))
     }
 
     updatePokemon(pokemon: Pokemon): Observable < Pokemon > {

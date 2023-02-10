@@ -6,21 +6,15 @@
             <div class="Title">
                 <h1>CelebiDotNet</h1>
             </div>
-            <div>Content</div>
         </div>
         
         <mat-form-field appearance="fill">
             <mat-label>Select</mat-label>
             <mat-select>
-                <mat-option value="one">Bulbasaur</mat-option>
-                <mat-option value="two">Ivysaur</mat-option>
-                <mat-option value="two">Venusaur</mat-option>
+                <div *ngFor="let pokemon of parray">
+                    <mat-option value="one" [routerLink]="['/pokedexPage',pokemon.id]">{{ pokemon.name }}</mat-option>
+                </div>
             </mat-select>
         </mat-form-field>
-
-        <div *ngFor="let pokemon of parray">
-            <div>{{ pokemon.name }}</div>
-        </div>
-        <h2>{{parray.length}}</h2>
     </body>
 </html>
