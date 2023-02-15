@@ -1,9 +1,11 @@
 ﻿using Migrations;
 using Objects;
+using System.Diagnostics.CodeAnalysis;
 using TestSupport.EfHelpers;
 
 namespace Unittests
 {
+    [ExcludeFromCodeCoverage]
     public static class TestSeedingExtensions
     {
         public static void PokemonSetup(this DataContext dataContext)
