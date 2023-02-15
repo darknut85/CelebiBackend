@@ -4,24 +4,32 @@ using Objects;
 using Services;
 using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
-using TestSupport.EfHelpers;
 using Xunit;
+
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
     public class GetId
     {
+        PokemonService pokemonService;
+        DbContextOptions<DataContext> options;
+
+        public GetId()
+        {
+
+            options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            DataContext context = new(options);
+            context.DefaultSetup();
+            pokemonService = new PokemonService(context);
+        }
+
         [Fact]
         public void GetId_Should_ReturnPokemon()
         {
             //arrange
-            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
-            using DataContext context = new(options);
-            context.DefaultSetup();
-            PokemonService pokemonService2 = new(context);
 
             //act
-            Pokemon pokemon = pokemonService2.Get(1);
+            Pokemon pokemon = pokemonService.Get(1);
 
             //assert
             Assert.True(pokemon.Id == 1);
@@ -35,13 +43,9 @@ namespace Unittests.PokemonServiceTests
         public void GetId_Should_ReturnNoPokemon(int id)
         {
             //arrange
-            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
-            using DataContext context = new(options);
-            context.DefaultSetup();
-            PokemonService pokemonService2 = new(context);
 
             //act
-            Pokemon pokemon = pokemonService2.Get(id);
+            Pokemon pokemon = pokemonService.Get(id);
 
             //assert
             Assert.True(pokemon.Id == 0);

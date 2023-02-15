@@ -4,22 +4,30 @@ using Services;
 using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
 using Xunit;
+
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
     public class Delete
     {
+        PokemonService pokemonService;
+        DbContextOptions<DataContext> options;
+
+        public Delete()
+        {
+
+            options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            DataContext context = new(options);
+            context.DefaultSetup();
+            pokemonService = new PokemonService(context);
+        }
         [Fact]
         public void Delete_Should_DeletePokemon()
         {
             //arrange
-            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
-            using DataContext context = new(options);
-            context.DefaultSetup();
-            PokemonService pokemonService2 = new(context);
 
             //act
-            bool deleted = pokemonService2.Delete(5);
+            bool deleted = pokemonService.Delete(5);
 
             //assert
             Assert.True(deleted);
@@ -29,13 +37,9 @@ namespace Unittests.PokemonServiceTests
         public void Delete_Should_NotDeletePokemon()
         {
             //arrange
-            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
-            using DataContext context = new(options);
-            context.DefaultSetup();
-            PokemonService pokemonService2 = new(context);
 
             //act
-            bool deleted = pokemonService2.Delete(999);
+            bool deleted = pokemonService.Delete(999);
 
             //assert
             Assert.False(deleted);
