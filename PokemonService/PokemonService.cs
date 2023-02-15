@@ -1,30 +1,31 @@
 ﻿using Interfaces;
+using Migrations;
 using Objects;
 
 namespace Services
 {
     public class PokemonService : IPokemonService
     {
-        private readonly IRepository repository;
+        private readonly DataContext dataContext;
 
-        public PokemonService(IRepository repository)
+        public PokemonService(DataContext dataContext)
         {
-            this.repository = repository;
+            this.dataContext = dataContext;
         }
 
         public Pokemon Get(int id)
         {
-            return repository.Get(id);
+            return dataContext.Set<Pokemon>().FirstOrDefault(x => x.Id == id);
         }
 
         public List<Pokemon> Get()
         {
-            return repository.GetAll().ToList();
+            return dataContext.Set<Pokemon>().OrderBy(x => x.DexEntry).ToList();
         }
 
         public List<Pokemon> Search(string query)
         {
-            return repository.GetAll().Where(x => x.Name.Contains(query) || x.PokedexEntry.Contains(query) || x.Type1 == query || x.Type2.Contains(query)).ToList();
+            return dataContext.Set<Pokemon>().Where(x => x.Name.Contains(query) || x.PokedexEntry.Contains(query) || x.Type1 == query || x.Type2.Contains(query)).ToList();
         }
 
 
@@ -33,14 +34,14 @@ namespace Services
             Pokemon? newPokemon = Get().Where(x => x.Name == pokemon.Name).FirstOrDefault();
             if (newPokemon != null)
                 return new Pokemon();
-            repository.Create(pokemon);
+            dataContext.Set<Pokemon>().Add(pokemon);
             return pokemon;
         }
 
         public bool Delete(int id)
         {
-            Pokemon q = Get(id);
-            repository.Delete(q);
+            var q = Get(id);
+            dataContext.Set<Pokemon>().Remove(q);
             return true;
         }
 
@@ -49,14 +50,14 @@ namespace Services
             var q = Get(pokemon.Id);
             if (q.Id == pokemon.Id)
             {
-                repository.Update(pokemon);
+                dataContext.Set<Pokemon>().Update(pokemon);
                 return pokemon;
             }
             return new Pokemon();
         }
         public void SaveChanges()
         {
-            repository.SaveChanges();
+            dataContext.SaveChanges();
         }
     }
 }
