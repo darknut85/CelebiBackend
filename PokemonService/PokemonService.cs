@@ -6,13 +6,11 @@ namespace Services
 {
     public class PokemonService : IPokemonService
     {
-        //private readonly IRepository repository;
         private DataContext dataContext;
 
-        public PokemonService(DataContext dataContext)//IRepository repository)
+        public PokemonService(DataContext dataContext)
         {
             this.dataContext = dataContext;
-            //this.repository = repository;
         }
 
         public Pokemon Get(int id)
@@ -24,20 +22,17 @@ namespace Services
                 return pokemon;
             }
             return new Pokemon();
-            //return dataContext.Set<Pokemon>().Get(id);
         }
 
         public List<Pokemon> Get()
         {
 
             return dataContext.Set<Pokemon>().OrderBy(x => x.DexEntry).ToList();
-            //return repository.GetAll().ToList();
         }
 
         public List<Pokemon> Search(string query)
         {
             return dataContext.Set<Pokemon>().OrderBy(x => x.DexEntry).Where(x => x.Name.Contains(query) || x.PokedexEntry.Contains(query) || x.Type1 == query || x.Type2.Contains(query)).ToList();
-            //return repository.GetAll().Where(x => x.Name.Contains(query) || x.PokedexEntry.Contains(query) || x.Type1 == query || x.Type2.Contains(query)).ToList();
         }
 
 
@@ -48,7 +43,6 @@ namespace Services
                 return new Pokemon();
             dataContext.Set<Pokemon>().Add(pokemon);
             SaveChanges();
-            //repository.Create(pokemon);
             return pokemon;
         }
 
@@ -61,7 +55,6 @@ namespace Services
             }
             dataContext.Set<Pokemon>().Remove(pokemon);
             SaveChanges();
-            //repository.Delete(pokemon);
             return true;
         }
 
@@ -73,15 +66,12 @@ namespace Services
             {
                 dataContext.Set<Pokemon>().Update(pokemon);
                 SaveChanges();
-                //repository.Update(pokemon);
                 return pokemon;
             }
             return new Pokemon();
         }
         public void SaveChanges()
         {
-            dataContext.SaveChanges();
-            //repository.SaveChanges();
         }
     }
 }
