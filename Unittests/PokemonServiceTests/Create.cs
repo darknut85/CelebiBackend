@@ -1,6 +1,12 @@
+using Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Migrations;
+using Moq;
 using Objects;
 using Services;
 using System.Diagnostics.CodeAnalysis;
+using Test.Helpers;
+using TestSupport.EfHelpers;
 using Xunit;
 namespace Unittests.PokemonServiceTests
 {
@@ -11,20 +17,28 @@ namespace Unittests.PokemonServiceTests
         Pokemon existingPokemon;
         Pokemon emptyPokemon;
         Pokemon? nullPokemon;
+        PokemonService pokemonService;
+        DataContext context;
+
 
         public Create() 
         { 
-            pokemon = new Pokemon() { Id = 150, Name = "Mewtwo", DexEntry = 150, Type1 = "Psychic", Type2 = "", Height = 2, Weight = 2, Classification = "???", PokedexEntry = "..." };
-            existingPokemon = new Pokemon() { Id = 1, Name = "Bulbasaur" };
+            pokemon = new Pokemon() {Name = "Chikorita", DexEntry = 152, Type1 = "Grass", Type2 = "", Height = 3, Weight = 3, Classification = "???", PokedexEntry = "..." };
+            existingPokemon = new Pokemon() { Id = 150, Name = "Mewtwo" };
             emptyPokemon = new Pokemon();
             nullPokemon = null;
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            pokemonService = new PokemonService(context);
+
         }
 
         [Fact]
         public void Create_Should_MakePokemon()
         {
             //arrange
-            PokemonService pokemonService = new();
+            PokemonService pokemonService = new(context);
 
             //act
             Pokemon newPokemon = pokemonService.Create(pokemon);
@@ -38,7 +52,7 @@ namespace Unittests.PokemonServiceTests
         public void Create_ShouldNot_MakePokemon_IfPokemonExists()
         {
             //arrange
-            PokemonService pokemonService = new();
+            PokemonService pokemonService = new(context);
 
             //act
             Pokemon newPokemon = pokemonService.Create(existingPokemon);
@@ -51,7 +65,7 @@ namespace Unittests.PokemonServiceTests
         public void Create_Should_MakePokemonWithoutInfo()
         {
             //arrange
-            PokemonService pokemonService = new();
+            PokemonService pokemonService = new(context);
 
             //act
             Pokemon newPokemon = pokemonService.Create(emptyPokemon);
@@ -64,7 +78,7 @@ namespace Unittests.PokemonServiceTests
         public void Create_Should_ThrowNullReferenceException()
         {
             //arrange
-            PokemonService pokemonService = new();
+            PokemonService pokemonService = new(context);
 
             //act & assert
             Assert.Throws<NullReferenceException>(() => pokemonService.Create(nullPokemon));

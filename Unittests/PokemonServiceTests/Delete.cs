@@ -1,6 +1,8 @@
-using Objects;
+using Microsoft.EntityFrameworkCore;
+using Migrations;
 using Services;
 using System.Diagnostics.CodeAnalysis;
+using Test.Helpers;
 using Xunit;
 namespace Unittests.PokemonServiceTests
 {
@@ -11,10 +13,13 @@ namespace Unittests.PokemonServiceTests
         public void Delete_Should_DeletePokemon()
         {
             //arrange
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act
-            bool deleted = pokemonService.Delete(1);
+            bool deleted = pokemonService2.Delete(5);
 
             //assert
             Assert.True(deleted);
@@ -24,10 +29,13 @@ namespace Unittests.PokemonServiceTests
         public void Delete_Should_NotDeletePokemon()
         {
             //arrange
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act
-            bool deleted = pokemonService.Delete(999);
+            bool deleted = pokemonService2.Delete(999);
 
             //assert
             Assert.False(deleted);

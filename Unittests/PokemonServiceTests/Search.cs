@@ -1,6 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Migrations;
 using Objects;
 using Services;
 using System.Diagnostics.CodeAnalysis;
+using Test.Helpers;
+using TestSupport.EfHelpers;
 using Xunit;
 
 namespace Unittests.PokemonServiceTests
@@ -16,10 +20,13 @@ namespace Unittests.PokemonServiceTests
         public void Search_Should_ReturnList(string text)
         {
             //arranger
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act
-            List<Pokemon> pokemonList = pokemonService.Search(text);
+            List<Pokemon> pokemonList = pokemonService2.Search(text);
 
             //assert
             Assert.True(pokemonList.Any());
@@ -27,12 +34,15 @@ namespace Unittests.PokemonServiceTests
 
         [Fact]
         public void Search_Should_ReturnEmptyList() 
-        { 
+        {
             //arrange
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act
-            List<Pokemon> pokemonList = pokemonService.Search("psychic");
+            List<Pokemon> pokemonList = pokemonService2.Search("psychic");
 
             //assert
             Assert.False(pokemonList.Any());
@@ -42,23 +52,31 @@ namespace Unittests.PokemonServiceTests
         public void Search_Should_ReturnMultipleEntries()
         {
             //arrange
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act
-            List<Pokemon> pokemonList = pokemonService.Search("saur");
+            List<Pokemon> pokemonList = pokemonService2.Search("saur");
 
             //assert
             Assert.True(pokemonList.Count() == 3);
         }
 
         [Fact]
-        public void Search_Should_ThrowArgumentNullException()
+        public void Search_Should_ReturnZeroEntries()
         {
             //arrange
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act & assert
-            Assert.Throws<ArgumentNullException>(() => pokemonService.Search(null));
+            var a = pokemonService2.Search(null);
+
+            Assert.True(a.Count == 0);
         }
     }
 }

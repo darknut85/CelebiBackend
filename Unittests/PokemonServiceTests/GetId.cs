@@ -1,6 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Migrations;
 using Objects;
 using Services;
 using System.Diagnostics.CodeAnalysis;
+using Test.Helpers;
+using TestSupport.EfHelpers;
 using Xunit;
 namespace Unittests.PokemonServiceTests
 {
@@ -11,10 +15,13 @@ namespace Unittests.PokemonServiceTests
         public void GetId_Should_ReturnPokemon()
         {
             //arrange
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act
-            Pokemon pokemon = pokemonService.Get(1);
+            Pokemon pokemon = pokemonService2.Get(1);
 
             //assert
             Assert.True(pokemon.Id == 1);
@@ -28,10 +35,13 @@ namespace Unittests.PokemonServiceTests
         public void GetId_Should_ReturnNoPokemon(int id)
         {
             //arrange
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act
-            Pokemon pokemon = pokemonService.Get(id);
+            Pokemon pokemon = pokemonService2.Get(id);
 
             //assert
             Assert.True(pokemon.Id == 0);

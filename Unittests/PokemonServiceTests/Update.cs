@@ -1,6 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Migrations;
 using Objects;
 using Services;
 using System.Diagnostics.CodeAnalysis;
+using Test.Helpers;
+using TestSupport.EfHelpers;
 using Xunit;
 namespace Unittests.PokemonServiceTests
 {
@@ -15,15 +19,15 @@ namespace Unittests.PokemonServiceTests
         {
             pokemon = new Pokemon()
             {
-                Id = 1,
-                Name = "Squirtle",
-                DexEntry = 7,
-                Classification = "Turtle Pokemon",
-                Height = 0.7,
-                Weight = 6.9,
-                Type1 = "Water",
+                Id = 5,
+                Name = "Chikorita",
+                DexEntry = 5,
+                Type1 = "Grass",
                 Type2 = "",
-                PokedexEntry = "Water guns. Has a thick shell"
+                Height = 4,
+                Weight = 1,
+                Classification = "???",
+                PokedexEntry = "..."
             };
 
             emptyPokemon = new Pokemon();
@@ -34,10 +38,13 @@ namespace Unittests.PokemonServiceTests
         public void Update_Should_ChangePokemon()
         {
             //arrange
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act
-            Pokemon updatedPokemon = pokemonService.Update(pokemon);
+            Pokemon updatedPokemon = pokemonService2.Update(pokemon);
 
             //assert
             Assert.True(updatedPokemon.Id == pokemon.Id);
@@ -48,10 +55,13 @@ namespace Unittests.PokemonServiceTests
         public void Update_Should_ThrowNullReferenceException_WhenUpdatingPokemonWithoutInfo()
         {
             //arrange
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act
-            Pokemon updatedPokemon = pokemonService.Update(emptyPokemon);
+            Pokemon updatedPokemon = pokemonService2.Update(emptyPokemon);
 
             //assert
             Assert.True(updatedPokemon.Id == 0);
@@ -62,10 +72,13 @@ namespace Unittests.PokemonServiceTests
         public void Update_Should_ThrowNullReferenceException_WhenUpdatingNullPokemon()
         {
             //arrange
-            PokemonService pokemonService = new();
+            DbContextOptions<DataContext> options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
+            using DataContext context = new(options);
+            context.DefaultSetup();
+            PokemonService pokemonService2 = new(context);
 
             //act & assert
-            Assert.Throws<NullReferenceException>(() => pokemonService.Update(nullPokemon));
+            Assert.Throws<NullReferenceException>(() => pokemonService2.Update(nullPokemon));
         }
     }
 }

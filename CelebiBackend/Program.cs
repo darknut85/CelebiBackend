@@ -16,7 +16,7 @@ namespace CelebiBackend
             IServiceProvider provider = serviceProvider.AddDbContext<DataContext>
                 (options => { options.UseNpgsql(@"Host=localhost;Username=postgres;Port=1700;Password=Soraheliatos2@;Database=pokemon"); }, ServiceLifetime.Transient)
                 .AddScoped<IPokemonService, PokemonService>()
-                .AddScoped<IRepository, Repository>()
+                //.AddScoped<IRepository, Repository>()
                 .BuildServiceProvider();
 
             var pokemonService = provider.GetRequiredService<IPokemonService>();
