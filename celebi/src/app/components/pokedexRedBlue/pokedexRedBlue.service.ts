@@ -17,26 +17,26 @@ export class PokemonService {
         })
     }
     constructor(private httpClient: HttpClient) {}
+
     getPokemon(): Observable < Pokemon[] > {
         return this.httpClient.get <Pokemon[]> (this.apiURL + '/Pokemon').pipe(catchError(this.errorHandler));
     }
 
     addPokemon(pokemon: Pokemon): Observable < Pokemon > {
-        return this.httpClient.post < Pokemon > (this.apiURL + '/pokemon', JSON.stringify(pokemon), this.httpOptions).pipe(catchError(this.errorHandler))
+        return this.httpClient.post < Pokemon > (this.apiURL + '/Pokemon', JSON.stringify(pokemon), this.httpOptions).pipe(catchError(this.errorHandler))
     }
-
+    
     getPokemonByID(id: number): Observable < Pokemon > {
-        return this.httpClient.get < Pokemon > (this.apiURL + '/pokemon/id?id=' + id).pipe(catchError(this.errorHandler))
+        return this.httpClient.get < Pokemon > (this.apiURL + '/Pokemon/id?id=' + id).pipe(catchError(this.errorHandler))
     }
 
     updatePokemon(pokemon: Pokemon): Observable < Pokemon > {
-        return this.httpClient.put < Pokemon > (this.apiURL + '/pokemon/' + pokemon.id, JSON.stringify(pokemon), this.httpOptions).pipe(catchError(this.errorHandler))
+        return this.httpClient.put < Pokemon > (this.apiURL + '/Pokemon/' + pokemon.id, JSON.stringify(pokemon), this.httpOptions).pipe(catchError(this.errorHandler))
     }
 
     removePokemon(id: number) {
-        return this.httpClient.delete < Pokemon > (this.apiURL + '/pokemon/' + id, this.httpOptions).pipe(catchError(this.errorHandler));
+        return this.httpClient.delete < Pokemon > (this.apiURL + '/Pokemon/' + id, this.httpOptions).pipe(catchError(this.errorHandler));
     }
-
     errorHandler(error: {
         error: {
             message: string;

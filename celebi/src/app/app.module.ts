@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component'; 
@@ -13,13 +12,18 @@ import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonService } from './components/pokedexRedBlue/pokedexRedBlue.service';
 import { PokedexPageComponent } from './components/pokedex-page/pokedex-page.component';
+import { PokedexAddComponent } from './components/pokedex-add/pokedex-add.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     PokedexRedBlueComponent,
     HomeComponent,
-    PokedexPageComponent
+    PokedexPageComponent,
+    PokedexAddComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,10 @@ import { PokedexPageComponent } from './components/pokedex-page/pokedex-page.com
     MatListModule,
     MatFormFieldModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [PokemonService],
   bootstrap: [AppComponent]

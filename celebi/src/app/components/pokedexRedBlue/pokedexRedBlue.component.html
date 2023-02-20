@@ -17,4 +17,11 @@
             </mat-select>
         </mat-form-field>
     </body>
+    
+    <li>
+        <button (click)="openDialog()">Add new Pokemon</button>
+    </li>
+    <li *ngIf="pokemon.name">
+        You added: <i>{{pokemon.name}}</i>
+    </li>
 </html>

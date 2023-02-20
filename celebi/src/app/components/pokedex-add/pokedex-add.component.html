@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>hi</h1>
+<div mat-dialog-content>
+  <p>Add a new Pokemon</p>
+  <mat-form-field appearance="fill">
+    Name:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    DexNumber:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.dexEntry">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    Type1:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.type1">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    Type2:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.type2">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    Height:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.height">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    Weight:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.weight">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    Classification:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.classification">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    DexEntry:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.pokedexEntry">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>
+

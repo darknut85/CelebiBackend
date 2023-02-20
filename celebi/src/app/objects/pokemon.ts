@@ -17,5 +17,3 @@ export interface Pokemon{
 
     pokedexEntry: string;
 }
-
-
