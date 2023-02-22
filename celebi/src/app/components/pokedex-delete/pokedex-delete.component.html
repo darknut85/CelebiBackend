@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+    <p>Delete a Pokemon</p>
+    <mat-form-field>
+        <mat-select [(value)]="selectedPokemon" (selectionChange)="findId(selectedPokemon)">
+            <div *ngFor="let pokemon of parray">
+                <mat-option value={{pokemon.name}}>{{pokemon.name}}</mat-option>
+            </div>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      Id:<mat-label></mat-label>
+      <input matInput [(ngModel)]="pokemonId">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Undo</button>
+    <button mat-button [mat-dialog-close]="pokemonId" cdkFocusInitial>Delete the pokemon</button>
+    {{pokemonId}}
+</div>

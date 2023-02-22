@@ -19,9 +19,12 @@
     </body>
     
     <li>
-        <button (click)="openDialog()">Add new Pokemon</button>
+        <button (click)="openAddDialog()">Add new Pokemon</button>
     </li>
     <li *ngIf="pokemon.name">
         You added: <i>{{pokemon.name}}</i>
+    </li>
+    <li>
+        <button (click)="openDeleteDialog()">Delete Pokemon</button>
     </li>
 </html>

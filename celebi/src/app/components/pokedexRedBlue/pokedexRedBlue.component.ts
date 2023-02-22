@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PokedexAddComponent } from '../pokedex-add/pokedex-add.component';
 import { Router } from '@angular/router';
+import { PokedexDeleteComponent } from '../pokedex-delete/pokedex-delete.component';
 
 @Component({
   selector: 'pokedexRedBlue-root',
@@ -28,7 +29,7 @@ export class PokedexRedBlueComponent implements OnInit {
     });
   }
 
-  openDialog(): void {
+  openAddDialog(): void {
     const dialogRef = this.dialog.open(PokedexAddComponent, {
       data: {
         id: this.pokemon.id,
@@ -51,6 +52,19 @@ export class PokedexRedBlueComponent implements OnInit {
     });
   }
 
+  openDeleteDialog(): void{
+    const dialogRef = this.dialog.open(PokedexDeleteComponent, {
+      data: this.pokemon.id
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.pokemon.id = result;
+      console.log(result);
+      this.removePokemon(result);
+    });
+  }
+
   //GET
   getPokemon(){
     this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
@@ -68,14 +82,17 @@ export class PokedexRedBlueComponent implements OnInit {
     });
   }
 
-  /*
+  
   //DELETE
-  removePokemon(){
-    this.pokemonService.removePokemon(id).subscribe(() => {
-      this.refreshUser();
+  removePokemon(id: number){
+    this.pokemonService.removePokemon(id).subscribe(response => {
+      this.router.navigate(['/pokedexRedBlue']);
+      
+      console.log(response);
     });
   }
-  
+
+  /*
   //PUT
   updatePokemon(){
     this.pokemonService.updatePokemon(this.pokemonform.value).subscribe((data: Pokemon) => {

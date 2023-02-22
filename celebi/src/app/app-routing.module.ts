@@ -5,13 +5,15 @@ import { PokedexRedBlueComponent } from './components/pokedexRedBlue/pokedexRedB
 import { HomeComponent } from './components/home/home.component';
 import { PokedexPageComponent } from './components/pokedex-page/pokedex-page.component';
 import { PokedexAddComponent } from './components/pokedex-add/pokedex-add.component';
+import { PokedexDeleteComponent } from './components/pokedex-delete/pokedex-delete.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
   { path: 'pokedexRedBlue', component: PokedexRedBlueComponent },
   { path: 'home', component: HomeComponent },
   { path: 'pokedexPage/:id', component: PokedexPageComponent },
-  { path: 'add', component: PokedexAddComponent }
+  { path: 'add', component: PokedexAddComponent },
+  { path: 'delete', component: PokedexDeleteComponent }
 ];
 
 @NgModule({

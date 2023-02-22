@@ -35,7 +35,7 @@ export class PokemonService {
     }
 
     removePokemon(id: number) {
-        return this.httpClient.delete < Pokemon > (this.apiURL + '/Pokemon/' + id, this.httpOptions).pipe(catchError(this.errorHandler));
+        return this.httpClient.delete < Pokemon > (this.apiURL + '/Pokemon/id?id=' + id, this.httpOptions).pipe(catchError(this.errorHandler));
     }
     errorHandler(error: {
         error: {
