@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { Pokemon } from 'src/app/objects/pokemon';
 import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 
@@ -11,7 +10,7 @@ import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 })
 export class PokedexDeleteComponent 
 {
-  constructor(private pokemonService: PokemonService, private route: ActivatedRoute,
+  constructor(private pokemonService: PokemonService,
     public dialogRef: MatDialogRef<PokedexDeleteComponent>,
                       @Inject(MAT_DIALOG_DATA) public data: Pokemon)
     {}

@@ -27,4 +27,10 @@
     <li>
         <button (click)="openDeleteDialog()">Delete Pokemon</button>
     </li>
+    <li *ngIf="pokemon.id">
+        You deleted: <i>{{pokemon.id}}</i>
+    </li>
+    <li>
+        <button (click)="openUpdateDialog()">Update Pokemon</button>
+    </li>
 </html>

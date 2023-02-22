@@ -31,7 +31,7 @@ export class PokemonService {
     }
 
     updatePokemon(pokemon: Pokemon): Observable < Pokemon > {
-        return this.httpClient.put < Pokemon > (this.apiURL + '/Pokemon/' + pokemon.id, JSON.stringify(pokemon), this.httpOptions).pipe(catchError(this.errorHandler))
+        return this.httpClient.put < Pokemon > (this.apiURL + '/Pokemon', JSON.stringify(pokemon), this.httpOptions).pipe(catchError(this.errorHandler))
     }
 
     removePokemon(id: number) {

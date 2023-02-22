@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PokedexAddComponent } from '../pokedex-add/pokedex-add.component';
 import { Router } from '@angular/router';
 import { PokedexDeleteComponent } from '../pokedex-delete/pokedex-delete.component';
+import { PokedexUpdateComponent } from '../pokedex-update/pokedex-update.component';
 
 @Component({
   selector: 'pokedexRedBlue-root',
@@ -65,6 +66,29 @@ export class PokedexRedBlueComponent implements OnInit {
     });
   }
 
+  openUpdateDialog(): void{
+    const dialogRef = this.dialog.open(PokedexUpdateComponent, {
+      data: {
+        id: this.pokemon.id,
+        name: this.pokemon.name, 
+        dexEntry: this.pokemon.dexEntry, 
+        type1: this.pokemon.type1, 
+        type2: this.pokemon.type2, 
+        height: this.pokemon.height, 
+        weight: this.pokemon.weight,
+        classification: this.pokemon.classification,
+        pokedexEntry: this.pokemon.pokedexEntry
+        },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.pokemon = result;
+      console.log(result);
+      this.updatePokemon(result);
+    });
+  }
+
   //GET
   getPokemon(){
     this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
@@ -75,7 +99,6 @@ export class PokedexRedBlueComponent implements OnInit {
   //POST
   addPokemon(pokemon: Pokemon){
     this.pokemonService.addPokemon(pokemon).subscribe(response => {
-      //Redirecting to user List page after save or update
       this.router.navigate(['/pokedexRedBlue']);
       
       console.log(response);
@@ -92,13 +115,12 @@ export class PokedexRedBlueComponent implements OnInit {
     });
   }
 
-  /*
   //PUT
-  updatePokemon(){
-    this.pokemonService.updatePokemon(this.pokemonform.value).subscribe((data: Pokemon) => {
-      //Redirecting to user List page after save or update
-      this.router.navigate(['/pokemon']);
+  updatePokemon(pokemon: Pokemon){
+    this.pokemonService.updatePokemon(pokemon).subscribe(response => {
+      //this.router.navigate(['/pokemonRedBlue']);
+      
+      console.log(response);
     });
   }
-  */
 }
