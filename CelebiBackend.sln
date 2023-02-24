@@ -26,21 +26,22 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "celebi", "celebi\", "{992044A7-B9BD-4E93-8D12-6297629A5347}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_54789"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_49559"
 		Debug.AspNetCompiler.PhysicalPath = "celebi\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54789\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49559\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_54789"
+		Release.AspNetCompiler.VirtualPath = "/localhost_49559"
 		Release.AspNetCompiler.PhysicalPath = "celebi\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54789\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49559\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "54789"
+		VWDPort = "49559"
+		SlnRelativePath = "celebi\"
 	EndProjectSection
 EndProject
 Global
