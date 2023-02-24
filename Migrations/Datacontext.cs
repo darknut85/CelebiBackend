@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Query.ExpressionTranslators.Internal;
 using Objects;
 namespace Migrations
 {
@@ -8,19 +10,16 @@ namespace Migrations
 
         public DataContext() { }
 
-        public DataContext(DbContextOptions<DataContext> options) : base(options) 
-        { 
-        
-        }
-
-        string ConnectionString = @"Host=localhost;Username=postgres;Port=1700;Password=Soraheliatos2@;Database=pokemon";
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
+            IConfiguration configuration = builder.Build();
+
             if (!optionsBuilder.IsConfigured)
             {
-
-                optionsBuilder.UseNpgsql(ConnectionString);
+                optionsBuilder.UseNpgsql(configuration.GetConnectionString("conn1"));
             }
         }
 

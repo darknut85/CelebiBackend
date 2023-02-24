@@ -1,9 +1,12 @@
 ﻿using Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Migrations;
 using Objects;
 using Services;
+using System.Configuration;
 
 namespace CelebiBackend
 {
@@ -11,12 +14,17 @@ namespace CelebiBackend
     {
         static void Main(string[] args)
         {
-            ServiceCollection serviceProvider = new ServiceCollection();
+            //@"Host=localhost;Username=postgres;Port=1700;Password=Soraheliatos2@;Database=pokemon"
 
+            //IConfigurationRoot root = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build();
+
+            ServiceCollection serviceProvider = new ServiceCollection();
             IServiceProvider provider = serviceProvider.AddDbContext<DataContext>
-                (options => { options.UseNpgsql(@"Host=localhost;Username=postgres;Port=1700;Password=Soraheliatos2@;Database=pokemon"); }, ServiceLifetime.Transient)
+                (options => 
+                {
+                    options.UseNpgsql(@"Host=localhost;Username=postgres;Port=1700;Password=Soraheliatos2@;Database=pokemon"); 
+                }, ServiceLifetime.Transient)
                 .AddScoped<IPokemonService, PokemonService>()
-                //.AddScoped<IRepository, Repository>()
                 .BuildServiceProvider();
 
             var pokemonService = provider.GetRequiredService<IPokemonService>();
