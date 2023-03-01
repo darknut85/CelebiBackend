@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Objects;
 namespace Migrations
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext
     {
         public DbSet<Pokemon> Pokemons { get; set; }
 
