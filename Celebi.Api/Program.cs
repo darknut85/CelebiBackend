@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Migrations;
 using Services;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
 using System.Text;
 
 namespace Celebi.Api
