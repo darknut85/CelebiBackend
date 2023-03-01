@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { PokedexDeleteComponent } from './components/pokedex-delete/pokedex-delete.component';
 import { PokedexUpdateComponent } from './components/pokedex-update/pokedex-update.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PokedexUpdateComponent } from './components/pokedex-update/pokedex-upda
     PokedexPageComponent,
     PokedexAddComponent,
     PokedexDeleteComponent,
-    PokedexUpdateComponent
+    PokedexUpdateComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
