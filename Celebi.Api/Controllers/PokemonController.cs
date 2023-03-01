@@ -1,4 +1,6 @@
 using Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Objects;
 
@@ -28,24 +30,31 @@ namespace Celebi.Api.Controllers
         }
 
         [HttpPost]
-        public void Create(Pokemon pokemon) 
-        { 
+        [Authorize]
+        public IActionResult Create(Pokemon pokemon) 
+        {
+            //var token = HttpContext.GetTokenAsync("access_token").Result;
             _pokemonService.Create(pokemon);
             _pokemonService.SaveChanges();
+            return Ok(pokemon);
         }
 
         [HttpDelete("id")]
-        public void Delete(int id) 
+        [Authorize]
+        public IActionResult Delete(int id) 
         { 
             _pokemonService.Delete(id);
             _pokemonService.SaveChanges();
+            return Ok($"{id} deleted");
         }
 
         [HttpPut]
-        public void Put(Pokemon pokemon) 
+        [Authorize]
+        public IActionResult Put(Pokemon pokemon) 
         { 
             _pokemonService.Update(pokemon);
             _pokemonService.SaveChanges();
+            return Ok(pokemon);
         }
     }
 }

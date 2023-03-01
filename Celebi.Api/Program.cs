@@ -1,7 +1,11 @@
 using Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Migrations;
 using Services;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
+using System.Text;
 
 namespace Celebi.Api
 {
@@ -14,9 +18,30 @@ namespace Celebi.Api
             builder.Services.AddCors();
 
             builder.Services.AddControllers();
+            builder.Services.AddAuthentication(AuthOptions =>
+            {
+                AuthOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                AuthOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(jwtOptions =>
+            {
+                var key = builder.Configuration.GetValue<string>("JwtConfig:key");
+                var keyBytes = Encoding.ASCII.GetBytes(key);
+                jwtOptions.SaveToken = true;
+                jwtOptions.TokenValidationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+                    ValidateLifetime = true,
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
             builder.Services.AddDbContext<DataContext>
                 (options => { options.UseNpgsql(builder.Configuration.GetConnectionString("conn1")); }, ServiceLifetime.Transient);
             builder.Services.AddScoped<IPokemonService, PokemonService>();
+            builder.Services.AddSingleton(typeof(IJwtTokenManager), typeof(JwtTokenManager));
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
