@@ -13,13 +13,13 @@ import { PokedexUpdateComponent } from '../pokedex-update/pokedex-update.compone
   templateUrl: './pokedexRedBlue.component.html',
   styleUrls: ['./pokedexRedBlue.component.css']
 })
-
 export class PokedexRedBlueComponent implements OnInit {
   @Injectable({
     providedIn: 'root'
   })
   pokemon: Pokemon = <Pokemon>{ };
   title = 'celebi';
+
   constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router) { }
 
   parray: Pokemon[] = [];

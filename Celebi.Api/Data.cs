@@ -6,7 +6,6 @@
         {
             {"NewUser", "password" },
             {"Admin", "betterPassword" }
-        
         };
 
     }

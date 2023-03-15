@@ -8,6 +8,7 @@ import { Pokemon } from 'src/app/objects/pokemon';
 @Injectable({
   providedIn: 'root'
 })
+
 export class PokemonService {
 
     private apiURL = "https://localhost:7282";

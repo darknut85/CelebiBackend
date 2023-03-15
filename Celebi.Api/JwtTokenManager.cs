@@ -31,7 +31,7 @@ namespace Celebi.Api
                 {
                     new Claim(ClaimTypes.NameIdentifier, username)
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(30),
+                Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)
             };
 

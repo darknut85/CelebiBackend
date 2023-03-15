@@ -19,7 +19,9 @@ import { FormsModule } from '@angular/forms';
 import { PokedexDeleteComponent } from './components/pokedex-delete/pokedex-delete.component';
 import { PokedexUpdateComponent } from './components/pokedex-update/pokedex-update.component';
 import { LoginComponent } from './components/login/login.component';
-
+import { AuthService } from './components/auth/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './components/auth/authguard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,9 +44,10 @@ import { LoginComponent } from './components/login/login.component';
     HttpClientModule,
     MatDialogModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [PokemonService],
+  providers: [PokemonService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

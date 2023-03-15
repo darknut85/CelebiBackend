@@ -43,7 +43,6 @@ namespace CelebiBackend
             pokemonList = pokemonService.Get();
             while (true)
             {
-                if (pokemonList != null)
                 {
                     foreach (Pokemon pokemon in pokemonList)
                         Console.WriteLine($"{pokemon.Id}: {pokemon.Name}");
@@ -68,11 +67,6 @@ namespace CelebiBackend
                         Console.WriteLine("Press any button to go back to the main page");
                         Console.ReadKey();
                     }
-                }
-                else
-                {
-                    Console.WriteLine("List not found.");
-                    Console.ReadKey();
                 }
                 Console.Clear();
             }
