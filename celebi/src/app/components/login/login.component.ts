@@ -30,8 +30,9 @@ export class LoginComponent {
     this.http.post(this.apiURL, this.form.getRawValue(),{responseType:'text'})
       .subscribe( res => 
         {
-          console.log(res); 
-          localStorage.setItem("token_Id",res)
+          localStorage.setItem("token_Id",res);
+          const user = this.form.controls['userName'].value;
+          localStorage.setItem("username",user);
 
         },() => this.router.navigate(['/home']));
   }

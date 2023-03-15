@@ -9,9 +9,9 @@ export class AuthService {
      
     constructor(private httpClient: HttpClient) { }
       
-    login(email:string, password:string ): Observable < User > {
-        return this.httpClient.post<User>('/api/Token/Authenticate', {email, password});
-    }          
+    //login(email:string, password:string ): Observable < User > {
+        //return this.httpClient.post<User>('/api/Token/Authenticate', {email, password});
+    //}          
 
     logout() {
         localStorage.removeItem("id_token");
@@ -19,7 +19,6 @@ export class AuthService {
     }
 
     public isLoggedIn() {
-        console.log(this.getExpiration());
         return !this.getExpiration();
     }
 
@@ -34,8 +33,6 @@ export class AuthService {
         if(expiration != null)
         {
             const expiry = (JSON.parse(atob(expiration.split('.')[1]))).exp;
-            console.log(Math.floor((new Date).getTime() / 1000));
-            console.log(expiry);
             return (Math.floor((new Date).getTime() / 1000)) >= expiry;
         }
         return;
