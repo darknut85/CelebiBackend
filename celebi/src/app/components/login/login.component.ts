@@ -33,7 +33,8 @@ export class LoginComponent {
           localStorage.setItem("token_Id",res);
           const user = this.form.controls['userName'].value;
           localStorage.setItem("username",user);
+          this.router.navigate(['/home']);
 
-        },() => this.router.navigate(['/home']));
+        },() => this.router.navigate(['/login']));
   }
 }
