@@ -1,4 +1,7 @@
-﻿namespace Celebi.Api
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+
+namespace Celebi.Api
 {
     public interface IJwtTokenManager
     {

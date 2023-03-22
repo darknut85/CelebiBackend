@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Migrations.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230321102906_user")]
+    partial class user
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,14 +53,14 @@ namespace Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7aa34caf-f2f2-44ac-99f6-2a7d57633892",
+                            Id = "9947e3f4-9eef-4318-aa8c-20d4fa2ac633",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "ce915472-b097-407d-8a4e-a0d030a96f0e",
+                            Id = "9a7c89e3-eb93-43f0-9e73-78de40d79fc4",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"
@@ -155,17 +158,17 @@ namespace Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b5c4c1c6-0503-4b04-a280-fc707a1b9cb9",
+                            Id = "d719d2a3-e5b2-4b8a-9dc7-4071ac24fbb6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ec092c78-772a-461e-95c1-92bb8e9b65ed",
+                            ConcurrencyStamp = "0da4598a-1470-41c8-85c8-3c5139eb6af1",
                             Email = "new.user@newUser.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "new.user@newUser.com",
                             NormalizedUserName = "NewUser",
-                            PasswordHash = "password",
+                            PasswordHash = "",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6bc92c8f-b292-4dbf-af74-ea641ac55c7c",
+                            SecurityStamp = "5e9599f9-25c8-4073-9424-0d1379faac81",
                             TwoFactorEnabled = false,
                             UserName = "NewUser"
                         });

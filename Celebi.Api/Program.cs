@@ -5,6 +5,7 @@ using Migrations;
 using Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace Celebi.Api
 {
@@ -39,8 +40,14 @@ namespace Celebi.Api
 
             builder.Services.AddDbContext<DataContext>
                 (options => { options.UseNpgsql(builder.Configuration.GetConnectionString("conn1")); }, ServiceLifetime.Transient);
+            
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
+
             builder.Services.AddScoped<IPokemonService, PokemonService>();
-            builder.Services.AddSingleton(typeof(IJwtTokenManager), typeof(JwtTokenManager));
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped(typeof(IJwtTokenManager), typeof(JwtTokenManager));
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

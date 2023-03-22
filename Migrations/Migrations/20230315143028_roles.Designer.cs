@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Migrations.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230315143028_roles")]
+    partial class roles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,14 +53,14 @@ namespace Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7aa34caf-f2f2-44ac-99f6-2a7d57633892",
+                            Id = "b65b4356-9830-4a40-8d44-74548a58ac86",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "ce915472-b097-407d-8a4e-a0d030a96f0e",
+                            Id = "0ca5a619-98bc-4f5b-afa4-b1caca72adcf",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"
@@ -151,24 +154,6 @@ namespace Migrations.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "b5c4c1c6-0503-4b04-a280-fc707a1b9cb9",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ec092c78-772a-461e-95c1-92bb8e9b65ed",
-                            Email = "new.user@newUser.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "new.user@newUser.com",
-                            NormalizedUserName = "NewUser",
-                            PasswordHash = "password",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "6bc92c8f-b292-4dbf-af74-ea641ac55c7c",
-                            TwoFactorEnabled = false,
-                            UserName = "NewUser"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

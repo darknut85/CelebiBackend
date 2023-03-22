@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Objects;
+using System.Security.Cryptography;
+
 namespace Migrations
 {
     public class DataContext : IdentityDbContext
@@ -77,6 +81,21 @@ namespace Migrations
                     PokedexEntry = "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail."
                 }
                 );
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin"},
+                new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" }
+                );
+
+            modelBuilder.Entity<IdentityUser>().HasData(
+                new IdentityUser() { 
+                    UserName = "NewUser", 
+                    PasswordHash = "password", 
+                    Email = "new.user@newUser.com",
+                    NormalizedEmail = "new.user@newUser.com",
+                    NormalizedUserName = "NewUser",
+                    EmailConfirmed = true
+                });
         }
     }
 }

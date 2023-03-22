@@ -33,7 +33,6 @@ namespace Celebi.Api.Controllers
         [Authorize]
         public IActionResult Create(Pokemon pokemon) 
         {
-            //var token = HttpContext.GetTokenAsync("access_token").Result;
             _pokemonService.Create(pokemon);
             _pokemonService.SaveChanges();
             return Ok(pokemon);
