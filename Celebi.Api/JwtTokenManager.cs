@@ -24,20 +24,16 @@ namespace Celebi.Api
 
         public string Authenticate(string username, string password)
         {
-            //password needs to be hashed to compare
             List<IdentityUser> iuser = _userService.getUsers();
-            if (!iuser.Any(x => x.UserName.Equals(username)))// && x.PasswordHash.Equals(password)))
+            if (!iuser.Any(x => x.UserName.Equals(username)))
             {
                 return null;
             }
 
             var loginUser = iuser.FirstOrDefault(x => x.UserName == username);
 
-            //string hash = loginUser.PasswordHash;
             PasswordVerificationResult passresult = _userManager.PasswordHasher.VerifyHashedPassword(loginUser, loginUser.PasswordHash, password);
 
-            Debug.WriteLine(loginUser.PasswordHash);
-            Debug.WriteLine(password);
             if (passresult != PasswordVerificationResult.Success)
             {
                 return null;

@@ -22,6 +22,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './components/auth/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './components/auth/authguard.service';
+import { RegisterComponent } from './components/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { AuthGuard } from './components/auth/authguard.service';
     PokedexAddComponent,
     PokedexDeleteComponent,
     PokedexUpdateComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

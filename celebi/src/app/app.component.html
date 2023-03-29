@@ -1,10 +1,11 @@
 <mat-sidenav-container fullscreen>
     <mat-sidenav-content>
-        <div>{{loggedIn}} is logged in</div>
+        <div>{{loggedIn}}</div>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
     <mat-sidenav mode="side" opened>
         <mat-action-list>
+            <mat-list-item [routerLink]="'/register'">Register</mat-list-item>
             <mat-list-item [routerLink]="'/login'">Login</mat-list-item>
             <mat-list-item [routerLink]="'/home'">Home</mat-list-item>
             <mat-list-item [routerLink]="'/pokedexRedBlue'">Pokedex Red/Blue</mat-list-item>

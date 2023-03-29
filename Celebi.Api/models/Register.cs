@@ -12,5 +12,7 @@ namespace Celebi.Api.models
 
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
+
+        public string? Role { get; set; }
     }
 }

@@ -52,7 +52,7 @@ namespace Celebi.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] Register register, string role)
+        public async Task<IActionResult> Register([FromBody] Register register)
         {
             var userExists = await _userManager.FindByNameAsync(register.Username);
             if (userExists != null)
@@ -69,13 +69,19 @@ namespace Celebi.Api.Controllers
                     NormalizedEmail= register.Email,
                     NormalizedUserName = register.Username
                 };
-
                 var result = _userManager.CreateAsync(user, register.Password);
 
                 await result;
 
                 if (result.IsCompletedSuccessfully)
                 {
+                    var newUser = await _userManager.FindByNameAsync(register.Username);
+                    var roleExists = await _roleManager.RoleExistsAsync("User");
+                    if (!roleExists)
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole("User"));
+                    }
+                    await _userManager.AddToRoleAsync(newUser, "User");
                     return Ok("User created");
                 }
                 else
