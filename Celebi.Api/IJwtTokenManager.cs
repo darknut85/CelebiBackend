@@ -5,6 +5,6 @@ namespace Celebi.Api
 {
     public interface IJwtTokenManager
     {
-        string Authenticate(string username, string password);
+        string Authenticate(string username, string password, string role = "User");
     }
 }

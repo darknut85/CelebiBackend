@@ -7,7 +7,9 @@ import { PokedexAddComponent } from '../pokedex-add/pokedex-add.component';
 import { Router } from '@angular/router';
 import { PokedexDeleteComponent } from '../pokedex-delete/pokedex-delete.component';
 import { PokedexUpdateComponent } from '../pokedex-update/pokedex-update.component';
+import { AuthService } from '../auth/auth.service';
 
+//remove authservice once test is done
 @Component({
   selector: 'pokedexRedBlue-root',
   templateUrl: './pokedexRedBlue.component.html',
@@ -20,13 +22,13 @@ export class PokedexRedBlueComponent implements OnInit {
   pokemon: Pokemon = <Pokemon>{ };
   title = 'celebi';
 
-  constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router) { }
+  constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router, private auth: AuthService) { }
 
   parray: Pokemon[] = [];
   ngOnInit() {
+      this.auth.getRole();
       this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
       this.parray = data;
-      console.log("ngonInit()",data);
     });
   }
 
@@ -118,7 +120,7 @@ export class PokedexRedBlueComponent implements OnInit {
   //PUT
   updatePokemon(pokemon: Pokemon){
     this.pokemonService.updatePokemon(pokemon).subscribe(response => {
-      //this.router.navigate(['/pokemonRedBlue']);
+      this.router.navigate(['/pokemonRedBlue']);
       
       console.log(response);
     });

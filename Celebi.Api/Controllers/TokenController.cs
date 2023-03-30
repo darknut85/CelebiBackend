@@ -1,13 +1,8 @@
 ﻿using Celebi.Api.models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using System.Diagnostics;
-using Services;
 using Interfaces;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace Celebi.Api.Controllers
 {
@@ -50,10 +45,21 @@ namespace Celebi.Api.Controllers
             return Ok(token);
         }
 
-        [AllowAnonymous]
         [HttpPost("Register")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register([FromBody] Register register)
         {
+            var roleExists = await _roleManager.RoleExistsAsync("User");
+            var adminExists = await _roleManager.RoleExistsAsync("Admin");
+            if (!roleExists)
+            {
+                await _roleManager.CreateAsync(new IdentityRole("User"));
+            }
+            if (!adminExists)
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
             var userExists = await _userManager.FindByNameAsync(register.Username);
             if (userExists != null)
             {
@@ -76,12 +82,7 @@ namespace Celebi.Api.Controllers
                 if (result.IsCompletedSuccessfully)
                 {
                     var newUser = await _userManager.FindByNameAsync(register.Username);
-                    var roleExists = await _roleManager.RoleExistsAsync("User");
-                    if (!roleExists)
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole("User"));
-                    }
-                    await _userManager.AddToRoleAsync(newUser, "User");
+                    await _userManager.AddToRoleAsync(newUser, register.Role);
                     return Ok("User created");
                 }
                 else

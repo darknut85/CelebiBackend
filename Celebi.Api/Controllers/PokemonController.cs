@@ -1,5 +1,4 @@
 using Interfaces;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Objects;
@@ -17,6 +16,7 @@ namespace Celebi.Api.Controllers
             _pokemonService = pokemonService;
         }
 
+        [Authorize(Roles = "User,Admin")]
         [HttpGet]
         public IEnumerable<Pokemon> Get()
         {
@@ -29,8 +29,8 @@ namespace Celebi.Api.Controllers
             return _pokemonService.Get(id);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Authorize]
         public IActionResult Create(Pokemon pokemon) 
         {
             _pokemonService.Create(pokemon);
@@ -38,8 +38,8 @@ namespace Celebi.Api.Controllers
             return Ok(pokemon);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("id")]
-        [Authorize]
         public IActionResult Delete(int id) 
         { 
             _pokemonService.Delete(id);
@@ -47,8 +47,8 @@ namespace Celebi.Api.Controllers
             return Ok($"{id} deleted");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
-        [Authorize]
         public IActionResult Put(Pokemon pokemon) 
         { 
             _pokemonService.Update(pokemon);

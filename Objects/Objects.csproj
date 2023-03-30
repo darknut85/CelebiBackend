@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="..\Celebi.Api\Properties\launchSettings.json" Link="launchSettings.json" />
+  </ItemGroup>
+
 </Project>

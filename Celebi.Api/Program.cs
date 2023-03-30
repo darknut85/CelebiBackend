@@ -15,6 +15,10 @@ namespace Celebi.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<DataContext>()
+                .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("MyTokenProvider");
+
             builder.Services.AddCors();
 
             builder.Services.AddControllers();
@@ -22,28 +26,26 @@ namespace Celebi.Api
             {
                 AuthOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 AuthOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                AuthOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(jwtOptions =>
             {
                 var key = builder.Configuration.GetValue<string>("JwtConfig:key");
                 var keyBytes = Encoding.ASCII.GetBytes(key);
                 jwtOptions.SaveToken = true;
+                jwtOptions.RequireHttpsMetadata = false;
                 jwtOptions.TokenValidationParameters = new TokenValidationParameters
                 {
                     IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
                     ValidateLifetime = true,
-                    ValidateAudience = false,
-                    ValidateIssuer = false,
+                    ValidateAudience = true,
+                    ValidateIssuer = true,
                     ClockSkew = TimeSpan.Zero
                 };
             });
 
             builder.Services.AddDbContext<DataContext>
                 (options => { options.UseNpgsql(builder.Configuration.GetConnectionString("conn1")); }, ServiceLifetime.Transient);
-            
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<DataContext>()
-                .AddDefaultTokenProviders();
 
             builder.Services.AddScoped<IPokemonService, PokemonService>();
             builder.Services.AddScoped<IUserService, UserService>();
@@ -53,7 +55,6 @@ namespace Celebi.Api
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
-            app.UseAuthentication();
 
             if (app.Environment.IsDevelopment())
             {
@@ -63,6 +64,7 @@ namespace Celebi.Api
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseRouting();
             app.UseCors(x =>
             {
@@ -74,6 +76,12 @@ namespace Celebi.Api
             app.UseAuthorization();
 
             app.MapControllers();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller}/{action=Index}/{id?}");
+            });
+            app.MapFallbackToFile("index.html");
 
             app.Run();
         }

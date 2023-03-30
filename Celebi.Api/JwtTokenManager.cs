@@ -22,7 +22,7 @@ namespace Celebi.Api
             _userManager = userManager;
         }
 
-        public string Authenticate(string username, string password)
+        public string Authenticate(string username, string password, string userRole = "User")
         {
             List<IdentityUser> iuser = _userService.getUsers();
             if (!iuser.Any(x => x.UserName.Equals(username)))
@@ -48,7 +48,8 @@ namespace Celebi.Api
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, username)
+                    new Claim("id", username),
+                    new Claim(ClaimTypes.Role, userRole)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(10),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)

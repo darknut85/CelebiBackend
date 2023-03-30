@@ -34,4 +34,22 @@ export class AuthService {
         }
         return;
     }
+
+    public getRole(){
+        const token = localStorage.getItem("token_Id");
+        if(token != null)
+        {
+            let jwtData = token.split('.')[1];
+            let decoded = window.atob(jwtData);
+            let decodedData = JSON.parse(decoded);
+
+            let isAdmin = decodedData.admin
+            console.log(token);
+            //console.log(jwtData);
+            //console.log(decoded);
+            //console.log(decodedData);
+            //console.log(isAdmin);
+        }
+        return;
+    }
 }
