@@ -9,7 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatSelectModule} from '@angular/material/select';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PokemonService } from './components/pokedexRedBlue/pokedexRedBlue.service';
 import { PokedexPageComponent } from './components/pokedex-page/pokedex-page.component';
 import { PokedexAddComponent } from './components/pokedex-add/pokedex-add.component';
@@ -23,6 +23,7 @@ import { AuthService } from './components/auth/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './components/auth/authguard.service';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthInterceptor } from './components/auth/authinterceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,12 @@ import { RegisterComponent } from './components/register/register.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [PokemonService, AuthService, AuthGuard],
+  providers: [
+    PokemonService, 
+    AuthService, 
+    AuthGuard,
+    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Pokemon } from 'src/app/objects/pokemon';
 import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 

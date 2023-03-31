@@ -26,7 +26,7 @@ export class PokedexPageComponent implements OnInit {
   };
   ngOnInit()
   {
-    const a = this.route.paramMap.subscribe((params) =>
+    this.route.paramMap.subscribe((params) =>
     { 
       const id = params.get('id');
       this.pokemonService.getPokemonByID(Number(id)).subscribe((data: Pokemon) => { this.pokemon = data; });

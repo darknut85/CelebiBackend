@@ -40,6 +40,9 @@ namespace Celebi.Api
                     ValidateLifetime = true,
                     ValidateAudience = true,
                     ValidateIssuer = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration.GetValue<string>("JwtConfig:Issuer"),
+                    ValidAudience= builder.Configuration.GetValue<string>("JwtConfig:Audience"),
                     ClockSkew = TimeSpan.Zero
                 };
             });
@@ -79,9 +82,7 @@ namespace Celebi.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapControllerRoute(name: "default", pattern: "{controller}/{action=Index}/{id?}");
             });
-            app.MapFallbackToFile("index.html");
 
             app.Run();
         }

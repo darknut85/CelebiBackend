@@ -39,20 +39,23 @@ namespace Celebi.Api
                 return null;
             }
 
-            var key = _configuration.GetValue<string>("JwtConfig:key");
-            var keyBytes = Encoding.ASCII.GetBytes(key);
+            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration.GetValue<string>("JwtConfig:key")));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new Claim[]
+            {
+                new Claim(ClaimTypes.Name, username),
+                new Claim(ClaimTypes.Role, userRole)
+            };
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim("id", username),
-                    new Claim(ClaimTypes.Role, userRole)
-                }),
+                Issuer = _configuration["JwtConfig:Issuer"],
+                Audience = _configuration["JwtConfig:Audience"],
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddMinutes(10),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = credentials
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

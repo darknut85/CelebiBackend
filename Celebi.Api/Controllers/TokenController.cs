@@ -13,7 +13,6 @@ namespace Celebi.Api.Controllers
         private readonly IJwtTokenManager _jwtTokenManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
 
         public TokenController(IJwtTokenManager jwtTokenManager, UserManager<IdentityUser> userManager, 
@@ -22,7 +21,6 @@ namespace Celebi.Api.Controllers
             _jwtTokenManager = jwtTokenManager;
             _userManager = userManager;
             _roleManager = roleManager;
-            _configuration = configuration;
             _userService = userService;
         }
 
@@ -37,7 +35,13 @@ namespace Celebi.Api.Controllers
         [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] UserCredential userCredential) 
         {
-            var token = _jwtTokenManager.Authenticate(userCredential.UserName, userCredential.Password);
+            string role = "Joker";
+            var newUser = await _userManager.FindByNameAsync(userCredential.UserName);
+            IList<string> roles = await _userManager.GetRolesAsync(newUser);
+
+            foreach (var item in roles) { role = item; }
+
+            var token = _jwtTokenManager.Authenticate(userCredential.UserName, userCredential.Password, role);
             if (string.IsNullOrEmpty(token))
             {
                 return Unauthorized();
@@ -46,19 +50,13 @@ namespace Celebi.Api.Controllers
         }
 
         [HttpPost("Register")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register([FromBody] Register register)
         {
             var roleExists = await _roleManager.RoleExistsAsync("User");
             var adminExists = await _roleManager.RoleExistsAsync("Admin");
-            if (!roleExists)
-            {
-                await _roleManager.CreateAsync(new IdentityRole("User"));
-            }
-            if (!adminExists)
-            {
-                await _roleManager.CreateAsync(new IdentityRole("Admin"));
-            }
+            if (!roleExists) { await _roleManager.CreateAsync(new IdentityRole("User")); }
+            if (!adminExists) { await _roleManager.CreateAsync(new IdentityRole("Admin")); }
 
             var userExists = await _userManager.FindByNameAsync(register.Username);
             if (userExists != null)

@@ -16,7 +16,6 @@ namespace Celebi.Api.Controllers
             _pokemonService = pokemonService;
         }
 
-        [Authorize(Roles = "User,Admin")]
         [HttpGet]
         public IEnumerable<Pokemon> Get()
         {

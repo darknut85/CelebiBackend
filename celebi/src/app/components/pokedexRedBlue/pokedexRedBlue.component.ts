@@ -9,7 +9,6 @@ import { PokedexDeleteComponent } from '../pokedex-delete/pokedex-delete.compone
 import { PokedexUpdateComponent } from '../pokedex-update/pokedex-update.component';
 import { AuthService } from '../auth/auth.service';
 
-//remove authservice once test is done
 @Component({
   selector: 'pokedexRedBlue-root',
   templateUrl: './pokedexRedBlue.component.html',
@@ -26,7 +25,6 @@ export class PokedexRedBlueComponent implements OnInit {
 
   parray: Pokemon[] = [];
   ngOnInit() {
-      this.auth.getRole();
       this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
       this.parray = data;
     });
