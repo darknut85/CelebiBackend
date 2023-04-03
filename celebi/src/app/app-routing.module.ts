@@ -9,7 +9,7 @@ import { AuthGuard } from './components/auth/authguard.service';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', redirectTo:'home', pathMatch: 'full'},
   { path: 'pokedexRedBlue', component: PokedexRedBlueComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent },
   { path: 'pokedexPage/:id', component: PokedexPageComponent },
