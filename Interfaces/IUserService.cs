@@ -18,5 +18,7 @@ namespace Interfaces
         //register user
 
         //check if user exists
+
+        //delete user
     }
 }

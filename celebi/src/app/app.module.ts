@@ -24,6 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './components/auth/authguard.service';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptor } from './components/auth/authinterceptor.service';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminService } from './components/admin/admin.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,8 @@ import { AuthInterceptor } from './components/auth/authinterceptor.service';
     PokedexDeleteComponent,
     PokedexUpdateComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { AuthInterceptor } from './components/auth/authinterceptor.service';
     ReactiveFormsModule
   ],
   providers: [
-    PokemonService, 
+    PokemonService,
+    AdminService,
     AuthService, 
     AuthGuard,
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true},

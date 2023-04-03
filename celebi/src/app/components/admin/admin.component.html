@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class="grid-container">
+            <div class="Title">
+                <h1>CelebiDotNet</h1>
+            </div>
+        </div>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select>
+                <div *ngFor="let user of uarray">
+                    <mat-option value="one" [routerLink]="['/userPage',user.userName]">{{ user.userName }}</mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+    </body>
+</html>

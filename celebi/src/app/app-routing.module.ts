@@ -6,14 +6,16 @@ import { PokedexPageComponent } from './components/pokedex-page/pokedex-page.com
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './components/auth/authguard.service';
 import { RegisterComponent } from './components/register/register.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'home', pathMatch: 'full'},
-  { path: 'pokedexRedBlue', component: PokedexRedBlueComponent, canActivate: [AuthGuard] },
+  { path: 'pokedexRedBlue', component: PokedexRedBlueComponent },
   { path: 'home', component: HomeComponent },
   { path: 'pokedexPage/:id', component: PokedexPageComponent },
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
