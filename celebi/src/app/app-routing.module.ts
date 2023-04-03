@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './components/auth/authguard.service';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { UserPageComponent } from './components/user-page/user-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'home', pathMatch: 'full'},
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'pokedexPage/:id', component: PokedexPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'userPage/:id', component: UserPageComponent,canActivate:[AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }
 ];
 

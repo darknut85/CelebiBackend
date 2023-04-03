@@ -22,12 +22,12 @@ export class AdminService {
     }
 
     getUserByID(userName: string): Observable < User > {
-        return this.httpClient.get < User > (this.apiURL + '/GetOneUser/userName?userName=' + userName).pipe(catchError(this.errorHandler))
+        return this.httpClient.get < User > (this.apiURL + '/GetOneUser?userName=' + userName).pipe(catchError(this.errorHandler))
     }
 
-    removeUser(userName: string) {
-        return this.httpClient.delete < User > (this.apiURL + '/Pokemon/userName?userName=' + userName, this.httpOptions).pipe(catchError(this.errorHandler));
-    }
+    //removeUser(userName: string) {
+        //return this.httpClient.delete < User > (this.apiURL + '/Pokemon/userName?userName=' + userName, this.httpOptions).pipe(catchError(this.errorHandler));
+    //}
 
     errorHandler(error: {
         error: {

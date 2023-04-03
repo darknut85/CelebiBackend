@@ -26,6 +26,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptor } from './components/auth/authinterceptor.service';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminService } from './components/admin/admin.service';
+import { UserPageComponent } from './components/user-page/user-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { AdminService } from './components/admin/admin.service';
     PokedexUpdateComponent,
     LoginComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,
