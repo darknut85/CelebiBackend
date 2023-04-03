@@ -13,7 +13,10 @@ namespace Interfaces
         IdentityUser getUser(string username);
 
         //get users
-        List<IdentityUser> getUsers();
+        List<IdentityUser> GetUsers();
+
+        //get role of user
+        string GetRole(string username);
 
         //register user
 

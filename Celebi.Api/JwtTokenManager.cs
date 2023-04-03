@@ -24,7 +24,7 @@ namespace Celebi.Api
 
         public string Authenticate(string username, string password, string userRole = "User")
         {
-            List<IdentityUser> iuser = _userService.getUsers();
+            List<IdentityUser> iuser = _userService.GetUsers();
             if (!iuser.Any(x => x.UserName.Equals(username)))
             {
                 return null;

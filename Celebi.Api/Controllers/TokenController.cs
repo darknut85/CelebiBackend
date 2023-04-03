@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Interfaces;
+using Objects;
 
 namespace Celebi.Api.Controllers
 {
@@ -28,7 +29,7 @@ namespace Celebi.Api.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult ListUsers() 
         {
-            var users = _userService.getUsers();
+            var users = _userService.GetUsers();
             if (users == null)
             {
                 return BadRequest("No users found");
@@ -46,6 +47,21 @@ namespace Celebi.Api.Controllers
                 return BadRequest("User does not exist");
             }
             return Ok(user);
+        }
+
+        [HttpGet("GetRoleOfUser")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetRoleOfUser(string userName) 
+        { 
+            string role = _userService.GetRole(userName);
+            
+            if (role != null)
+            {
+                Role roleModel = new Role();
+                roleModel.Name = role;
+                return Ok(roleModel);
+            }
+            return BadRequest("User does not exist");
         }
 
         [AllowAnonymous]

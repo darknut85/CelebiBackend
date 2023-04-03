@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from 'src/app/objects/user';
+import { Role } from 'src/app/objects/role';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +26,9 @@ export class AdminService {
         return this.httpClient.get < User > (this.apiURL + '/GetOneUser?userName=' + userName).pipe(catchError(this.errorHandler))
     }
 
-    //removeUser(userName: string) {
-        //return this.httpClient.delete < User > (this.apiURL + '/Pokemon/userName?userName=' + userName, this.httpOptions).pipe(catchError(this.errorHandler));
-    //}
+    getRole(userName: string): Observable < Role > {
+        return this.httpClient.get < Role > (this.apiURL + '/GetRoleOfUser?userName=' + userName).pipe(catchError(this.errorHandler));
+    }
 
     errorHandler(error: {
         error: {
