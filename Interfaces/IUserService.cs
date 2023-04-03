@@ -10,7 +10,7 @@ namespace Interfaces
     public interface IUserService
     {
         //get user
-        IdentityUser getUser(string username, string password);
+        IdentityUser getUser(string username);
 
         //get users
         List<IdentityUser> getUsers();

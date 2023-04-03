@@ -13,7 +13,7 @@ namespace Services
             _dataContext = dataContext;
         }
 
-        public IdentityUser getUser(string username, string password)
+        public IdentityUser getUser(string username)
         {
             IdentityUser identityUser = _dataContext.Set<IdentityUser>().FirstOrDefault(x => x.UserName == username);
             if (identityUser != null)

@@ -24,11 +24,28 @@ namespace Celebi.Api.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllUsers")]
+        [Authorize(Roles = "Admin")]
         public IActionResult ListUsers() 
         {
             var users = _userService.getUsers();
+            if (users == null)
+            {
+                return BadRequest("No users found");
+            }
             return Ok(users);
+        }
+
+        [HttpGet("GetOneUser")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult FindUser(string userName)
+        {
+            var user = _userService.getUser(userName);
+            if (user == null) 
+            {
+                return BadRequest("User does not exist");
+            }
+            return Ok(user);
         }
 
         [AllowAnonymous]
