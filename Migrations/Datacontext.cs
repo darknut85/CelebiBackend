@@ -83,14 +83,14 @@ namespace Migrations
                 );
 
             modelBuilder.Entity<IdentityRole>().HasData(
-                new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin"},
-                new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" }
+                new IdentityRole() { Name = "Admin", ConcurrencyStamp = "aec62267-a49a-400e-b4cc-305a6f08a6f2", NormalizedName = "ADMIN"},
+                new IdentityRole() { Name = "User", ConcurrencyStamp = "b0c191f3-d89d-462e-8e7b-63afeffab947", NormalizedName = "USER" }
                 );
 
             modelBuilder.Entity<IdentityUser>().HasData(
                 new IdentityUser() { 
                     UserName = "NewUser", 
-                    PasswordHash = "password", 
+                    PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==", 
                     Email = "new.user@newUser.com",
                     NormalizedEmail = "new.user@newUser.com",
                     NormalizedUserName = "NewUser",
