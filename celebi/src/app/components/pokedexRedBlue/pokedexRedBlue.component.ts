@@ -24,7 +24,9 @@ export class PokedexRedBlueComponent implements OnInit {
   constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router, private auth: AuthService) { }
 
   parray: Pokemon[] = [];
+  userName = "";
   ngOnInit() {
+      this.userName = this.pokemonService.displayLogin();
       this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
       this.parray = data;
     });

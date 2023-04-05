@@ -6,20 +6,9 @@ import { AuthService } from './components/auth/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'celebi';
   loggedIn = "";
 
-  constructor(private authService: AuthService) { }
-
-  ngOnInit(): void {
-    if(this.authService.isLoggedIn())
-    {
-      const token = localStorage.getItem("username");
-      if(token != null)
-      {
-        this.loggedIn = token;
-      }
-    }
-  }
+  constructor() { }
 }

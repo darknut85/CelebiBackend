@@ -54,7 +54,7 @@ namespace Celebi.Api
                 Issuer = _configuration["JwtConfig:Issuer"],
                 Audience = _configuration["JwtConfig:Audience"],
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(15),
+                Expires = DateTime.UtcNow.AddMinutes(1),
                 SigningCredentials = credentials
             };
 

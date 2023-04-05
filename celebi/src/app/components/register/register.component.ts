@@ -1,16 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/objects/user';
+import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit{
+  userName = "";
+  ngOnInit(): void {
+    this.userName = this.pokemonService.displayLogin();
+  }
     form: FormGroup = this.formBuilder.group({
       userName: ['',Validators.required],
       email: ['', Validators.required],
@@ -25,7 +30,8 @@ export class RegisterComponent {
       })
   }
   
-    constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+    constructor(private formBuilder: FormBuilder, private http: HttpClient, 
+                private router: Router, private pokemonService: PokemonService) { }
   
     submit(): void {
       this.http.post(this.apiURL, this.form.getRawValue(),{responseType:'text'})
@@ -43,9 +49,9 @@ export class RegisterComponent {
             this.router.navigate(['/home']);
   
           },() => this.router.navigate(['/register']));
-    }
+  }
 
-    addUser(user: User): Observable < User > {
-      return this.http.post < User > (this.apiURL, JSON.stringify(user), this.httpOptions);
+  addUser(user: User): Observable < User > {
+    return this.http.post < User > (this.apiURL, JSON.stringify(user), this.httpOptions);
   }
 }

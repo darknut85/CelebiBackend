@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Pokemon } from 'src/app/objects/pokemon';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class PokemonService {
             'Content-Type': 'application/json'
         })
     }
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient, private authService: AuthService) {}
 
     getPokemon(): Observable < Pokemon[] > {
         return this.httpClient.get <Pokemon[]> (this.apiURL + '/Pokemon').pipe(catchError(this.errorHandler));
@@ -50,5 +51,19 @@ export class PokemonService {
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
         return throwError(errorMessage);
+    }
+
+    displayLogin(): string
+    {
+        if(this.authService.isLoggedIn())
+        {
+            const token = localStorage.getItem("username");
+            if(token != null)
+            {
+                return token;
+            }
+            return "";
+        }
+        return "";
     }
 }
