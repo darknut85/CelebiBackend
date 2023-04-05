@@ -12,7 +12,8 @@ import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 export class PokedexUpdateComponent 
 {
   constructor( private pokemonService: PokemonService,
-    public dialogRef: MatDialogRef<PokedexUpdateComponent>, @Inject(MAT_DIALOG_DATA) public data: Pokemon){
+              public dialogRef: MatDialogRef<PokedexUpdateComponent>, 
+              @Inject(MAT_DIALOG_DATA) public data: Pokemon){
   }
   
   selectedPokemon = 'selectedPokemon';
@@ -31,7 +32,6 @@ export class PokedexUpdateComponent
     {
       this.pokemon = pokemon;
     }
-    console.log(pokemon);
   }
 
   onNoClick(): void{

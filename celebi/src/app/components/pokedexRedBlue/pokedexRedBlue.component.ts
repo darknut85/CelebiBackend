@@ -100,8 +100,7 @@ export class PokedexRedBlueComponent implements OnInit {
   addPokemon(pokemon: Pokemon){
     this.pokemonService.addPokemon(pokemon).subscribe(response => {
       this.router.navigate(['/pokedexRedBlue']);
-      
-      console.log(response);
+      this.refresh();
     });
   }
 
@@ -110,8 +109,7 @@ export class PokedexRedBlueComponent implements OnInit {
   removePokemon(id: number){
     this.pokemonService.removePokemon(id).subscribe(response => {
       this.router.navigate(['/pokedexRedBlue']);
-      
-      console.log(response);
+      this.refresh();
     });
   }
 
@@ -119,8 +117,11 @@ export class PokedexRedBlueComponent implements OnInit {
   updatePokemon(pokemon: Pokemon){
     this.pokemonService.updatePokemon(pokemon).subscribe(response => {
       this.router.navigate(['/pokemonRedBlue']);
-      
-      console.log(response);
+      this.refresh();
     });
+  }
+  
+  refresh(): void{
+    window.location.reload();
   }
 }

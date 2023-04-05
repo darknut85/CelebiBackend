@@ -11,7 +11,7 @@ import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 export class PokedexDeleteComponent 
 {
   constructor(private pokemonService: PokemonService,
-    public dialogRef: MatDialogRef<PokedexDeleteComponent>,
+                      public dialogRef: MatDialogRef<PokedexDeleteComponent>,
                       @Inject(MAT_DIALOG_DATA) public data: Pokemon)
     {}
   
@@ -31,7 +31,6 @@ export class PokedexDeleteComponent
     {
       this.pokemonId = pokemon.id;
     }
-    console.log(pokemon);
   }
 
   onNoClick(): void{

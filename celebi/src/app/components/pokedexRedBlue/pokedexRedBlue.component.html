@@ -33,4 +33,7 @@
     <li>
         <button (click)="openUpdateDialog()">Update Pokemon</button>
     </li>
+    <li *ngIf="pokemon.id">
+        You updated: <i>{{pokemon.id}}</i>
+    </li>
 </html>
