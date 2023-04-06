@@ -1,6 +1,7 @@
 ﻿using Interfaces;
 using Migrations;
 using Objects;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Services
 {
@@ -62,14 +63,22 @@ namespace Services
         {
             dataContext.Set<Pokemon>().Update(pokemon);
             Pokemon q = Get(pokemon.Id);
-            if (q != null && q.Id == pokemon.Id && q.Id != 0)
+            if (q != null)
             {
-                dataContext.Set<Pokemon>().Update(pokemon);
-                SaveChanges();
-                return pokemon;
+                if (q.Id == pokemon.Id)
+                {
+                    if (q.Id != 0)
+                    {
+                        dataContext.Set<Pokemon>().Update(pokemon);
+                        SaveChanges();
+                        return pokemon;
+                    }
+                }
             }
             return new Pokemon();
         }
+
+        [ExcludeFromCodeCoverage]
         public void SaveChanges()
         {
             dataContext.SaveChanges();

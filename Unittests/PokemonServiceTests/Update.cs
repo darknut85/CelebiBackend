@@ -12,6 +12,7 @@ namespace Unittests.PokemonServiceTests
     public class Update
     {
         Pokemon pokemon;
+        Pokemon zeroPokemon;
         Pokemon emptyPokemon;
         Pokemon? nullPokemon;
         PokemonService pokemonService;
@@ -30,6 +31,10 @@ namespace Unittests.PokemonServiceTests
                 Weight = 1,
                 Classification = "???",
                 PokedexEntry = "..."
+            };
+            zeroPokemon = new Pokemon()
+            {
+                Id = 0
             };
 
             emptyPokemon = new Pokemon();
@@ -54,7 +59,7 @@ namespace Unittests.PokemonServiceTests
         }
 
         [Fact]
-        public void Update_Should_ThrowNullReferenceException_WhenUpdatingPokemonWithoutInfo()
+        public void Update_Should_ReturnNewPokemn_WhenUpdatingPokemonWithoutInfo()
         {
             //arrange
 
