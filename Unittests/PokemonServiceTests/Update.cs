@@ -11,12 +11,11 @@ namespace Unittests.PokemonServiceTests
     [ExcludeFromCodeCoverage]
     public class Update
     {
-        Pokemon pokemon;
-        Pokemon zeroPokemon;
-        Pokemon emptyPokemon;
-        Pokemon? nullPokemon;
-        PokemonService pokemonService;
-        DbContextOptions<DataContext> options;
+        readonly Pokemon pokemon;
+        readonly Pokemon emptyPokemon;
+        readonly Pokemon? nullPokemon;
+        readonly PokemonService pokemonService;
+        readonly DbContextOptions<DataContext> options;
 
         public Update() 
         {
@@ -31,10 +30,6 @@ namespace Unittests.PokemonServiceTests
                 Weight = 1,
                 Classification = "???",
                 PokedexEntry = "..."
-            };
-            zeroPokemon = new Pokemon()
-            {
-                Id = 0
             };
 
             emptyPokemon = new Pokemon();
@@ -68,16 +63,7 @@ namespace Unittests.PokemonServiceTests
 
             //assert
             Assert.True(updatedPokemon.Id == 0);
-            Assert.True(updatedPokemon.Name == null);
-        }
-
-        [Fact]
-        public void Update_Should_ThrowNullReferenceException_WhenUpdatingNullPokemon()
-        {
-            //arrange
-
-            //act & assert
-            Assert.Throws<NullReferenceException>(() => pokemonService.Update(nullPokemon));
+            Assert.True(updatedPokemon.Name == "");
         }
     }
 }

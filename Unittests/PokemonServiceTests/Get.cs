@@ -11,8 +11,8 @@ namespace Unittests.PokemonServiceTests
     [ExcludeFromCodeCoverage]
     public class Get
     {
-        PokemonService pokemonService;
-        DbContextOptions<DataContext> options;
+        readonly PokemonService pokemonService;
+        readonly DbContextOptions<DataContext> options;
         public Get()
         {
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();

@@ -12,13 +12,13 @@ namespace CelebiBackend
 {
     public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             //@"Host=localhost;Username=postgres;Port=1700;Password=Soraheliatos2@;Database=pokemon"
 
             //IConfigurationRoot root = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build();
 
-            ServiceCollection serviceProvider = new ServiceCollection();
+            ServiceCollection serviceProvider = new();
             IServiceProvider provider = serviceProvider.AddDbContext<DataContext>
                 (options => 
                 {

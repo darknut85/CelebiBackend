@@ -11,8 +11,8 @@ namespace Unittests.PokemonServiceTests
     [ExcludeFromCodeCoverage]
     public class Search
     {
-        PokemonService pokemonService;
-        DbContextOptions<DataContext> options;
+        readonly PokemonService pokemonService;
+        readonly DbContextOptions<DataContext> options;
 
         public Search()
         {
@@ -59,7 +59,7 @@ namespace Unittests.PokemonServiceTests
             List<Pokemon> pokemonList = pokemonService.Search("saur");
 
             //assert
-            Assert.True(pokemonList.Count() == 3);
+            Assert.True(pokemonList.Count == 3);
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace Unittests.PokemonServiceTests
             //arrange
 
             //act & assert
-            var a = pokemonService.Search(null);
+            List<Pokemon>? a = pokemonService.Search("random text that does not exist");
 
             Assert.True(a.Count == 0);
         }

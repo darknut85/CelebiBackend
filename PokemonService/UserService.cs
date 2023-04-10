@@ -10,7 +10,7 @@ namespace Services
     [ExcludeFromCodeCoverage]
     public class UserService : IUserService
     {
-        DataContext _dataContext;
+        private readonly DataContext _dataContext;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IJwtTokenManager _jwtTokenManager;
@@ -26,12 +26,12 @@ namespace Services
 
         public IdentityUser getUser(string username)
         {
-            IdentityUser identityUser = _dataContext.Set<IdentityUser>().FirstOrDefault(x => x.UserName == username);
-            if (identityUser != null)
+            IdentityUser? identity = _dataContext.Set<IdentityUser>().FirstOrDefault(x => x.UserName == username);
+            if (identity != null) 
             {
-                return identityUser;
+                return identity;
             }
-            return null;
+            return new IdentityUser("");
         }
 
         public List<IdentityUser> GetUsers()
@@ -50,7 +50,7 @@ namespace Services
         {
             IdentityUser user = getUser(username);
 
-            if (user == null)
+            if (user == null || user.UserName == "")
             {
                 return "";
             }
@@ -69,21 +69,21 @@ namespace Services
 
         public IList<string> GetRoles(IdentityUser user)
         {
-            var roles = _userManager.GetRolesAsync(user);
+            Task<IList<string>>? roles = _userManager.GetRolesAsync(user);
             roles.Wait();
-            var result = roles.Result;
+            IList<string>? result = roles.Result;
             return result;
         }
 
         public async Task<bool> register(Register register)
         {
 
-            var roleExists = await _roleManager.RoleExistsAsync("User");
-            var adminExists = await _roleManager.RoleExistsAsync("Admin");
+            bool roleExists = await _roleManager.RoleExistsAsync("User");
+            bool adminExists = await _roleManager.RoleExistsAsync("Admin");
             if (!roleExists) { await _roleManager.CreateAsync(new IdentityRole("User")); }
             if (!adminExists) { await _roleManager.CreateAsync(new IdentityRole("Admin")); }
 
-            var userExists = await _userManager.FindByNameAsync(register.Username);
+            IdentityUser? userExists = await _userManager.FindByNameAsync(register.Username);
             if (userExists != null)
             {
                 return false;
@@ -98,13 +98,13 @@ namespace Services
                     NormalizedEmail = register.Email,
                     NormalizedUserName = register.Username
                 };
-                var result = _userManager.CreateAsync(user, register.Password);
+                Task<IdentityResult> result = _userManager.CreateAsync(user, register.Password);
 
                 await result;
 
                 if (result.IsCompletedSuccessfully)
                 {
-                    var newUser = await _userManager.FindByNameAsync(register.Username);
+                    IdentityUser? newUser = await _userManager.FindByNameAsync(register.Username);
                     await _userManager.AddToRoleAsync(newUser, register.Role);
                     return true;
                 }
@@ -117,8 +117,8 @@ namespace Services
 
         public async Task<string> login(UserCredential userCredential)
         {
-            string role = "Joker";
-            var newUser = await _userManager.FindByNameAsync(userCredential.UserName);
+            string role = "";
+           IdentityUser? newUser = await _userManager.FindByNameAsync(userCredential.UserName);
             IList<string> roles = await _userManager.GetRolesAsync(newUser);
 
             foreach (var item in roles) { role = item; }

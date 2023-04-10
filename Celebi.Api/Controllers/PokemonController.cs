@@ -9,7 +9,7 @@ namespace Celebi.Api.Controllers
     [Route("[controller]")]
     public class PokemonController : ControllerBase
     {
-        IPokemonService _pokemonService;
+        readonly IPokemonService _pokemonService;
 
         public PokemonController(IPokemonService pokemonService)
         {

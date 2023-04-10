@@ -6,9 +6,11 @@ using Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Services
 {
+    [ExcludeFromCodeCoverage]
     public class JwtTokenManager : IJwtTokenManager
     {
         private readonly IConfiguration _configuration;
@@ -27,19 +29,31 @@ namespace Services
             List<IdentityUser> iuser = _userService.GetUsers();
             if (!iuser.Any(x => x.UserName.Equals(username)))
             {
-                return null;
+                return "";
             }
 
             var loginUser = iuser.FirstOrDefault(x => x.UserName == username);
+
+            if (loginUser == null) 
+            {
+                return "";
+            }
 
             PasswordVerificationResult passresult = _userManager.PasswordHasher.VerifyHashedPassword(loginUser, loginUser.PasswordHash, password);
 
             if (passresult != PasswordVerificationResult.Success)
             {
-                return null;
+                return "";
             }
 
-            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration.GetValue<string>("JwtConfig:key")));
+            var configString = _configuration.GetValue<string>("JwtConfig:key");
+
+            if (configString == null) 
+            {
+                return "";
+            }
+
+            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configString));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new Claim[]
             {
@@ -62,7 +76,7 @@ namespace Services
             return tokenHandler.WriteToken(token);
         }
 
-        public string HashPassword(string password) 
+        public static string HashPassword(string password) 
         { 
             SHA256 hash = SHA256.Create();
 

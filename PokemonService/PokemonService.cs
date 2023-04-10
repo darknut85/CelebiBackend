@@ -7,7 +7,7 @@ namespace Services
 {
     public class PokemonService : IPokemonService
     {
-        private DataContext dataContext;
+        private readonly DataContext dataContext;
 
         public PokemonService(DataContext dataContext)
         {
@@ -17,7 +17,7 @@ namespace Services
         public Pokemon Get(int id)
         {
 
-            Pokemon pokemon = dataContext.Set<Pokemon>().FirstOrDefault(x => x.Id == id);
+            Pokemon? pokemon = dataContext.Set<Pokemon>().FirstOrDefault(x => x.Id == id);
             if (pokemon != null)
             {
                 return pokemon;
@@ -33,7 +33,11 @@ namespace Services
 
         public List<Pokemon> Search(string query)
         {
-            return dataContext.Set<Pokemon>().OrderBy(x => x.DexEntry).Where(x => x.Name.Contains(query) || x.PokedexEntry.Contains(query) || x.Type1 == query || x.Type2.Contains(query)).ToList();
+            return dataContext.Set<Pokemon>().OrderBy(x => x.DexEntry)
+                .Where(x => x.Name.Contains(query) || 
+                x.PokedexEntry.Contains(query) ||
+                x.Type1 == query || 
+                x.Type2.Contains(query)).ToList();
         }
 
 

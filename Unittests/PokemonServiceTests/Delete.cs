@@ -10,8 +10,8 @@ namespace Unittests.PokemonServiceTests
     [ExcludeFromCodeCoverage]
     public class Delete
     {
-        PokemonService pokemonService;
-        DbContextOptions<DataContext> options;
+        readonly PokemonService pokemonService;
+        readonly DbContextOptions<DataContext> options;
 
         public Delete()
         {

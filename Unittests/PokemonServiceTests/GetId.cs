@@ -11,8 +11,8 @@ namespace Unittests.PokemonServiceTests
     [ExcludeFromCodeCoverage]
     public class GetId
     {
-        PokemonService pokemonService;
-        DbContextOptions<DataContext> options;
+        readonly PokemonService pokemonService;
+        readonly DbContextOptions<DataContext> options;
 
         public GetId()
         {
@@ -49,7 +49,7 @@ namespace Unittests.PokemonServiceTests
 
             //assert
             Assert.True(pokemon.Id == 0);
-            Assert.True(pokemon.Name == null);
+            Assert.True(pokemon.Name == "");
         }
     }
 }

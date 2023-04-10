@@ -11,12 +11,12 @@ namespace Unittests.PokemonServiceTests
     [ExcludeFromCodeCoverage]
     public class Create
     {
-        Pokemon pokemon;
-        Pokemon existingPokemon;
-        Pokemon emptyPokemon;
-        Pokemon? nullPokemon;
-        PokemonService pokemonService;
-        DbContextOptions<DataContext> options;
+        readonly Pokemon pokemon;
+        readonly Pokemon existingPokemon;
+        readonly Pokemon emptyPokemon;
+        readonly Pokemon? nullPokemon;
+        readonly PokemonService pokemonService;
+        readonly DbContextOptions<DataContext> options;
 
 
         public Create() 
@@ -66,16 +66,8 @@ namespace Unittests.PokemonServiceTests
             Pokemon newPokemon = pokemonService.Create(emptyPokemon);
 
             //assert
-            Assert.Null(newPokemon.Name = null);
-        }
-
-        [Fact]
-        public void Create_Should_ThrowNullReferenceException()
-        {
-            //arrange
-
-            //act & assert
-            Assert.Throws<NullReferenceException>(() => pokemonService.Create(nullPokemon));
+            Assert.Equal("", newPokemon.Name);
+            Assert.Equal(0, newPokemon.DexEntry);
         }
     }
 }

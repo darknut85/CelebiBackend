@@ -13,7 +13,7 @@ namespace Celebi.Api
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>()
@@ -30,8 +30,12 @@ namespace Celebi.Api
             })
             .AddJwtBearer(jwtOptions =>
             {
-                var key = builder.Configuration.GetValue<string>("JwtConfig:key");
-                var keyBytes = Encoding.ASCII.GetBytes(key);
+                string? key = builder.Configuration.GetValue<string>("JwtConfig:key");
+                if (key == null)
+                {
+                    throw new Exception();
+                }
+                byte[]? keyBytes = Encoding.ASCII.GetBytes(key);
                 jwtOptions.SaveToken = true;
                 jwtOptions.RequireHttpsMetadata = false;
                 jwtOptions.TokenValidationParameters = new TokenValidationParameters

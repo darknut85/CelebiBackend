@@ -11,14 +11,10 @@ namespace Celebi.Api.Controllers
     [ApiController]
     public class TokenController : ControllerBase
     {
-        private readonly IJwtTokenManager _jwtTokenManager;
-        private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserService _userService;
 
-        public TokenController(IJwtTokenManager jwtTokenManager, UserManager<IdentityUser> userManager, IUserService userService)
+        public TokenController(IUserService userService)
         {
-            _jwtTokenManager = jwtTokenManager;
-            _userManager = userManager;
             _userService = userService;
         }
 
@@ -26,7 +22,7 @@ namespace Celebi.Api.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult ListUsers() 
         {
-            var users = _userService.GetUsers();
+            List<IdentityUser> users = _userService.GetUsers();
             if (users == null)
             {
                 return BadRequest("No users found");
@@ -38,7 +34,7 @@ namespace Celebi.Api.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult FindUser(string userName)
         {
-            var user = _userService.getUser(userName);
+            IdentityUser? user = _userService.getUser(userName);
             if (user == null) 
             {
                 return BadRequest("User does not exist");
@@ -54,8 +50,10 @@ namespace Celebi.Api.Controllers
             
             if (role != null)
             {
-                Role roleModel = new Role();
-                roleModel.Name = role;
+                Role roleModel = new()
+                {
+                    Name = role
+                };
                 return Ok(roleModel);
             }
             return BadRequest("User does not exist");
@@ -67,7 +65,7 @@ namespace Celebi.Api.Controllers
         {
             string token = await _userService.login(userCredential);
             
-            if (string.IsNullOrEmpty(token))
+            if (token == "")
             {
                 return Unauthorized();
             }
