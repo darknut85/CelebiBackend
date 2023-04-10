@@ -5,9 +5,9 @@ using System.Security.Claims;
 using Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Cryptography;
-using System.Diagnostics;
+using Microsoft.Extensions.Configuration;
 
-namespace Celebi.Api
+namespace Services
 {
     public class JwtTokenManager : IJwtTokenManager
     {

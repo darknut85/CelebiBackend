@@ -13,13 +13,15 @@ namespace Services
         DataContext _dataContext;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IJwtTokenManager _jwtTokenManager;
 
         public UserService(DataContext dataContext, UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager) 
+            RoleManager<IdentityRole> roleManager, IJwtTokenManager jwtTokenManager) 
         {
             _dataContext = dataContext;
             _userManager = userManager;
             _roleManager = roleManager;
+            _jwtTokenManager = jwtTokenManager;
         }
 
         public IdentityUser getUser(string username)
@@ -111,6 +113,17 @@ namespace Services
                     return false;
                 }
             }
+        }
+
+        public async Task<string> login(UserCredential userCredential)
+        {
+            string role = "Joker";
+            var newUser = await _userManager.FindByNameAsync(userCredential.UserName);
+            IList<string> roles = await _userManager.GetRolesAsync(newUser);
+
+            foreach (var item in roles) { role = item; }
+
+            return _jwtTokenManager.Authenticate(userCredential.UserName, userCredential.Password, role);
         }
     }
 }

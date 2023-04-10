@@ -25,6 +25,9 @@ namespace Interfaces
         //register user
         Task<bool> register(Register register);
 
+        //login user
+        Task<string> login(UserCredential userCredential);
+
         //check if user exists
 
         //delete user

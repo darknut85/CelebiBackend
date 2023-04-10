@@ -1,9 +1,9 @@
-﻿using Celebi.Api.models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Interfaces;
 using Objects;
+using Services;
 
 namespace Celebi.Api.Controllers
 {
@@ -13,15 +13,12 @@ namespace Celebi.Api.Controllers
     {
         private readonly IJwtTokenManager _jwtTokenManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserService _userService;
 
-        public TokenController(IJwtTokenManager jwtTokenManager, UserManager<IdentityUser> userManager, 
-            RoleManager<IdentityRole> roleManager, IConfiguration configuration, IUserService userService)
+        public TokenController(IJwtTokenManager jwtTokenManager, UserManager<IdentityUser> userManager, IUserService userService)
         {
             _jwtTokenManager = jwtTokenManager;
             _userManager = userManager;
-            _roleManager = roleManager;
             _userService = userService;
         }
 
@@ -68,13 +65,8 @@ namespace Celebi.Api.Controllers
         [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] UserCredential userCredential) 
         {
-            string role = "Joker";
-            var newUser = await _userManager.FindByNameAsync(userCredential.UserName);
-            IList<string> roles = await _userManager.GetRolesAsync(newUser);
-
-            foreach (var item in roles) { role = item; }
-
-            var token = _jwtTokenManager.Authenticate(userCredential.UserName, userCredential.Password, role);
+            string token = await _userService.login(userCredential);
+            
             if (string.IsNullOrEmpty(token))
             {
                 return Unauthorized();
