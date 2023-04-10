@@ -1,9 +1,15 @@
 ﻿using Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Migrations;
 using Objects;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Services
 {
@@ -13,18 +19,18 @@ namespace Services
         private readonly DataContext _dataContext;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IJwtTokenManager _jwtTokenManager;
+        private readonly IConfiguration _configuration;
 
         public UserService(DataContext dataContext, UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager, IJwtTokenManager jwtTokenManager) 
+            RoleManager<IdentityRole> roleManager, IConfiguration configuration) 
         {
             _dataContext = dataContext;
             _userManager = userManager;
             _roleManager = roleManager;
-            _jwtTokenManager = jwtTokenManager;
+            _configuration = configuration;
         }
 
-        public IdentityUser getUser(string username)
+        public IdentityUser GetUser(string username)
         {
             IdentityUser? identity = _dataContext.Set<IdentityUser>().FirstOrDefault(x => x.UserName == username);
             if (identity != null) 
@@ -48,7 +54,7 @@ namespace Services
 
         public string GetRole(string username)
         {
-            IdentityUser user = getUser(username);
+            IdentityUser user = GetUser(username);
 
             if (user == null || user.UserName == "")
             {
@@ -75,7 +81,7 @@ namespace Services
             return result;
         }
 
-        public async Task<bool> register(Register register)
+        public async Task<bool> Register(Register register)
         {
 
             bool roleExists = await _roleManager.RoleExistsAsync("User");
@@ -115,7 +121,7 @@ namespace Services
             }
         }
 
-        public async Task<string> login(UserCredential userCredential)
+        public async Task<string> Login(UserCredential userCredential)
         {
             string role = "";
            IdentityUser? newUser = await _userManager.FindByNameAsync(userCredential.UserName);
@@ -123,7 +129,59 @@ namespace Services
 
             foreach (var item in roles) { role = item; }
 
-            return _jwtTokenManager.Authenticate(userCredential.UserName, userCredential.Password, role);
+            return Authenticate(userCredential.UserName, userCredential.Password, role);
+        }
+
+        public string Authenticate(string username, string password, string userRole = "User")
+        {
+            List<IdentityUser> iuser = GetUsers();
+            if (!iuser.Any(x => x.UserName.Equals(username)))
+            {
+                return "";
+            }
+
+            var loginUser = iuser.FirstOrDefault(x => x.UserName == username);
+
+            if (loginUser == null)
+            {
+                return "";
+            }
+
+            PasswordVerificationResult passresult = _userManager.PasswordHasher.VerifyHashedPassword(loginUser, loginUser.PasswordHash, password);
+
+            if (passresult != PasswordVerificationResult.Success)
+            {
+                return "";
+            }
+
+            var configString = _configuration.GetValue<string>("JwtConfig:key");
+
+            if (configString == null)
+            {
+                return "";
+            }
+
+            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configString));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new Claim[]
+            {
+                new Claim(ClaimTypes.Name, username),
+                new Claim(ClaimTypes.Role, userRole)
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var tokenDescriptor = new SecurityTokenDescriptor()
+            {
+                Issuer = _configuration["JwtConfig:Issuer"],
+                Audience = _configuration["JwtConfig:Audience"],
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddMinutes(1),
+                SigningCredentials = credentials
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

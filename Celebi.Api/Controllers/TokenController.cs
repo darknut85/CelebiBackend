@@ -34,7 +34,7 @@ namespace Celebi.Api.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult FindUser(string userName)
         {
-            IdentityUser? user = _userService.getUser(userName);
+            IdentityUser? user = _userService.GetUser(userName);
             if (user == null) 
             {
                 return BadRequest("User does not exist");
@@ -63,7 +63,7 @@ namespace Celebi.Api.Controllers
         [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] UserCredential userCredential) 
         {
-            string token = await _userService.login(userCredential);
+            string token = await _userService.Login(userCredential);
             
             if (token == "")
             {
@@ -76,7 +76,7 @@ namespace Celebi.Api.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register([FromBody] Register register)
         {
-            bool completed = await _userService.register(register);
+            bool completed = await _userService.Register(register);
             if (completed) 
             {
                 return Ok("User created");

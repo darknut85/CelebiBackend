@@ -11,7 +11,7 @@ namespace Interfaces
     public interface IUserService
     {
         //get user
-        IdentityUser getUser(string username);
+        IdentityUser GetUser(string username);
 
         //get users
         List<IdentityUser> GetUsers();
@@ -23,10 +23,13 @@ namespace Interfaces
         IList<string> GetRoles(IdentityUser user);
 
         //register user
-        Task<bool> register(Register register);
+        Task<bool> Register(Register register);
 
         //login user
-        Task<string> login(UserCredential userCredential);
+        Task<string> Login(UserCredential userCredential);
+
+        //authenticate
+        string Authenticate(string username, string password, string role = "User");
 
         //check if user exists
 

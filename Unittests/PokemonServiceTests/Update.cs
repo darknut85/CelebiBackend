@@ -13,7 +13,6 @@ namespace Unittests.PokemonServiceTests
     {
         readonly Pokemon pokemon;
         readonly Pokemon emptyPokemon;
-        readonly Pokemon? nullPokemon;
         readonly PokemonService pokemonService;
         readonly DbContextOptions<DataContext> options;
 
@@ -33,7 +32,6 @@ namespace Unittests.PokemonServiceTests
             };
 
             emptyPokemon = new Pokemon();
-            nullPokemon = null;
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
             DataContext context = new(options);
             context.DefaultSetup();
