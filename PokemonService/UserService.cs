@@ -136,42 +136,34 @@ namespace Services
         {
             List<IdentityUser> iuser = GetUsers();
             if (!iuser.Any(x => x.UserName.Equals(username)))
-            {
                 return "";
-            }
 
-            var loginUser = iuser.FirstOrDefault(x => x.UserName == username);
+            IdentityUser? loginUser = iuser.FirstOrDefault(x => x.UserName == username);
 
             if (loginUser == null)
-            {
                 return "";
-            }
 
             PasswordVerificationResult passresult = _userManager.PasswordHasher.VerifyHashedPassword(loginUser, loginUser.PasswordHash, password);
 
             if (passresult != PasswordVerificationResult.Success)
-            {
                 return "";
-            }
 
-            var configString = _configuration.GetValue<string>("JwtConfig:key");
+            string? configString = _configuration.GetValue<string>("JwtConfig:key");
 
             if (configString == null)
-            {
                 return "";
-            }
 
-            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configString));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var claims = new Claim[]
+            SymmetricSecurityKey? securityKey = new(Encoding.ASCII.GetBytes(configString));
+            SigningCredentials credentials = new(securityKey, SecurityAlgorithms.HmacSha256);
+            Claim[] claims = new Claim[]
             {
                 new Claim(ClaimTypes.Name, username),
                 new Claim(ClaimTypes.Role, userRole)
             };
 
-            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler tokenHandler = new();
 
-            var tokenDescriptor = new SecurityTokenDescriptor()
+            SecurityTokenDescriptor tokenDescriptor = new()
             {
                 Issuer = _configuration["JwtConfig:Issuer"],
                 Audience = _configuration["JwtConfig:Audience"],
@@ -180,7 +172,7 @@ namespace Services
                 SigningCredentials = credentials
             };
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
     }
