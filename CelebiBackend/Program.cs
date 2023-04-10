@@ -14,11 +14,6 @@ namespace CelebiBackend
     {
         static void Main()
         {
-            //@"Host=localhost;Username=postgres;Port=1700;Password=Soraheliatos2@;Database=pokemon"
-
-            //IConfigurationRoot root = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build();
-
-
             Pokedex pokedex = new();
 
             ServiceCollection serviceProvider = new();
@@ -77,10 +72,15 @@ namespace CelebiBackend
         {
             var builder = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            //.AddEnvironmentVariables();
-            var config = builder.Build();
+            IConfigurationRoot config = builder.Build();
 
-            return config.GetConnectionString("PostgreSqlConnection");
+            string? conn = config.GetConnectionString("PostgreSqlConnection");
+
+            if (conn != null)
+            {
+                return conn;
+            }
+            return "";
         }
     }
 }
