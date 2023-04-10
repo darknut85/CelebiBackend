@@ -1,19 +1,25 @@
 ﻿using Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Migrations;
+using Objects;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Services
 {
+    [ExcludeFromCodeCoverage]
     public class UserService : IUserService
     {
         DataContext _dataContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserService(DataContext dataContext, UserManager<IdentityUser> userManager) 
+        public UserService(DataContext dataContext, UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager) 
         {
             _dataContext = dataContext;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IdentityUser getUser(string username)
@@ -65,6 +71,46 @@ namespace Services
             roles.Wait();
             var result = roles.Result;
             return result;
+        }
+
+        public async Task<bool> register(Register register)
+        {
+
+            var roleExists = await _roleManager.RoleExistsAsync("User");
+            var adminExists = await _roleManager.RoleExistsAsync("Admin");
+            if (!roleExists) { await _roleManager.CreateAsync(new IdentityRole("User")); }
+            if (!adminExists) { await _roleManager.CreateAsync(new IdentityRole("Admin")); }
+
+            var userExists = await _userManager.FindByNameAsync(register.Username);
+            if (userExists != null)
+            {
+                return false;
+            }
+            else
+            {
+                IdentityUser user = new()
+                {
+                    Email = register.Email,
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    UserName = register.Username,
+                    NormalizedEmail = register.Email,
+                    NormalizedUserName = register.Username
+                };
+                var result = _userManager.CreateAsync(user, register.Password);
+
+                await result;
+
+                if (result.IsCompletedSuccessfully)
+                {
+                    var newUser = await _userManager.FindByNameAsync(register.Username);
+                    await _userManager.AddToRoleAsync(newUser, register.Role);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }

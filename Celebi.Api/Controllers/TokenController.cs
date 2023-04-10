@@ -86,41 +86,16 @@ namespace Celebi.Api.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register([FromBody] Register register)
         {
-            var roleExists = await _roleManager.RoleExistsAsync("User");
-            var adminExists = await _roleManager.RoleExistsAsync("Admin");
-            if (!roleExists) { await _roleManager.CreateAsync(new IdentityRole("User")); }
-            if (!adminExists) { await _roleManager.CreateAsync(new IdentityRole("Admin")); }
-
-            var userExists = await _userManager.FindByNameAsync(register.Username);
-            if (userExists != null)
+            bool completed = await _userService.register(register);
+            if (completed) 
             {
-                return BadRequest("User already exists: " + register.Username);
+                return Ok("User created");
             }
             else
             {
-                IdentityUser user = new()
-                {
-                    Email = register.Email,
-                    SecurityStamp = Guid.NewGuid().ToString(),
-                    UserName = register.Username,
-                    NormalizedEmail= register.Email,
-                    NormalizedUserName = register.Username
-                };
-                var result = _userManager.CreateAsync(user, register.Password);
-
-                await result;
-
-                if (result.IsCompletedSuccessfully)
-                {
-                    var newUser = await _userManager.FindByNameAsync(register.Username);
-                    await _userManager.AddToRoleAsync(newUser, register.Role);
-                    return Ok("User created");
-                }
-                else
-                {
-                    return BadRequest("User wasn't created");
-                }
+                return BadRequest("User wasn't created");
             }
+
         }
     }
 }
