@@ -42,19 +42,16 @@ namespace Celebi.Api.Controllers
             return Ok(user);
         }
 
-        [HttpGet("GetRoleOfUser")]
-        [Authorize(Roles = "Admin")]
-        public IActionResult GetRoleOfUser(string userName) 
+        [HttpGet("GetRolesOfUser")]
+        //[Authorize(Roles = "Admin")]
+        public IActionResult GetRolesOfUser(string userName) 
         { 
-            string role = _userService.GetRole(userName);
+            IdentityUser user = _userService.GetUser(userName);
+            IList<string> roles = _userService.GetRoles(user);
             
-            if (role != null)
+            if (roles != null)
             {
-                Role roleModel = new()
-                {
-                    Name = role
-                };
-                return Ok(roleModel);
+                return Ok(roles);
             }
             return BadRequest("User does not exist");
         }
@@ -85,6 +82,7 @@ namespace Celebi.Api.Controllers
         }
 
         [HttpGet("Roles")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRole(string userName, string role )
         {
             var message = await _userService.AddRoleToUser(role, userName);

@@ -35,7 +35,7 @@ export class UserPageComponent {
       const id = params.get('id');
       this.adminService.getUserByID(String(id)).subscribe((data: User) => { 
         this.user = data;
-        this.adminService.getRole(String(data.userName)).subscribe((role: Role) => {
+        this.adminService.getRoles(String(data.userName)).subscribe((role: Role) => {
           this.user.role = role.name;
         });
       });
