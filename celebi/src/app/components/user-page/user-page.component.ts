@@ -23,6 +23,7 @@ export class UserPageComponent {
     role: ""
   };
   message = "";
+  roles: Role[] = [];
 
   ngOnInit()
   {
@@ -35,8 +36,12 @@ export class UserPageComponent {
       const id = params.get('id');
       this.adminService.getUserByID(String(id)).subscribe((data: User) => { 
         this.user = data;
-        this.adminService.getRoles(String(data.userName)).subscribe((role: Role) => {
-          this.user.role = role.name;
+        this.adminService.getRoles(String(data.userName)).subscribe((role: Role[]) => {
+          
+          console.log(role)
+          role.forEach(element => {
+            this.roles.push({name:element.toString()});
+          });
         });
       });
     });

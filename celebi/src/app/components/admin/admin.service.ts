@@ -27,8 +27,8 @@ export class AdminService {
         return this.httpClient.get < User > (this.apiURL + '/GetOneUser', { params }).pipe(catchError(this.errorHandler))
     }
 
-    getRoles(userName: string): Observable < Role > {
-        return this.httpClient.get < Role > (this.apiURL + '/GetRolesOfUser?userName=' + userName).pipe(catchError(this.errorHandler));
+    getRoles(userName: string): Observable < Role[] > {
+        return this.httpClient.get < Role[] > (this.apiURL + '/GetRolesOfUser?userName=' + userName).pipe(catchError(this.errorHandler));
     }
 
     addRole(role: string, userName: string): Observable < Role >{

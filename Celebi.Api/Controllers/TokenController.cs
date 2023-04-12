@@ -43,7 +43,7 @@ namespace Celebi.Api.Controllers
         }
 
         [HttpGet("GetRolesOfUser")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetRolesOfUser(string userName) 
         { 
             IdentityUser user = _userService.GetUser(userName);

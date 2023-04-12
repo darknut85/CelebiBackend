@@ -9,7 +9,9 @@
         </div>
         <div>Username: {{user.userName}}</div>
         <div>Email: {{user.email}}</div>
-        <div>Role: {{user.role}}</div>
+        <div *ngFor="let role of roles">
+            Role: {{role.name}}
+        </div>
         
         
         <div>
