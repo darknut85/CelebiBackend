@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
 using Migrations;
 using Objects;
 using System.Diagnostics;
@@ -111,8 +112,13 @@ namespace Services
                 if (result.IsCompletedSuccessfully)
                 {
                     IdentityUser? newUser = await _userManager.FindByNameAsync(register.Username);
-                    await _userManager.AddToRoleAsync(newUser, register.Role);
-                    return true;
+                    Task<IdentityResult> irole = _userManager.AddToRoleAsync(newUser, register.Role);
+                    irole.Wait();
+                    if (irole.IsCompletedSuccessfully)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
                 else
                 {
@@ -124,7 +130,7 @@ namespace Services
         public async Task<string> Login(UserCredential userCredential)
         {
             string role = "";
-           IdentityUser? newUser = await _userManager.FindByNameAsync(userCredential.UserName);
+            IdentityUser? newUser = await _userManager.FindByNameAsync(userCredential.UserName);
             IList<string> roles = await _userManager.GetRolesAsync(newUser);
 
             foreach (var item in roles) { role = item; }
@@ -168,12 +174,39 @@ namespace Services
                 Issuer = _configuration["JwtConfig:Issuer"],
                 Audience = _configuration["JwtConfig:Audience"],
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = credentials
             };
 
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public async Task<string> AddRoleToUser(string role, string userName)
+        {
+            IdentityUser? user = await _userManager.FindByNameAsync(userName);
+            if (user.UserName == "")
+                return "The user does not exist";
+
+            IList<string> roles = GetRoles(user);
+
+            IQueryable<IdentityRole> roleExists = _roleManager.Roles;
+
+            IdentityRole? irole = roleExists.Where(x => x.Name.Equals(role)).FirstOrDefault();
+            if (irole == null) 
+                return "The role does not exist";
+
+            string? hasRole = roles.Where(x => x == role).FirstOrDefault();
+            if (hasRole != null)
+                return "The user already as the role";
+
+            Task<IdentityResult> iresult = _userManager.AddToRoleAsync(user, role);
+            iresult.Wait();
+            if (iresult.IsCompletedSuccessfully)
+            {
+                return "The role has been added to the user";
+            }
+            return "The role has not been added to the user";
         }
     }
 }

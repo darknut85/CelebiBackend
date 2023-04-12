@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -23,13 +23,19 @@ export class AdminService {
     }
 
     getUserByID(userName: string): Observable < User > {
-        return this.httpClient.get < User > (this.apiURL + '/GetOneUser?userName=' + userName).pipe(catchError(this.errorHandler))
+        let params = new HttpParams().set('userName', userName);
+        return this.httpClient.get < User > (this.apiURL + '/GetOneUser', { params }).pipe(catchError(this.errorHandler))
     }
 
     getRole(userName: string): Observable < Role > {
         return this.httpClient.get < Role > (this.apiURL + '/GetRoleOfUser?userName=' + userName).pipe(catchError(this.errorHandler));
     }
 
+    addRole(role: string, userName: string): Observable < Role >{
+        let params = new HttpParams().set('role', role).set('userName', userName);
+        return this.httpClient.get <Role> (this.apiURL + '/Roles', { params } ).pipe(catchError(this.errorHandler));
+    }
+    
     errorHandler(error: {
         error: {
             message: string;

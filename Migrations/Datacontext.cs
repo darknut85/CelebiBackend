@@ -92,8 +92,8 @@ namespace Migrations
                     UserName = "NewUser", 
                     PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==", 
                     Email = "new.user@newUser.com",
-                    NormalizedEmail = "new.user@newUser.com",
-                    NormalizedUserName = "NewUser",
+                    NormalizedEmail = "NEW.USER@NEWUSER.COM",
+                    NormalizedUserName = "NEWUSER",
                     EmailConfirmed = true
                 });
         }

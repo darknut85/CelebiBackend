@@ -31,8 +31,9 @@ namespace Interfaces
         //authenticate
         string Authenticate(string username, string password, string role = "User");
 
-        //check if user exists
+        //add role to user
+        Task<string> AddRoleToUser(string role, string userName);
 
-        //delete user
+        //remove role from user
     }
 }

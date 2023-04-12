@@ -1,58 +1,58 @@
 <div mat-dialog-content>
-    <p>Delete a Pokemon</p>
-    <mat-form-field>
-        <mat-select [(value)]="selectedPokemon" (selectionChange)="findPokemon(selectedPokemon)">
-            <div *ngFor="let pokemon of parray">
-                <mat-option value={{pokemon.name}}>{{pokemon.name}}</mat-option>
-            </div>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      Id:<mat-label></mat-label>
-      <input matInput [(ngModel)]="pokemon.id">
-    </mat-form-field>
-    <p>Update a Pokemon</p>
-    <mat-form-field appearance="fill">
-      Name:<mat-label></mat-label>
-      <input matInput [(ngModel)]="pokemon.name">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-      DexNumber:<mat-label></mat-label>
-      <input matInput [(ngModel)]="pokemon.dexEntry">
-    </mat-form-field>
+  <p>Select a Pokemon</p>
+  <mat-form-field>
+      <mat-select [(value)]="selectedPokemon" (selectionChange)="findPokemon(selectedPokemon)">
+          <div *ngFor="let pokemon of parray">
+              <mat-option value={{pokemon.name}}>{{pokemon.name}}</mat-option>
+          </div>
+      </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    Id:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.id">
+  </mat-form-field>
+  <p>Update a Pokemon</p>
+  <mat-form-field appearance="fill">
+    Name:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.name">
+  </mat-form-field>
   
-    <mat-form-field appearance="fill">
-      Type1:<mat-label></mat-label>
-      <input matInput [(ngModel)]="pokemon.type1">
-    </mat-form-field>
+  <mat-form-field appearance="fill">
+    DexNumber:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.dexEntry">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    Type1:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.type1">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    Type2:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.type2">
+  </mat-form-field>
   
-    <mat-form-field appearance="fill">
-      Type2:<mat-label></mat-label>
-      <input matInput [(ngModel)]="pokemon.type2">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-      Height:<mat-label></mat-label>
-      <input matInput [(ngModel)]="pokemon.height">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-      Weight:<mat-label></mat-label>
-      <input matInput [(ngModel)]="pokemon.weight">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-      Classification:<mat-label></mat-label>
-      <input matInput [(ngModel)]="pokemon.classification">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-      DexEntry:<mat-label></mat-label>
-      <input matInput [(ngModel)]="pokemon.pokedexEntry">
-    </mat-form-field>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Undo</button>
-    <button mat-button [mat-dialog-close]="pokemon" cdkFocusInitial>Update the pokemon</button>
-  </div>
+  <mat-form-field appearance="fill">
+    Height:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.height">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    Weight:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.weight">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    Classification:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.classification">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    DexEntry:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.pokedexEntry">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Undo</button>
+  <button mat-button [mat-dialog-close]="pokemon" cdkFocusInitial>Update the pokemon</button>
+</div>

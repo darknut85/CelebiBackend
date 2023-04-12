@@ -3,6 +3,7 @@ import { AdminService } from '../admin/admin.service';
 import { User } from 'src/app/objects/user';
 import { ActivatedRoute } from '@angular/router';
 import { Role } from 'src/app/objects/role';
+import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 
 @Component({
   selector: 'app-user-page',
@@ -10,8 +11,10 @@ import { Role } from 'src/app/objects/role';
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent {
-  constructor(private adminService: AdminService, private route: ActivatedRoute) { }
+  constructor(private adminService: AdminService, private route: ActivatedRoute, private pokemonService: PokemonService) { }
 
+  userName = "";
+  uarray: User[] = [];
   user: User = 
   {
     userName: "",
@@ -19,9 +22,14 @@ export class UserPageComponent {
     password: "",
     role: ""
   };
+  message = "";
 
   ngOnInit()
   {
+    this.userName = this.pokemonService.displayLogin();
+      this.adminService.getUsers().subscribe((data: User[]) => {
+      this.uarray = data;
+    });
     this.route.paramMap.subscribe((params) =>
     { 
       const id = params.get('id');
@@ -33,4 +41,12 @@ export class UserPageComponent {
       });
     });
   }
+
+  AddRole(): void
+  {
+    this.adminService.addRole(this.user.role,this.user.userName).subscribe((role: Role) => {
+      this.message = role.name;
+      console.log(this.message);
+    });
+  };
 }

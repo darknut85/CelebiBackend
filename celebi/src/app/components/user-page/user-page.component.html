@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{{userName}}
 <html>
     <body>
         <div class="grid-container">
@@ -9,5 +10,24 @@
         <div>Username: {{user.userName}}</div>
         <div>Email: {{user.email}}</div>
         <div>Role: {{user.role}}</div>
+        
+        
+        <div>
+            <p>Add a role to the user</p>
+            <mat-form-field appearance="fill">
+            Name of role:<mat-label></mat-label>
+            <input matInput [(ngModel)]="user.role">
+            </mat-form-field>
+            
+            <div mat-dialog-actions>
+                <button mat-button (click)="AddRole()">Add the role</button>
+            </div>
+
+            <p>Remove a role from the user</p>
+            <mat-form-field appearance="fill">
+            Name of role:<mat-label></mat-label>
+            <input matInput [(ngModel)]="user.role">
+            </mat-form-field>
+        </div>
     </body>
 </html>

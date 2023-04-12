@@ -77,15 +77,25 @@ namespace Celebi.Api.Controllers
         public async Task<IActionResult> Register([FromBody] Register register)
         {
             bool completed = await _userService.Register(register);
-            if (completed) 
-            {
-                return Ok("User created");
-            }
-            else
+            if (!completed)
             {
                 return BadRequest("User wasn't created");
             }
+            return Ok("User created");
+        }
 
+        [HttpGet("Roles")]
+        public async Task<IActionResult> AddRole(string userName, string role )
+        {
+            var message = await _userService.AddRoleToUser(role, userName);
+
+            Role mess = new() { Name = message };
+
+            if (mess.Name != "The role has been added to the user")
+            {
+                return BadRequest(mess);
+            }
+            return Ok(mess);
         }
     }
 }
