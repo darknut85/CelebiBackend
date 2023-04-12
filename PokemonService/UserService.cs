@@ -53,27 +53,6 @@ namespace Services
             return _dataContext.Set<IdentityUser>().OrderBy(x => x.Id).ToList();
         }
 
-        public string GetRole(string username)
-        {
-            IdentityUser user = GetUser(username);
-
-            if (user == null || user.UserName == "")
-            {
-                return "";
-            }
-
-            IList<string> roles = GetRoles(user);
-
-            string r = "";
-            foreach (var role in roles) 
-            { 
-                r = role;
-                break;
-            }
-
-            return r;
-        }
-
         public IList<string> GetRoles(IdentityUser user)
         {
             Task<IList<string>>? roles = _userManager.GetRolesAsync(user);

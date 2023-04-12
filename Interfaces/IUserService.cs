@@ -16,9 +16,6 @@ namespace Interfaces
         //get users
         List<IdentityUser> GetUsers();
 
-        //get first role of user
-        string GetRole(string username);
-
         //get all roles of user
         IList<string> GetRoles(IdentityUser user);
 

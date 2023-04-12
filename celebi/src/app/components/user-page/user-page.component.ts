@@ -37,8 +37,6 @@ export class UserPageComponent {
       this.adminService.getUserByID(String(id)).subscribe((data: User) => { 
         this.user = data;
         this.adminService.getRoles(String(data.userName)).subscribe((role: Role[]) => {
-          
-          console.log(role)
           role.forEach(element => {
             this.roles.push({name:element.toString()});
           });
