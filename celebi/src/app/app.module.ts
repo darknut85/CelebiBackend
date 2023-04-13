@@ -27,6 +27,7 @@ import { AuthInterceptor } from './components/auth/authinterceptor.service';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminService } from './components/admin/admin.service';
 import { UserPageComponent } from './components/user-page/user-page.component';
+import { LogoutComponent } from './components/logout/logout.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { UserPageComponent } from './components/user-page/user-page.component';
     LoginComponent,
     RegisterComponent,
     AdminComponent,
-    UserPageComponent
+    UserPageComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
