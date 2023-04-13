@@ -5,6 +5,7 @@ import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Pokemon } from 'src/app/objects/pokemon';
 import { AuthService } from '../auth/auth.service';
+import { Delete } from 'src/app/objects/delete';
 
 @Injectable({
   providedIn: 'root'
@@ -36,8 +37,8 @@ export class PokemonService {
         return this.httpClient.put < Pokemon > (this.apiURL + '/Pokemon', JSON.stringify(pokemon), this.httpOptions).pipe(catchError(this.errorHandler))
     }
 
-    removePokemon(id: number) {
-        return this.httpClient.delete < Pokemon > (this.apiURL + '/Pokemon/id?id=' + id, this.httpOptions).pipe(catchError(this.errorHandler));
+    removePokemon(id: number): Observable < Delete>  {
+        return this.httpClient.delete < Delete > (this.apiURL + '/Pokemon/id?id=' + id, this.httpOptions).pipe(catchError(this.errorHandler));
     }
     errorHandler(error: {
         error: {

@@ -8,7 +8,6 @@ import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
   templateUrl: './pokedex-update.component.html',
   styleUrls: ['./pokedex-update.component.css']
 })
-
 export class PokedexUpdateComponent 
 {
   constructor( private pokemonService: PokemonService,

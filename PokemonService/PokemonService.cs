@@ -51,16 +51,19 @@ namespace Services
             return pokemon;
         }
 
-        public bool Delete(int id)
+        public Delete Delete(int id)
         {
+            Delete delete = new();
             Pokemon pokemon = Get(id);
             if (pokemon.Id == 0) 
             {
-                return false;
+                delete.Deleted = false;
+                return delete;
             }
             dataContext.Set<Pokemon>().Remove(pokemon);
             SaveChanges();
-            return true;
+            delete.Deleted = true;
+            return delete;
         }
 
         public Pokemon Update(Pokemon pokemon)

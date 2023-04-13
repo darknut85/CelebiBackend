@@ -41,9 +41,9 @@ namespace Celebi.Api.Controllers
         [HttpDelete("id")]
         public IActionResult Delete(int id) 
         { 
-            _pokemonService.Delete(id);
+            Delete delete = _pokemonService.Delete(id);
             _pokemonService.SaveChanges();
-            return Ok($"{id} deleted");
+            return Ok(delete);
         }
 
         [Authorize(Roles = "Admin")]

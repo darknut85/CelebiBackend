@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { PokedexDeleteComponent } from '../pokedex-delete/pokedex-delete.component';
 import { PokedexUpdateComponent } from '../pokedex-update/pokedex-update.component';
 import { AuthService } from '../auth/auth.service';
+import { Delete } from 'src/app/objects/delete';
 
 @Component({
   selector: 'pokedexRedBlue-root',
@@ -24,6 +25,7 @@ export class PokedexRedBlueComponent implements OnInit {
   constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router, private auth: AuthService) { }
 
   parray: Pokemon[] = [];
+  delete: Delete = {delete: false};
   userName = "";
   ngOnInit() {
       this.userName = this.pokemonService.displayLogin();
@@ -100,16 +102,7 @@ export class PokedexRedBlueComponent implements OnInit {
 
   //POST
   addPokemon(pokemon: Pokemon){
-    this.pokemonService.addPokemon(pokemon).subscribe(response => {
-      this.router.navigate(['/pokedexRedBlue']);
-      this.refresh();
-    });
-  }
-
-  
-  //DELETE
-  removePokemon(id: number){
-    this.pokemonService.removePokemon(id).subscribe(response => {
+    this.pokemonService.addPokemon(pokemon).subscribe((response) => {
       this.router.navigate(['/pokedexRedBlue']);
       this.refresh();
     });
@@ -119,6 +112,15 @@ export class PokedexRedBlueComponent implements OnInit {
   updatePokemon(pokemon: Pokemon){
     this.pokemonService.updatePokemon(pokemon).subscribe(response => {
       this.router.navigate(['/pokemonRedBlue']);
+      this.refresh();
+    });
+  }
+
+  //DELETE
+  removePokemon(id: number){
+    this.pokemonService.removePokemon(id).subscribe((data: Delete) => {
+      this.delete = data;
+      this.router.navigate(['/pokedexRedBlue']);
       this.refresh();
     });
   }
