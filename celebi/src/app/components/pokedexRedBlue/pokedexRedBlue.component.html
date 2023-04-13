@@ -17,24 +17,25 @@
                 </div>
             </mat-select>
         </mat-form-field>
+        
+        <li>
+            <button (click)="openAddDialog()">Add new Pokemon</button>
+        </li>
+        <li *ngIf="pokemon.name">
+            You added: <i>{{pokemon.name}}</i>
+        </li>
+        <li>
+            <button (click)="openDeleteDialog()">Delete Pokemon</button>
+        </li>
+        <li *ngIf="pokemon.id">
+            You deleted: <i>{{pokemon.id}}</i>
+        </li>
+        <li>
+            <button (click)="openUpdateDialog()">Update Pokemon</button>
+        </li>
+        <li *ngIf="pokemon.id">
+            You updated: <i>{{pokemon.id}}</i>
+        </li>
+        
     </body>
-    
-    <li>
-        <button (click)="openAddDialog()">Add new Pokemon</button>
-    </li>
-    <li *ngIf="pokemon.name">
-        You added: <i>{{pokemon.name}}</i>
-    </li>
-    <li>
-        <button (click)="openDeleteDialog()">Delete Pokemon</button>
-    </li>
-    <li *ngIf="pokemon.id">
-        You deleted: <i>{{pokemon.id}}</i>
-    </li>
-    <li>
-        <button (click)="openUpdateDialog()">Update Pokemon</button>
-    </li>
-    <li *ngIf="pokemon.id">
-        You updated: <i>{{pokemon.id}}</i>
-    </li>
 </html>

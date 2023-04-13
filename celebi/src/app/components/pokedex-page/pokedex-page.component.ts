@@ -11,7 +11,7 @@ import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 export class PokedexPageComponent implements OnInit {
   
   constructor(private pokemonService: PokemonService, private route: ActivatedRoute) { }
-
+  userName = "";
   pokemon: Pokemon = 
   {
     id: 0,
@@ -26,6 +26,7 @@ export class PokedexPageComponent implements OnInit {
   };
   ngOnInit()
   {
+    this.userName = this.pokemonService.displayLogin();
     this.route.paramMap.subscribe((params) =>
     { 
       const id = params.get('id');
