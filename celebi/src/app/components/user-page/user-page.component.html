@@ -28,6 +28,10 @@
             Name of role:<mat-label></mat-label>
             <input matInput [(ngModel)]="user.role">
             </mat-form-field>
+
+            <div mat-dialog-actions>
+                <button mat-button (click)="RemoveRole()">Remove the role</button>
+            </div>
         </div>
     </body>
 </html>

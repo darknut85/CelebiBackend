@@ -95,5 +95,20 @@ namespace Celebi.Api.Controllers
             }
             return Ok(mess);
         }
+
+        [HttpDelete("Roles")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> RmemoveRole(string userName, string role)
+        {
+            var message = await _userService.RemoveRoleFromUser(role, userName);
+
+            Role mess = new() { Name = message };
+
+            if (mess.Name != "The role has been removed from the user")
+            {
+                return BadRequest(mess);
+            }
+            return Ok(mess);
+        }
     }
 }

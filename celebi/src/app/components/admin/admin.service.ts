@@ -35,6 +35,11 @@ export class AdminService {
         let params = new HttpParams().set('role', role).set('userName', userName);
         return this.httpClient.get <Role> (this.apiURL + '/Roles', { params } ).pipe(catchError(this.errorHandler));
     }
+
+    removeRole(role: string, userName: string): Observable < Role >{
+        let params = new HttpParams().set('role', role).set('userName', userName);
+        return this.httpClient.delete <Role> (this.apiURL + '/Roles', { params } ).pipe(catchError(this.errorHandler));
+    }
     
     errorHandler(error: {
         error: {

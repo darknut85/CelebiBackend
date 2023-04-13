@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Interfaces
 {
@@ -32,5 +27,6 @@ namespace Interfaces
         Task<string> AddRoleToUser(string role, string userName);
 
         //remove role from user
+        Task<string> RemoveRoleFromUser(string role, string userName);
     }
 }

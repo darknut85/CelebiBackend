@@ -2,14 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Win32;
 using Migrations;
 using Objects;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Services
@@ -186,6 +184,30 @@ namespace Services
                 return "The role has been added to the user";
             }
             return "The role has not been added to the user";
+        }
+
+        public async Task<string> RemoveRoleFromUser(string role, string userName)
+        {
+            IdentityUser? user = await _userManager.FindByNameAsync(userName);
+            if (user.UserName == "")
+                return "The user does not exist";
+
+            IList<string> roles = GetRoles(user);
+
+            IQueryable<IdentityRole> roleExists = _roleManager.Roles;
+
+            IdentityRole? irole = roleExists.Where(x => x.Name.Equals(role)).FirstOrDefault();
+            if (irole == null)
+                return "The role does not exist";
+
+            Task<IdentityResult> iresult = _userManager.RemoveFromRoleAsync(user, role);
+            iresult.Wait();
+
+            if (iresult.IsCompletedSuccessfully)
+            {
+                return "The role has been removed from the user";
+            }
+            return "The role has not been removed from the user";
         }
     }
 }

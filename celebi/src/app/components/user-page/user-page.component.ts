@@ -49,7 +49,20 @@ export class UserPageComponent {
   {
     this.adminService.addRole(this.user.role,this.user.userName).subscribe((role: Role) => {
       this.message = role.name;
-      console.log(this.message);
+      this.refresh();
+      
     });
   };
+
+  RemoveRole(): void
+  {
+    this.adminService.removeRole(this.user.role,this.user.userName).subscribe((role: Role) => {
+      this.message = role.name;
+      this.refresh();
+    });
+  };
+
+  refresh(): void{
+    window.location.reload();
+  }
 }
