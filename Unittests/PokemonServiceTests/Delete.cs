@@ -4,16 +4,17 @@ using Services;
 using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
 using Xunit;
+using Objects;
 
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class Delete
+    public class Deletes
     {
         readonly PokemonService pokemonService;
         readonly DbContextOptions<DataContext> options;
 
-        public Delete()
+        public Deletes()
         {
 
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
@@ -27,10 +28,10 @@ namespace Unittests.PokemonServiceTests
             //arrange
 
             //act
-            bool deleted = pokemonService.Delete(5);
+            Delete deleted = pokemonService.Delete(5);
 
             //assert
-            Assert.True(deleted);
+            Assert.True(deleted.Deleted);
         }
 
         [Fact]
@@ -39,10 +40,10 @@ namespace Unittests.PokemonServiceTests
             //arrange
 
             //act
-            bool deleted = pokemonService.Delete(999);
+            Delete deleted = pokemonService.Delete(999);
 
             //assert
-            Assert.False(deleted);
+            Assert.False(deleted.Deleted);
         }
     }
 }
