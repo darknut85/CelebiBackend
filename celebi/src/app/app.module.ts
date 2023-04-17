@@ -28,6 +28,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AdminService } from './components/admin/admin.service';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { Front2Component } from './components/front2/front2.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     RegisterComponent,
     AdminComponent,
     UserPageComponent,
-    LogoutComponent
+    LogoutComponent,
+    Front2Component
   ],
   imports: [
     BrowserModule,

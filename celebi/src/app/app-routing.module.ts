@@ -9,9 +9,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { Front2Component } from './components/front2/front2.component';
 
 const routes: Routes = [
-  { path: '', redirectTo:'home', pathMatch: 'full'},
+  { path: 'front', component: Front2Component },
+  { path: '', redirectTo:'front', pathMatch: 'full'},
   { path: 'pokedexRedBlue', component: PokedexRedBlueComponent },
   { path: 'home', component: HomeComponent },
   { path: 'pokedexPage/:id', component: PokedexPageComponent },

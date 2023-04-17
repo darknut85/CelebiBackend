@@ -1,0 +1,34 @@
+body{
+    background-color: rgb(8, 143, 8);
+}
+.container {
+    width: 100%;
+}
+.container img {
+    position: relative;
+    height: 50%;
+    width: 50%;
+    transition: all 2s;
+}
+.image:hover {
+transform: rotate(1080deg);
+}
+.container .btn{
+    border-radius: 50%;
+    height: 6.4%;
+    width: 3.5%;
+    position: absolute;
+    left: 25%;
+    top: 46.5%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+.container .btn:hover {
+    background-color: rgb(241, 83, 83);
+}
