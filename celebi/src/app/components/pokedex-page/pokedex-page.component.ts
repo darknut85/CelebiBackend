@@ -11,7 +11,8 @@ import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 export class PokedexPageComponent implements OnInit {
   
   constructor(private pokemonService: PokemonService, private route: ActivatedRoute) { }
-  userName = "";
+  userName = "";  
+
   pokemon: Pokemon = 
   {
     id: 0,
@@ -34,4 +35,6 @@ export class PokedexPageComponent implements OnInit {
       this.pokemonService.getPokemonByID(Number(id)).subscribe((data: Pokemon) => { this.pokemon = data; });
     });
   }
+
+
 }
