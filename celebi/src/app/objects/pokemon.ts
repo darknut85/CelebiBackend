@@ -16,4 +16,30 @@ export interface Pokemon{
     weight: number;
 
     pokedexEntry: string;
+
+    growthRate: number;
+
+    hp: number;
+
+    atk: number;
+
+    def: number;
+
+    spatk: number;
+
+    spdef: number;
+
+    spd: number;
+
+    hpev: number;
+
+    atkev: number;
+
+    defev: number;
+
+    spatkev: number;
+
+    spdefev: number;
+
+    spdev: number;
 }

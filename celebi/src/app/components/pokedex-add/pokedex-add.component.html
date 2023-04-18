@@ -39,7 +39,76 @@
     DexEntry:<mat-label></mat-label>
     <input matInput [(ngModel)]="data.pokedexEntry">
   </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    Growth rate:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.growthRate">
+  </mat-form-field>
 </div>
+
+<div>
+  <mat-form-field appearance="fill">
+    HPEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.hpev">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    ATKEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.atkev">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    DEFEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.defev">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPATKEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.spatkev">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPDEFEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.spdefev">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPDEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.spdev">
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field appearance="fill">
+    HP:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.hp">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    ATK:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.atk">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    DEF:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.def">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPATK:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.spatk">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPDEF:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.spdef">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPD:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.spd">
+  </mat-form-field>
+</div>
+
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Undo</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add the pokemon</button>

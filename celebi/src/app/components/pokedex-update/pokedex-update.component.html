@@ -51,7 +51,75 @@
     DexEntry:<mat-label></mat-label>
     <input matInput [(ngModel)]="pokemon.pokedexEntry">
   </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    Growth Rate:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.growthRate">
+  </mat-form-field>
 </div>
+<div>
+  <mat-form-field appearance="fill">
+    HPEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.hpev">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    ATKEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.atkev">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    DEFEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.defev">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPATKEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.spatkev">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPDEFEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.spdefev">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPDEV:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.spdev">
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field appearance="fill">
+    HP:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.hp">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    ATK:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.atk">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    DEF:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.def">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPATK:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.spatk">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPDEF:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.spdef">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    SPD:<mat-label></mat-label>
+    <input matInput [(ngModel)]="pokemon.spd">
+  </mat-form-field>
+</div>
+
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Undo</button>
   <button mat-button [mat-dialog-close]="pokemon" cdkFocusInitial>Update the pokemon</button>

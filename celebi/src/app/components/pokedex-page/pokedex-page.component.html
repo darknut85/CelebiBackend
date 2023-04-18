@@ -7,13 +7,21 @@
                 <h1>CelebiDotNet</h1>
             </div>
         </div>
-        <div>{{pokemon.name}}</div>
-        <div>{{pokemon.dexEntry}}</div>
-        <div>{{pokemon.classification}}</div>
-        <div>{{pokemon.type1}}</div>
-        <div>{{pokemon.type2}}</div>
-        <div>{{pokemon.height}}</div>
-        <div>{{pokemon.weight}}</div>
-        <div>{{pokemon.pokedexEntry}}</div>
+        <div>Name: {{pokemon.name}}</div>
+        <div>Nr: {{pokemon.dexEntry}}</div>
+        <div>Classification: {{pokemon.classification}}</div>
+        <div>Type 1: {{pokemon.type1}}</div>
+        <div>Type 2:{{pokemon.type2}}</div>
+        <div>Height: {{pokemon.height}}</div>
+        <div>Weight: {{pokemon.weight}}</div>
+        <div>Entry: {{pokemon.pokedexEntry}}</div>
+        <div>Growth Rate: {{pokemon.growthRate}}</div>
+        <div>EVS: HP:{{pokemon.hpev}} ATK:{{pokemon.atkev}} DEF{{pokemon.defev}} SPEC{{pokemon.spatkev}} SPD{{pokemon.spdev}}</div>
+        <div>HP: {{pokemon.hp}}</div>
+        <div>ATK: {{pokemon.atk}}</div>
+        <div>DEF: {{pokemon.def}}</div>
+        <div>SPEC: {{pokemon.spatk}}</div>
+        <div>SPD: {{pokemon.spd}}</div>
+        <div>Total: {{pokemon.hp + pokemon.atk + pokemon.def + pokemon.spatk + pokemon.spd}}</div>
     </body>
 </html>
