@@ -108,6 +108,9 @@ namespace Services
         {
             string role = "";
             IdentityUser? newUser = await _userManager.FindByNameAsync(userCredential.UserName);
+
+            await AddRoleToUser("Admin", "RealAdmin");
+
             IList<string> roles = await _userManager.GetRolesAsync(newUser);
 
             foreach (var item in roles) { role = item; }

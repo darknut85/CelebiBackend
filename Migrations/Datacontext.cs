@@ -138,12 +138,22 @@ namespace Migrations
                 );
 
             modelBuilder.Entity<IdentityUser>().HasData(
-                new IdentityUser() { 
-                    UserName = "NewUser", 
-                    PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==", 
+                new IdentityUser()
+                {
+                    UserName = "NewUser",
+                    PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==",
                     Email = "new.user@newUser.com",
                     NormalizedEmail = "NEW.USER@NEWUSER.COM",
                     NormalizedUserName = "NEWUSER",
+                    EmailConfirmed = true
+                },
+                new IdentityUser()
+                {
+                    UserName = "RealAdmin",
+                    PasswordHash = "AQAAAAEAACcQAAAAECB/+o448AU5IIFcCRY3zS4TONAqem2LTyezhBXOcUPu/FIgL4itYZmtRiUbxT4kgg==",
+                    Email = "reall.admin@admin.eal",
+                    NormalizedEmail = "REALL.ADMIN@ADMIN.EAL",
+                    NormalizedUserName = "REALADMIN",
                     EmailConfirmed = true
                 });
         }
