@@ -4,10 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Migrations.Migrations
 {
     /// <inheritdoc />
-    public partial class identity : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,6 +51,39 @@ namespace Migrations.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pokemons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    DexEntry = table.Column<int>(type: "integer", nullable: false),
+                    Classification = table.Column<string>(type: "text", nullable: false),
+                    Type1 = table.Column<string>(type: "text", nullable: false),
+                    Type2 = table.Column<string>(type: "text", nullable: false),
+                    Height = table.Column<double>(type: "double precision", nullable: false),
+                    Weight = table.Column<double>(type: "double precision", nullable: false),
+                    PokedexEntry = table.Column<string>(type: "text", nullable: false),
+                    GrowthRate = table.Column<double>(type: "double precision", nullable: false),
+                    HP = table.Column<double>(type: "double precision", nullable: false),
+                    ATK = table.Column<double>(type: "double precision", nullable: false),
+                    DEF = table.Column<double>(type: "double precision", nullable: false),
+                    SPATK = table.Column<double>(type: "double precision", nullable: false),
+                    SPDEF = table.Column<double>(type: "double precision", nullable: false),
+                    SPD = table.Column<double>(type: "double precision", nullable: false),
+                    HPEV = table.Column<double>(type: "double precision", nullable: false),
+                    ATKEV = table.Column<double>(type: "double precision", nullable: false),
+                    DEFEV = table.Column<double>(type: "double precision", nullable: false),
+                    SPATKEV = table.Column<double>(type: "double precision", nullable: false),
+                    SPDEFEV = table.Column<double>(type: "double precision", nullable: false),
+                    SPDEV = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pokemons", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,6 +192,31 @@ namespace Migrations.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "0797628a-4794-4dfa-a7f9-1b3fee38a183", "aec62267-a49a-400e-b4cc-305a6f08a6f2", "Admin", "ADMIN" },
+                    { "68743196-f887-4c0a-b37a-ce4646b08792", "b0c191f3-d89d-462e-8e7b-63afeffab947", "User", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "31b35feb-974e-4d1a-ab20-bb046378f5c2", 0, "51532cf3-044a-4a9a-86ab-28aa659ca120", "new.user@newUser.com", true, false, null, "NEW.USER@NEWUSER.COM", "NEWUSER", "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==", null, false, "b99e3038-984b-475d-9994-a26487ae5aaf", false, "NewUser" });
+
+            migrationBuilder.InsertData(
+                table: "Pokemons",
+                columns: new[] { "Id", "ATK", "ATKEV", "Classification", "DEF", "DEFEV", "DexEntry", "GrowthRate", "HP", "HPEV", "Height", "Name", "PokedexEntry", "SPATK", "SPATKEV", "SPD", "SPDEF", "SPDEFEV", "SPDEV", "Type1", "Type2", "Weight" },
+                values: new object[,]
+                {
+                    { 1, 49.0, 49.0, "Seed Pokemon", 49.0, 49.0, 1, 1059860.0, 45.0, 45.0, 0.69999999999999996, "Bulbasaur", "A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon.", 65.0, 65.0, 45.0, 65.0, 65.0, 45.0, "Grass", "Poison", 6.9000000000000004 },
+                    { 2, 62.0, 62.0, "Seed Pokemon", 63.0, 63.0, 2, 1059860.0, 60.0, 60.0, 1.0, "Ivysaur", "When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.", 80.0, 80.0, 60.0, 80.0, 80.0, 60.0, "Grass", "Poison", 13.0 },
+                    { 3, 82.0, 82.0, "Seed Pokemon", 83.0, 83.0, 3, 1059860.0, 80.0, 80.0, 2.0, "Venusaur", "The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.", 100.0, 100.0, 80.0, 100.0, 100.0, 80.0, "Grass", "Poison", 100.0 },
+                    { 4, 52.0, 52.0, "Lizard Pokemon", 42.0, 42.0, 4, 1059860.0, 39.0, 39.0, 0.59999999999999998, "Charmander", "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.", 50.0, 50.0, 65.0, 50.0, 50.0, 65.0, "Fire", "", 8.5 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -212,6 +272,9 @@ namespace Migrations.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Pokemons");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

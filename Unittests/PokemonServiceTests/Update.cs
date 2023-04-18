@@ -28,7 +28,20 @@ namespace Unittests.PokemonServiceTests
                 Height = 4,
                 Weight = 1,
                 Classification = "???",
-                PokedexEntry = "..."
+                PokedexEntry = "...",
+                HP = 1,
+                ATK = 1,
+                DEF = 1,
+                SPATK = 1,
+                SPDEF = 1,
+                SPD = 1,
+                HPEV = 1,
+                ATKEV = 1,
+                DEFEV = 1,
+                SPATKEV = 1,
+                SPDEFEV = 1,
+                SPDEV = 1,
+                GrowthRate = 1
             };
 
             emptyPokemon = new Pokemon();

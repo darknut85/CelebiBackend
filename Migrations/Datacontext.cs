@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Objects;
-using System.Security.Cryptography;
 
 namespace Migrations
 {
@@ -42,7 +40,20 @@ namespace Migrations
                     Weight = 6.9,
                     Type1 = "Grass",
                     Type2 = "Poison",
-                    PokedexEntry = "A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon."
+                    PokedexEntry = "A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon.",
+                    HP = 45,
+                    ATK = 49,
+                    DEF = 49,
+                    SPATK = 65,
+                    SPDEF = 65,
+                    SPD = 45,
+                    HPEV = 45,
+                    ATKEV = 49,
+                    DEFEV = 49,
+                    SPATKEV = 65,
+                    SPDEFEV = 65,
+                    SPDEV = 45,
+                    GrowthRate = 1059860
                 },
                 new Pokemon()
                 {
@@ -54,7 +65,20 @@ namespace Migrations
                     Weight = 13,
                     Type1 = "Grass",
                     Type2 = "Poison",
-                    PokedexEntry = "When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs."
+                    PokedexEntry = "When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.",
+                    HP = 60,
+                    ATK = 62,
+                    DEF = 63,
+                    SPATK = 80,
+                    SPDEF = 80,
+                    SPD = 60,
+                    HPEV = 60,
+                    ATKEV = 62,
+                    DEFEV = 63,
+                    SPATKEV = 80,
+                    SPDEFEV = 80,
+                    SPDEV = 60,
+                    GrowthRate = 1059860
                 },
                 new Pokemon()
                 {
@@ -66,7 +90,20 @@ namespace Migrations
                     Weight = 100,
                     Type1 = "Grass",
                     Type2 = "Poison",
-                    PokedexEntry = "The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight."
+                    PokedexEntry = "The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.",
+                    HP = 80,
+                    ATK = 82,
+                    DEF = 83,
+                    SPATK = 100,
+                    SPDEF = 100,
+                    SPD = 80,
+                    HPEV = 80,
+                    ATKEV = 82,
+                    DEFEV = 83,
+                    SPATKEV = 100,
+                    SPDEFEV = 100,
+                    SPDEV = 80,
+                    GrowthRate = 1059860
                 },
                 new Pokemon()
                 {
@@ -78,7 +115,20 @@ namespace Migrations
                     Weight = 8.5,
                     Type1 = "Fire",
                     Type2 = "",
-                    PokedexEntry = "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail."
+                    PokedexEntry = "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.",
+                    HP = 39,
+                    ATK = 52,
+                    DEF = 42,
+                    SPATK = 50,
+                    SPDEF = 50,
+                    SPD = 65,
+                    HPEV = 39,
+                    ATKEV = 52,
+                    DEFEV = 42,
+                    SPATKEV = 50,
+                    SPDEFEV = 50,
+                    SPDEV = 65,
+                    GrowthRate = 1059860
                 }
                 );
 

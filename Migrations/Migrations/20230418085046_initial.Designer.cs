@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Migrations.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230315143028_roles")]
-    partial class roles
+    [Migration("20230418085046_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,17 +53,17 @@ namespace Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b65b4356-9830-4a40-8d44-74548a58ac86",
-                            ConcurrencyStamp = "1",
+                            Id = "0797628a-4794-4dfa-a7f9-1b3fee38a183",
+                            ConcurrencyStamp = "aec62267-a49a-400e-b4cc-305a6f08a6f2",
                             Name = "Admin",
-                            NormalizedName = "Admin"
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0ca5a619-98bc-4f5b-afa4-b1caca72adcf",
-                            ConcurrencyStamp = "2",
+                            Id = "68743196-f887-4c0a-b37a-ce4646b08792",
+                            ConcurrencyStamp = "b0c191f3-d89d-462e-8e7b-63afeffab947",
                             Name = "User",
-                            NormalizedName = "User"
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -154,6 +154,24 @@ namespace Migrations.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "31b35feb-974e-4d1a-ab20-bb046378f5c2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "51532cf3-044a-4a9a-86ab-28aa659ca120",
+                            Email = "new.user@newUser.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "NEW.USER@NEWUSER.COM",
+                            NormalizedUserName = "NEWUSER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b99e3038-984b-475d-9994-a26487ae5aaf",
+                            TwoFactorEnabled = false,
+                            UserName = "NewUser"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -245,22 +263,65 @@ namespace Migrations.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<double>("ATK")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("ATKEV")
+                        .HasColumnType("double precision");
+
                     b.Property<string>("Classification")
+                        .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<double>("DEF")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("DEFEV")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("DexEntry")
                         .HasColumnType("integer");
+
+                    b.Property<double>("GrowthRate")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("HP")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("HPEV")
+                        .HasColumnType("double precision");
 
                     b.Property<double>("Height")
                         .HasColumnType("double precision");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PokedexEntry")
+                        .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<double>("SPATK")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("SPATKEV")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("SPD")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("SPDEF")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("SPDEFEV")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("SPDEV")
+                        .HasColumnType("double precision");
+
                     b.Property<string>("Type1")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Type2")
@@ -278,11 +339,24 @@ namespace Migrations.Migrations
                         new
                         {
                             Id = 1,
+                            ATK = 49.0,
+                            ATKEV = 49.0,
                             Classification = "Seed Pokemon",
+                            DEF = 49.0,
+                            DEFEV = 49.0,
                             DexEntry = 1,
+                            GrowthRate = 1059860.0,
+                            HP = 45.0,
+                            HPEV = 45.0,
                             Height = 0.69999999999999996,
                             Name = "Bulbasaur",
                             PokedexEntry = "A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon.",
+                            SPATK = 65.0,
+                            SPATKEV = 65.0,
+                            SPD = 45.0,
+                            SPDEF = 65.0,
+                            SPDEFEV = 65.0,
+                            SPDEV = 45.0,
                             Type1 = "Grass",
                             Type2 = "Poison",
                             Weight = 6.9000000000000004
@@ -290,11 +364,24 @@ namespace Migrations.Migrations
                         new
                         {
                             Id = 2,
+                            ATK = 62.0,
+                            ATKEV = 62.0,
                             Classification = "Seed Pokemon",
+                            DEF = 63.0,
+                            DEFEV = 63.0,
                             DexEntry = 2,
+                            GrowthRate = 1059860.0,
+                            HP = 60.0,
+                            HPEV = 60.0,
                             Height = 1.0,
                             Name = "Ivysaur",
                             PokedexEntry = "When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.",
+                            SPATK = 80.0,
+                            SPATKEV = 80.0,
+                            SPD = 60.0,
+                            SPDEF = 80.0,
+                            SPDEFEV = 80.0,
+                            SPDEV = 60.0,
                             Type1 = "Grass",
                             Type2 = "Poison",
                             Weight = 13.0
@@ -302,11 +389,24 @@ namespace Migrations.Migrations
                         new
                         {
                             Id = 3,
+                            ATK = 82.0,
+                            ATKEV = 82.0,
                             Classification = "Seed Pokemon",
+                            DEF = 83.0,
+                            DEFEV = 83.0,
                             DexEntry = 3,
+                            GrowthRate = 1059860.0,
+                            HP = 80.0,
+                            HPEV = 80.0,
                             Height = 2.0,
                             Name = "Venusaur",
                             PokedexEntry = "The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.",
+                            SPATK = 100.0,
+                            SPATKEV = 100.0,
+                            SPD = 80.0,
+                            SPDEF = 100.0,
+                            SPDEFEV = 100.0,
+                            SPDEV = 80.0,
                             Type1 = "Grass",
                             Type2 = "Poison",
                             Weight = 100.0
@@ -314,11 +414,24 @@ namespace Migrations.Migrations
                         new
                         {
                             Id = 4,
+                            ATK = 52.0,
+                            ATKEV = 52.0,
                             Classification = "Lizard Pokemon",
+                            DEF = 42.0,
+                            DEFEV = 42.0,
                             DexEntry = 4,
+                            GrowthRate = 1059860.0,
+                            HP = 39.0,
+                            HPEV = 39.0,
                             Height = 0.59999999999999998,
                             Name = "Charmander",
                             PokedexEntry = "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.",
+                            SPATK = 50.0,
+                            SPATKEV = 50.0,
+                            SPD = 65.0,
+                            SPDEF = 50.0,
+                            SPDEFEV = 50.0,
+                            SPDEV = 65.0,
                             Type1 = "Fire",
                             Type2 = "",
                             Weight = 8.5

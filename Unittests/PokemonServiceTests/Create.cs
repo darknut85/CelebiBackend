@@ -20,7 +20,16 @@ namespace Unittests.PokemonServiceTests
 
         public Create() 
         { 
-            pokemon = new Pokemon() {Name = "Chikorita", DexEntry = 152, Type1 = "Grass", Type2 = "", Height = 3, Weight = 3, Classification = "???", PokedexEntry = "..." };
+            pokemon = new Pokemon() 
+            {
+                Name = "Chikorita", DexEntry = 152, 
+                Type1 = "Grass", Type2 = "", 
+                Height = 3, Weight = 3, 
+                Classification = "???", PokedexEntry = "...", 
+                HP = 1, ATK = 1, DEF = 1, SPATK = 1, SPDEF = 1, SPD = 1, 
+                HPEV = 1, ATKEV = 1, DEFEV = 1, SPATKEV = 1, SPDEFEV = 1, SPDEV = 1, 
+                GrowthRate = 1
+            };
             existingPokemon = new Pokemon() { Id = 150, Name = "Mewtwo" };
             emptyPokemon = new Pokemon();
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
