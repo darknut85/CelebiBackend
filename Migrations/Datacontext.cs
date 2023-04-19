@@ -133,6 +133,32 @@ namespace Migrations
                     SPDEV = 65,
                     GrowthRate = 1059860,
                     CaptureRate = 45
+                },
+                new Pokemon()
+                {
+                    Id = 5,
+                    Name = "Charmeleon",
+                    DexEntry = 5,
+                    Classification = "Flame Pokemon",
+                    Height = 1.1,
+                    Weight = 19,
+                    Type1 = "Fire",
+                    Type2 = "",
+                    PokedexEntry = "When it swings its burning tail, it elevates the temperature to unbearably high levels.",
+                    HP = 58,
+                    ATK = 64,
+                    DEF = 58,
+                    SPATK = 65,
+                    SPDEF = 65,
+                    SPD = 80,
+                    HPEV = 58,
+                    ATKEV = 64,
+                    DEFEV = 58,
+                    SPATKEV = 65,
+                    SPDEFEV = 65,
+                    SPDEV = 80,
+                    GrowthRate = 1059860,
+                    CaptureRate = 45
                 }
                 );
 
