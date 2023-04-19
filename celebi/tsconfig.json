@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "jsx": "react",
     "checkJs": false,
     "allowJs": true,
     "baseUrl": "./",

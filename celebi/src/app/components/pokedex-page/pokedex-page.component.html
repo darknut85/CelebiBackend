@@ -1,66 +1,112 @@
 <!DOCTYPE html>
 {{userName}}
 <html>
+    <head>
+        <style>
+            div {text-align: center};
+        </style>
+    </head>
     <body>
         <div class="grid-container">
             <div class="Title">
                 <h1>CelebiDotNet</h1>
             </div>
         </div>
-        <div>Name: {{pokemon.name}}</div>
-        <div>Nr: {{pokemon.dexEntry}}</div>
-        <div>Classification: {{pokemon.classification}}</div>
-        <div>Type 1: {{pokemon.type1}}</div>
-        <div>Type 2: {{pokemon.type2}}</div>
-        <div>Height: {{pokemon.height}}</div>
-        <div>Weight: {{pokemon.weight}}</div>
-        <div>Entry: {{pokemon.pokedexEntry}}</div>
-        <div>Growth Rate: {{pokemon.growthRate}}</div>
-        <div>EVS: HP:{{pokemon.hpev}} ATK:{{pokemon.atkev}} DEF{{pokemon.defev}} SPEC{{pokemon.spatkev}} SPD{{pokemon.spdev}}</div>
-
-        <div>HP: {{pokemon.hp}}</div>
-        <div>ATK: {{pokemon.atk}}</div>
-        <div>DEF: {{pokemon.def}}</div>
-        <div>SPEC: {{pokemon.spatk}}</div>
-        <div>SPD: {{pokemon.spd}}</div>
-        <div>Total: {{pokemon.hp + pokemon.atk + pokemon.def + pokemon.spatk + pokemon.spd}}</div>
-        <div>
-            Max Stats:
-            <div>
-                Level 50:
-                <div>
-                    HP: {{pokemon.hp + 60}} - {{pokemon.hp + 106}},
-                    ATK: {{pokemon.atk + 5}} - {{pokemon.atk + 51}},
-                    DEF: {{pokemon.def + 5}} - {{pokemon.def + 51}},
-                    SPEC: {{pokemon.spatk + 5}} - {{pokemon.spatk + 51}},
-                    SPD: {{pokemon.spd + 5}} - {{pokemon.spd + 51}}
-                </div>
-                Level 100:
-                <div>
-                    HP: {{(pokemon.hp + 60) * 2 - 10}} - {{(pokemon.hp + 60) * 2 + 83}},
-                    ATK: {{pokemon.atk * 2 + 5}} - {{pokemon.atk * 2 + 98}},
-                    DEF: {{pokemon.def * 2 + 5}} - {{pokemon.def * 2 + 98}},
-                    SPEC: {{pokemon.spatk * 2 + 5}} - {{pokemon.spatk * 2 + 98}},
-                    SPD: {{pokemon.spd * 2 + 5}} - {{pokemon.spd * 2 + 98}}
-                </div>
-            </div>
-        </div>
-        <div>Types:
-            <div>Grass: {{typingFinal[0]}}</div>
-            <div>Bug: {{typingFinal[1]}}</div>
-            <div>Poison: {{typingFinal[2]}}</div>
-            <div>Fire: {{typingFinal[3]}}</div>
-            <div>Water: {{typingFinal[4]}}</div>
-            <div>Ice: {{typingFinal[5]}}</div>
-            <div>Electric: {{typingFinal[6]}}</div>
-            <div>Ground: {{typingFinal[7]}}</div>
-            <div>Rock: {{typingFinal[7]}}</div>
-            <div>Fighting: {{typingFinal[9]}}</div>
-            <div>Psychic: {{typingFinal[10]}}</div>
-            <div>Ghost: {{typingFinal[11]}}</div>
-            <div>Normal: {{typingFinal[12]}}</div>
-            <div>Flying: {{typingFinal[13]}}</div>
-            <div>Dragon: {{typingFinal[14]}}</div>
-        </div>
+        <table>
+            <tr>
+                <th>Name: </th> 
+                <th>Nr:</th> 
+                <th>Classification: </th>
+                <th>Type 1: </th> 
+                <th>Type 2: </th> 
+                <th>Height: </th> 
+                <th>Weight: </th> 
+                <th>Entry: </th> 
+                <th>Growth Rate: </th>
+                <th>EVS: </th>
+            </tr>
+            <tr>
+                <td>{{pokemon.name}}</td>
+                <td>{{pokemon.dexEntry}}</td>
+                <td>{{pokemon.classification}}</td>
+                <td>{{pokemon.type1}}</td>
+                <td>{{pokemon.type2}}</td>
+                <td>{{pokemon.height}}</td>
+                <td>{{pokemon.weight}}</td>
+                <td>{{pokemon.pokedexEntry}}</td>
+                <td>{{pokemon.growthRate}}</td>
+                <td>HP:{{pokemon.hpev}} ATK:{{pokemon.atkev}} DEF{{pokemon.defev}} SPEC{{pokemon.spatkev}} SPD{{pokemon.spdev}}</td>       
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Grass: </th>
+                <th>Bug: </th>
+                <th>Poison: </th>
+                <th>Fire: </th>
+                <th>Water: </th>
+                <th>Ice:</th>
+                <th>Electric: </th>
+                <th>Ground: </th>
+                <th>Rock: </th>
+                <th>Fighting: </th>
+                <th>Psychic: </th>
+                <th>Ghost:</th>
+                <th>Normal: </th>
+                <th>Flying: </th>
+                <th>Dragon: </th>
+            </tr>
+            <tr>
+                <th>{{typingFinal[0]}}</th>
+                <th>{{typingFinal[1]}}</th>
+                <th>{{typingFinal[2]}}</th>
+                <th>{{typingFinal[3]}}</th>
+                <th>{{typingFinal[4]}}</th>
+                <th>{{typingFinal[5]}}</th>
+                <th>{{typingFinal[6]}}</th>
+                <th>{{typingFinal[7]}}</th>
+                <th>{{typingFinal[8]}}</th>
+                <th>{{typingFinal[9]}}</th>
+                <th>{{typingFinal[10]}}</th>
+                <th>{{typingFinal[11]}}</th>
+                <th>{{typingFinal[12]}}</th>
+                <th>{{typingFinal[13]}}</th>
+                <th>{{typingFinal[14]}}</th>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Total: </th>
+                <th>HP: </th>
+                <th>ATK: </th>
+                <th>DEF: </th>
+                <th>SPEC: </th>
+                <th>SPD: </th>
+            </tr>
+            <tr>
+                <td>{{pokemon.hp + pokemon.atk + pokemon.def + pokemon.spatk + pokemon.spd}} </td>
+                <td>{{pokemon.hp}} </td>
+                <td>{{pokemon.atk}} </td>
+                <td>{{pokemon.def}} </td>
+                <td>{{pokemon.spatk}} </td>
+                <td>{{pokemon.spd}} </td>
+            </tr>
+            <tr>
+                <td>Level 50:</td>
+                <td>{{pokemon.hp + 60}} - {{pokemon.hp + 106}}</td>
+                <td>{{pokemon.atk + 5}} - {{pokemon.atk + 51}}</td>
+                <td>{{pokemon.def + 5}} - {{pokemon.def + 51}}</td>
+                <td>{{pokemon.spatk + 5}} - {{pokemon.spatk + 51}}</td>
+                <td>{{pokemon.spd + 5}} - {{pokemon.spd + 51}}</td>
+            </tr>
+            <tr>
+                <td>Level 100:</td>
+                <td>{{(pokemon.hp + 60) * 2 - 10}} - {{(pokemon.hp + 60) * 2 + 83}}</td>
+                <td>{{pokemon.atk * 2 + 5}} - {{pokemon.atk * 2 + 98}}</td>
+                <td>{{pokemon.def * 2 + 5}} - {{pokemon.def * 2 + 98}}</td>
+                <td>{{pokemon.spatk * 2 + 5}} - {{pokemon.spatk * 2 + 98}}</td>
+                <td>{{pokemon.spd * 2 + 5}} - {{pokemon.spd * 2 + 98}}</td>
+            </tr>
+        </table>
     </body>
 </html>
