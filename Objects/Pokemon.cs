@@ -25,6 +25,8 @@ namespace Objects
 
         public double GrowthRate { get; set; }
 
+        public double CaptureRate { get; set; }
+
         public double HP { get; set; }
 
         public double ATK { get; set; }

@@ -53,7 +53,8 @@ namespace Migrations
                     SPATKEV = 65,
                     SPDEFEV = 65,
                     SPDEV = 45,
-                    GrowthRate = 1059860
+                    GrowthRate = 1059860,
+                    CaptureRate = 45
                 },
                 new Pokemon()
                 {
@@ -78,7 +79,8 @@ namespace Migrations
                     SPATKEV = 80,
                     SPDEFEV = 80,
                     SPDEV = 60,
-                    GrowthRate = 1059860
+                    GrowthRate = 1059860,
+                    CaptureRate = 45
                 },
                 new Pokemon()
                 {
@@ -103,7 +105,8 @@ namespace Migrations
                     SPATKEV = 100,
                     SPDEFEV = 100,
                     SPDEV = 80,
-                    GrowthRate = 1059860
+                    GrowthRate = 1059860,
+                    CaptureRate = 45
                 },
                 new Pokemon()
                 {
@@ -128,12 +131,13 @@ namespace Migrations
                     SPATKEV = 50,
                     SPDEFEV = 50,
                     SPDEV = 65,
-                    GrowthRate = 1059860
+                    GrowthRate = 1059860,
+                    CaptureRate = 45
                 }
                 );
 
             modelBuilder.Entity<IdentityRole>().HasData(
-                new IdentityRole() { Name = "Admin", ConcurrencyStamp = "aec62267-a49a-400e-b4cc-305a6f08a6f2", NormalizedName = "ADMIN"},
+                new IdentityRole() { Name = "Admin", ConcurrencyStamp = "aec62267-a49a-400e-b4cc-305a6f08a6f2", NormalizedName = "ADMIN" },
                 new IdentityRole() { Name = "User", ConcurrencyStamp = "b0c191f3-d89d-462e-8e7b-63afeffab947", NormalizedName = "USER" }
                 );
 

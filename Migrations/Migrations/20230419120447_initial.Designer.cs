@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Migrations.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230419120447_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,22 +49,6 @@ namespace Migrations.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "4f39a600-56e2-4204-80fd-d38cbf156eff",
-                            ConcurrencyStamp = "aec62267-a49a-400e-b4cc-305a6f08a6f2",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "7fa21ea0-f11b-4c73-a54f-3f2527fd10e8",
-                            ConcurrencyStamp = "b0c191f3-d89d-462e-8e7b-63afeffab947",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -151,40 +138,6 @@ namespace Migrations.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "84352829-2372-4460-a0c2-65d7f4509212",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "a58b460f-261e-4635-9e7c-9a90f06398ef",
-                            Email = "new.user@newUser.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "NEW.USER@NEWUSER.COM",
-                            NormalizedUserName = "NEWUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "110ad665-500b-4350-bade-4a63fa975edd",
-                            TwoFactorEnabled = false,
-                            UserName = "NewUser"
-                        },
-                        new
-                        {
-                            Id = "e2066f3e-5cff-4c63-a389-468e9ca5358f",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "be4d8eab-e071-49a7-9c35-765d9aa73e2f",
-                            Email = "reall.admin@admin.eal",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "REALL.ADMIN@ADMIN.EAL",
-                            NormalizedUserName = "REALADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAECB/+o448AU5IIFcCRY3zS4TONAqem2LTyezhBXOcUPu/FIgL4itYZmtRiUbxT4kgg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "3f4ea29c-fb3b-496a-b966-db95c3ff8d7a",
-                            TwoFactorEnabled = false,
-                            UserName = "RealAdmin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

@@ -19,6 +19,8 @@ export interface Pokemon{
 
     growthRate: number;
 
+    captureRate: number;
+
     hp: number;
 
     atk: number;

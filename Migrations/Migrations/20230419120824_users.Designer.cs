@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Migrations.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230418085046_initial")]
-    partial class initial
+    [Migration("20230419120824_users")]
+    partial class users
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,14 +53,14 @@ namespace Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0797628a-4794-4dfa-a7f9-1b3fee38a183",
+                            Id = "4f39a600-56e2-4204-80fd-d38cbf156eff",
                             ConcurrencyStamp = "aec62267-a49a-400e-b4cc-305a6f08a6f2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "68743196-f887-4c0a-b37a-ce4646b08792",
+                            Id = "7fa21ea0-f11b-4c73-a54f-3f2527fd10e8",
                             ConcurrencyStamp = "b0c191f3-d89d-462e-8e7b-63afeffab947",
                             Name = "User",
                             NormalizedName = "USER"
@@ -158,9 +158,9 @@ namespace Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "31b35feb-974e-4d1a-ab20-bb046378f5c2",
+                            Id = "84352829-2372-4460-a0c2-65d7f4509212",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "51532cf3-044a-4a9a-86ab-28aa659ca120",
+                            ConcurrencyStamp = "a58b460f-261e-4635-9e7c-9a90f06398ef",
                             Email = "new.user@newUser.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -168,9 +168,25 @@ namespace Migrations.Migrations
                             NormalizedUserName = "NEWUSER",
                             PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b99e3038-984b-475d-9994-a26487ae5aaf",
+                            SecurityStamp = "110ad665-500b-4350-bade-4a63fa975edd",
                             TwoFactorEnabled = false,
                             UserName = "NewUser"
+                        },
+                        new
+                        {
+                            Id = "e2066f3e-5cff-4c63-a389-468e9ca5358f",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "be4d8eab-e071-49a7-9c35-765d9aa73e2f",
+                            Email = "reall.admin@admin.eal",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "REALL.ADMIN@ADMIN.EAL",
+                            NormalizedUserName = "REALADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAECB/+o448AU5IIFcCRY3zS4TONAqem2LTyezhBXOcUPu/FIgL4itYZmtRiUbxT4kgg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3f4ea29c-fb3b-496a-b966-db95c3ff8d7a",
+                            TwoFactorEnabled = false,
+                            UserName = "RealAdmin"
                         });
                 });
 
@@ -269,6 +285,9 @@ namespace Migrations.Migrations
                     b.Property<double>("ATKEV")
                         .HasColumnType("double precision");
 
+                    b.Property<double>("CaptureRate")
+                        .HasColumnType("double precision");
+
                     b.Property<string>("Classification")
                         .IsRequired()
                         .HasColumnType("text");
@@ -341,6 +360,7 @@ namespace Migrations.Migrations
                             Id = 1,
                             ATK = 49.0,
                             ATKEV = 49.0,
+                            CaptureRate = 45.0,
                             Classification = "Seed Pokemon",
                             DEF = 49.0,
                             DEFEV = 49.0,
@@ -366,6 +386,7 @@ namespace Migrations.Migrations
                             Id = 2,
                             ATK = 62.0,
                             ATKEV = 62.0,
+                            CaptureRate = 45.0,
                             Classification = "Seed Pokemon",
                             DEF = 63.0,
                             DEFEV = 63.0,
@@ -391,6 +412,7 @@ namespace Migrations.Migrations
                             Id = 3,
                             ATK = 82.0,
                             ATKEV = 82.0,
+                            CaptureRate = 45.0,
                             Classification = "Seed Pokemon",
                             DEF = 83.0,
                             DEFEV = 83.0,
@@ -416,6 +438,7 @@ namespace Migrations.Migrations
                             Id = 4,
                             ATK = 52.0,
                             ATKEV = 52.0,
+                            CaptureRate = 45.0,
                             Classification = "Lizard Pokemon",
                             DEF = 42.0,
                             DEFEV = 42.0,
