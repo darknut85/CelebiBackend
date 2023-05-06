@@ -10,6 +10,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { Front2Component } from './components/front2/front2.component';
+import { MovedexRedBlueComponent } from './components/movedex-red-blue/movedex-red-blue.component';
 
 const routes: Routes = [
   { path: 'front', component: Front2Component },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'logout', component: LogoutComponent},
   { path: 'userPage/:id', component: UserPageComponent,canActivate:[AuthGuard] },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'movedexRedBlue', component: MovedexRedBlueComponent }
 ];
 
 @NgModule({

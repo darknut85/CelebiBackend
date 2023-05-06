@@ -29,6 +29,8 @@ import { AdminService } from './components/admin/admin.service';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { Front2Component } from './components/front2/front2.component';
+import { MovedexRedBlueComponent } from './components/movedex-red-blue/movedex-red-blue.component';
+import { MoveService } from './components/movedex-red-blue/movedex-red-blue.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { Front2Component } from './components/front2/front2.component';
     AdminComponent,
     UserPageComponent,
     LogoutComponent,
-    Front2Component
+    Front2Component,
+    MovedexRedBlueComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { Front2Component } from './components/front2/front2.component';
   ],
   providers: [
     PokemonService,
+    MoveService,
     AdminService,
     AuthService, 
     AuthGuard,
