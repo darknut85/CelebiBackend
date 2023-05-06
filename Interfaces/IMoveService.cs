@@ -10,9 +10,9 @@ namespace Interfaces
 
         List<Move> Search(string query);
 
-        Pokemon Create(Move move);
+        Move Create(Move move);
 
-        Pokemon Update(Move move);
+        Move Update(Move move);
 
         Delete Delete(int id);
 
