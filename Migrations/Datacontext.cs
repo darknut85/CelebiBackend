@@ -186,6 +186,59 @@ namespace Migrations
                     NormalizedUserName = "REALADMIN",
                     EmailConfirmed = true
                 });
+            modelBuilder.Entity<Move>().HasData(
+                new Move()
+                {
+                    Id = 1,
+                    Name = "Tackle",
+                    Type = "Normal",
+                    PowerPoints = 35,
+                    BasePower = 35,
+                    Accuracy = 95,
+                    BattleEffect = "A NORMAL-type attack. Many Pokémon know this attack right from the start.",
+                    EffectRate = 0,
+                    Priority = 0,
+                    Target = "selected target"
+                },
+                new Move()
+                {
+                    Id = 2,
+                    Name = "Scratch",
+                    Type = "Normal",
+                    PowerPoints = 40,
+                    BasePower = 35,
+                    Accuracy = 100,
+                    BattleEffect = "A NORMAL-type attack. Sharp claws are used to inflict damage on the target.",
+                    EffectRate = 0,
+                    Priority = 0,
+                    Target = "selected target"
+                },
+                new Move()
+                {
+                    Id = 3,
+                    Name = "Growl",
+                    Type = "Normal",
+                    PowerPoints = 40,
+                    BasePower = 0,
+                    Accuracy = 100,
+                    BattleEffect = "A technique that lowers the target's ATTACK power. Can normally be used up to six times.",
+                    EffectRate = 0,
+                    Priority = 0,
+                    Target = "All opponent Pokémon in range"
+                },
+                new Move()
+                {
+                    Id = 4,
+                    Name = "Tail Whip",
+                    Type = "Normal",
+                    PowerPoints = 30,
+                    BasePower = 0,
+                    Accuracy = 100,
+                    BattleEffect = "A technique that lowers the target's DEFENSE. Useful against tough, armored Pokémon.",
+                    EffectRate = 0,
+                    Priority = 0,
+                    Target = "All opponent Pokémon in range"
+                });
         }
     }
 }
