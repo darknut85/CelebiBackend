@@ -12,7 +12,7 @@
             <mat-label>Select</mat-label>
             <mat-select>
                 <div *ngFor="let move of marray">
-                    <mat-option value="one" [routerLink]="['/pokedexPage',move.id]">{{ move.name }}</mat-option>
+                    <mat-option value="one" [routerLink]="['/movedexPage',move.id]">{{ move.name }}</mat-option>
                 </div>
             </mat-select>
         </mat-form-field>

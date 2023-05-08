@@ -30,7 +30,7 @@ export class MoveService {
     }
     
     getMoveByID(id: number): Observable < Move > {
-        return this.httpClient.get < Move > (this.apiURL + 'Move/id?id=' + id).pipe(catchError(this.errorHandler))
+        return this.httpClient.get < Move > (this.apiURL + '/Move/id?id=' + id).pipe(catchError(this.errorHandler))
     }
 
     updatePokemon(move: Move): Observable < Move > {

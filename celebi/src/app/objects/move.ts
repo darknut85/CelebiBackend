@@ -11,7 +11,7 @@ export interface Move {
 
     accuracy: number;
 
-    battleEffect: number;
+    battleEffect: string;
 
     effectRate: number;
 

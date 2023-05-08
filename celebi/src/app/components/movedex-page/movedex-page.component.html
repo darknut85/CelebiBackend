@@ -1,1 +1,58 @@
-<p>movedex-page works!</p>
+<!DOCTYPE html>
+{{userName}}
+<html>
+    <head>
+        <style>
+            div {text-align: center};
+        </style>
+    </head>
+    <body>
+        <div class="grid-container">
+            <div class="Title">
+                <h1>CelebiDotNet</h1>
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th>Name: </th> 
+                <th>Type: </th> 
+            </tr>
+            <tr>
+                <td>{{move.name}}</td>
+                <td>{{move.type}}</td></tr>
+        </table>
+        <table>
+            <tr>
+                <th>Power Points: </th>
+                <th>Base Power: </th>
+                <th>Accuracy: </th>
+            </tr>
+            <tr>
+                <td>{{move.powerPoints}} </td>
+                <td>{{move.basePower}} </td>
+                <td>{{move.accuracy}} </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Battle Effect: </th>
+            </tr>
+            <tr>
+                <td>{{move.battleEffect}} </td>
+            </tr>
+        </table>
+        
+        <table>
+            <tr>
+                <th>Effect Rate: </th>
+                <th>Priority: </th>
+                <th>Target: </th>
+            </tr>
+            <tr>
+                <td>{{move.effectRate}} </td>
+                <td>{{move.priority}} </td>
+                <td>{{move.target}} </td>
+            </tr>
+        </table>
+    </body>
+</html>
