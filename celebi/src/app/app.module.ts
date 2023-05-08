@@ -34,6 +34,7 @@ import { MoveService } from './components/movedex-red-blue/movedex-red-blue.serv
 import { MovedexPageComponent } from './components/movedex-page/movedex-page.component';
 import { MovedexAddComponent } from './components/movedex-add/movedex-add.component';
 import { MovedexUpdateComponent } from './components/movedex-update/movedex-update.component';
+import { MovedexDeleteComponent } from './components/movedex-delete/movedex-delete.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +53,8 @@ import { MovedexUpdateComponent } from './components/movedex-update/movedex-upda
     MovedexRedBlueComponent,
     MovedexPageComponent,
     MovedexAddComponent,
-    MovedexUpdateComponent
+    MovedexUpdateComponent,
+    MovedexDeleteComponent
   ],
   imports: [
     BrowserModule,

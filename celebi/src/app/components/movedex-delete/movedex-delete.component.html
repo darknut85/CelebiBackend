@@ -1,0 +1,18 @@
+<div mat-dialog-content>
+    <p>Delete a Move</p>
+    <mat-form-field>
+        <mat-select [(value)]="selectedMove" (selectionChange)="findId(selectedMove)">
+            <div *ngFor="let move of marray">
+                <mat-option value={{move.name}}>{{move.name}}</mat-option>
+            </div>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      Id:<mat-label></mat-label>
+      <input matInput [(ngModel)]="moveId">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Undo</button>
+    <button mat-button [mat-dialog-close]="moveId" cdkFocusInitial>Delete the move</button>
+</div>

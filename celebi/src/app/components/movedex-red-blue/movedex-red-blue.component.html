@@ -24,6 +24,12 @@
             You added: <i>{{move.name}}</i>
         </li>
         <li>
+            <button (click)="openDeleteDialog()">Delete Pokemon</button>
+        </li>
+        <li *ngIf="move.id">
+            You deleted: <i>{{move.id}}</i>
+        </li>
+        <li>
             <button (click)="openUpdateDialog()">Update Move</button>
         </li>
         <li *ngIf="move.id">

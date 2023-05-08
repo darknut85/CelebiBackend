@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MovedexAddComponent } from '../movedex-add/movedex-add.component';
 import { MovedexUpdateComponent } from '../movedex-update/movedex-update.component';
+import { Delete } from 'src/app/objects/delete';
+import { MovedexDeleteComponent } from '../movedex-delete/movedex-delete.component';
 
 @Component({
   selector: 'app-movedex-red-blue',
@@ -21,6 +23,7 @@ export class MovedexRedBlueComponent implements OnInit {
   constructor( private moveService: MoveService, private dialog: MatDialog, private router: Router) { }
 
   marray: Move[] = [];
+  delete: Delete = {delete: false};
   userName = "";
   ngOnInit() {
       this.userName = this.moveService.displayLogin();
@@ -42,7 +45,7 @@ export class MovedexRedBlueComponent implements OnInit {
       console.log('The dialog was closed');
       this.move = result;
       console.log(result);
-      this.addPokemon(result);
+      this.addMove(result);
     });
   }
 
@@ -58,7 +61,20 @@ export class MovedexRedBlueComponent implements OnInit {
       console.log('The dialog was closed');
       this.move = result;
       console.log(result);
-      this.updatePokemon(result);
+      this.updateMove(result);
+    });
+  }
+
+  openDeleteDialog(): void{
+    const dialogRef = this.dialog.open(MovedexDeleteComponent, {
+      data: this.move.id
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.move.id = result;
+      console.log(result);
+      this.removeMove(result);
     });
   }
 
@@ -70,15 +86,23 @@ export class MovedexRedBlueComponent implements OnInit {
   }
 
   //POST
-  addPokemon(move: Move){
+  addMove(move: Move){
     this.moveService.addMove(move).subscribe((response) => {
       this.router.navigate(['/movedexRedBlue']);
       this.refresh();
     });
 
   }//PUT
-  updatePokemon(move: Move){
+  updateMove(move: Move){
     this.moveService.updateMove(move).subscribe(response => {
+      this.router.navigate(['/movedexRedBlue']);
+      this.refresh();
+    });
+
+  }//DELETE
+  removeMove(id: number){
+    this.moveService.removeMove(id).subscribe((data: Delete) => {
+      this.delete = data;
       this.router.navigate(['/movedexRedBlue']);
       this.refresh();
     });
