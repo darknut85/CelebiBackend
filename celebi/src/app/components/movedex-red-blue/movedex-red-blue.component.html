@@ -20,20 +20,12 @@
         <li>
             <button (click)="openAddDialog()">Add new Move</button>
         </li>
-        <li *ngIf="move.name">
-            You added: <i>{{move.name}}</i>
-        </li>
-        <li>
-            <button (click)="openDeleteDialog()">Delete Pokemon</button>
-        </li>
-        <li *ngIf="move.id">
-            You deleted: <i>{{move.id}}</i>
-        </li>
         <li>
             <button (click)="openUpdateDialog()">Update Move</button>
         </li>
-        <li *ngIf="move.id">
-            You updated: <i>{{move.id}}</i>
+        <li>
+            <button (click)="openDeleteDialog()">Delete Move</button>
         </li>
+        <i>{{message}}</i>
     </body>
 </html>

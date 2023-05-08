@@ -25,11 +25,14 @@ export class MovedexRedBlueComponent implements OnInit {
   marray: Move[] = [];
   delete: Delete = {delete: false};
   userName = "";
+  message = "";
+  state = 0;
+
   ngOnInit() {
+    this.state = 0;
       this.userName = this.moveService.displayLogin();
       this.moveService.getMove().subscribe((data: Move[]) => {
       this.marray = data;
-      console.log(data);
     });
   }
 
@@ -42,9 +45,8 @@ export class MovedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.move = result;
-      console.log(result);
+      this.message = "You added " + this.move.name;
       this.addMove(result);
     });
   }
@@ -58,9 +60,8 @@ export class MovedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.move = result;
-      console.log(result);
+      this.message = "You updated " + this.move.name;
       this.updateMove(result);
     });
   }
@@ -71,9 +72,7 @@ export class MovedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.move.id = result;
-      console.log(result);
+      this.message = "You deleted " + result;
       this.removeMove(result);
     });
   }
