@@ -33,11 +33,11 @@ export class MoveService {
         return this.httpClient.get < Move > (this.apiURL + '/Move/id?id=' + id).pipe(catchError(this.errorHandler))
     }
 
-    updatePokemon(move: Move): Observable < Move > {
+    updateMove(move: Move): Observable < Move > {
         return this.httpClient.put < Move > (this.apiURL + '/Move', JSON.stringify(move), this.httpOptions).pipe(catchError(this.errorHandler))
     }
 
-    removePokemon(id: number): Observable < Delete>  {
+    removeMove(id: number): Observable < Delete>  {
         return this.httpClient.delete < Delete > (this.apiURL + '/Move/id?id=' + id, this.httpOptions).pipe(catchError(this.errorHandler));
     }
     errorHandler(error: {

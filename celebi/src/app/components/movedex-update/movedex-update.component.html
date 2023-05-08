@@ -1,1 +1,64 @@
-<p>movedex-update works!</p>
+<div mat-dialog-content>
+    <p>Select a Pokemon</p>
+    <mat-form-field>
+        <mat-select [(value)]="selectedMove" (selectionChange)="findMove(selectedMove)">
+            <div *ngFor="let move of marray">
+                <mat-option value={{move.name}}>{{move.name}}</mat-option>
+            </div>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      Id:<mat-label></mat-label>
+      <input matInput [(ngModel)]="move.id">
+    </mat-form-field>
+    <p>Update a Pokemon</p>
+    <mat-form-field appearance="fill">
+      Name:<mat-label></mat-label>
+      <input matInput [(ngModel)]="move.name">
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      Type:<mat-label></mat-label>
+      <input matInput [(ngModel)]="move.type">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      Power Points:<mat-label></mat-label>
+      <input matInput [(ngModel)]="move.powerPoints">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      Base Power:<mat-label></mat-label>
+      <input matInput [(ngModel)]="move.basePower">
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      Accuracy:<mat-label></mat-label>
+      <input matInput [(ngModel)]="move.accuracy">
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      Battle Effect:<mat-label></mat-label>
+      <input matInput [(ngModel)]="move.battleEffect">
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      Effect Rate:<mat-label></mat-label>
+      <input matInput [(ngModel)]="move.effectRate">
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      Priority:<mat-label></mat-label>
+      <input matInput [(ngModel)]="move.priority">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      Target:<mat-label></mat-label>
+      <input matInput [(ngModel)]="move.target">
+    </mat-form-field>
+  </div>
+  
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Undo</button>
+    <button mat-button [mat-dialog-close]="move" cdkFocusInitial>Update the move</button>
+  </div>

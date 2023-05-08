@@ -110,7 +110,7 @@ export class PokedexRedBlueComponent implements OnInit {
   //PUT
   updatePokemon(pokemon: Pokemon){
     this.pokemonService.updatePokemon(pokemon).subscribe(response => {
-      this.router.navigate(['/pokemonRedBlue']);
+      this.router.navigate(['/pokedexRedBlue']);
       this.refresh();
     });
   }

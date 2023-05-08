@@ -4,6 +4,7 @@ import { MoveService } from './movedex-red-blue.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MovedexAddComponent } from '../movedex-add/movedex-add.component';
+import { MovedexUpdateComponent } from '../movedex-update/movedex-update.component';
 
 @Component({
   selector: 'app-movedex-red-blue',
@@ -45,6 +46,22 @@ export class MovedexRedBlueComponent implements OnInit {
     });
   }
 
+  openUpdateDialog(): void{
+    const dialogRef = this.dialog.open(MovedexUpdateComponent, {
+      data: {
+        id: this.move.id,
+        name: this.move.name
+        },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.move = result;
+      console.log(result);
+      this.updatePokemon(result);
+    });
+  }
+
   //GET
   getMove(){
     this.moveService.getMove().subscribe((data: Move[]) => {
@@ -55,6 +72,13 @@ export class MovedexRedBlueComponent implements OnInit {
   //POST
   addPokemon(move: Move){
     this.moveService.addMove(move).subscribe((response) => {
+      this.router.navigate(['/movedexRedBlue']);
+      this.refresh();
+    });
+
+  }//PUT
+  updatePokemon(move: Move){
+    this.moveService.updateMove(move).subscribe(response => {
       this.router.navigate(['/movedexRedBlue']);
       this.refresh();
     });

@@ -23,5 +23,11 @@
         <li *ngIf="move.name">
             You added: <i>{{move.name}}</i>
         </li>
+        <li>
+            <button (click)="openUpdateDialog()">Update Move</button>
+        </li>
+        <li *ngIf="move.id">
+            You updated: <i>{{move.id}}</i>
+        </li>
     </body>
 </html>
