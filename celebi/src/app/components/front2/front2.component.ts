@@ -1,16 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-front2',
   templateUrl: './front2.component.html',
   styleUrls: ['./front2.component.css']
 })
-export class Front2Component implements OnInit {
-  constructor(){}
-  
-  ngOnInit(): void {}
-
-  rotation(): void
-  {
-  }
-}
+export class Front2Component{}
