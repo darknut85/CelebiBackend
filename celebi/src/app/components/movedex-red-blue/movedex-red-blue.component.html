@@ -16,5 +16,12 @@
                 </div>
             </mat-select>
         </mat-form-field>
+        
+        <li>
+            <button (click)="openAddDialog()">Add new Move</button>
+        </li>
+        <li *ngIf="move.name">
+            You added: <i>{{move.name}}</i>
+        </li>
     </body>
 </html>

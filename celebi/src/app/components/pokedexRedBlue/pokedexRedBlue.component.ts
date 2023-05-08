@@ -7,7 +7,6 @@ import { PokedexAddComponent } from '../pokedex-add/pokedex-add.component';
 import { Router } from '@angular/router';
 import { PokedexDeleteComponent } from '../pokedex-delete/pokedex-delete.component';
 import { PokedexUpdateComponent } from '../pokedex-update/pokedex-update.component';
-import { AuthService } from '../auth/auth.service';
 import { Delete } from 'src/app/objects/delete';
 
 @Component({
@@ -22,7 +21,7 @@ export class PokedexRedBlueComponent implements OnInit {
   pokemon: Pokemon = <Pokemon>{ };
   title = 'celebi';
 
-  constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router, private auth: AuthService) { }
+  constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router) { }
 
   parray: Pokemon[] = [];
   delete: Delete = {delete: false};
