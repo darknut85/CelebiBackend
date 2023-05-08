@@ -11,6 +11,7 @@ import { UserPageComponent } from './components/user-page/user-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { Front2Component } from './components/front2/front2.component';
 import { MovedexRedBlueComponent } from './components/movedex-red-blue/movedex-red-blue.component';
+import { MovedexPageComponent } from './components/movedex-page/movedex-page.component';
 
 const routes: Routes = [
   { path: 'front', component: Front2Component },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'pokedexRedBlue', component: PokedexRedBlueComponent },
   { path: 'home', component: HomeComponent },
   { path: 'pokedexPage/:id', component: PokedexPageComponent },
+  { path: 'movedexPage/:id', component: MovedexPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'logout', component: LogoutComponent},

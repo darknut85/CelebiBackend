@@ -1,0 +1,16 @@
+body{
+    background-color: rgb(8, 143, 8);
+}
+.Title{
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+    width: 20%;
+}
+.grid-container{
+    display: grid;
+}
+table, th, td{
+    border:1px solid black;
+    text-align: center;
+}
