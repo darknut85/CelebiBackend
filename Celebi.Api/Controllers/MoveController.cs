@@ -5,8 +5,9 @@ using Objects;
 
 namespace Celebi.Api.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
+    [Route("[controller]")]
     public class MoveController : ControllerBase
     {
         readonly IMoveService _moveService;
