@@ -31,6 +31,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { Front2Component } from './components/front2/front2.component';
 import { MovedexRedBlueComponent } from './components/movedex-red-blue/movedex-red-blue.component';
 import { MoveService } from './components/movedex-red-blue/movedex-red-blue.service';
+import { MovedexPageComponent } from './components/movedex-page/movedex-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { MoveService } from './components/movedex-red-blue/movedex-red-blue.serv
     UserPageComponent,
     LogoutComponent,
     Front2Component,
-    MovedexRedBlueComponent
+    MovedexRedBlueComponent,
+    MovedexPageComponent
   ],
   imports: [
     BrowserModule,
