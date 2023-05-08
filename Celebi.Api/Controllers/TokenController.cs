@@ -6,7 +6,7 @@ using Objects;
 
 namespace Celebi.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class TokenController : ControllerBase
     {
