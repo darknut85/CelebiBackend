@@ -26,10 +26,8 @@ export class MovedexRedBlueComponent implements OnInit {
   delete: Delete = {delete: false};
   userName = "";
   message = "";
-  state = 0;
 
   ngOnInit() {
-    this.state = 0;
       this.userName = this.moveService.displayLogin();
       this.moveService.getMove().subscribe((data: Move[]) => {
       this.marray = data;

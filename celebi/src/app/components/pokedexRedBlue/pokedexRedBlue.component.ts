@@ -20,6 +20,7 @@ export class PokedexRedBlueComponent implements OnInit {
   })
   pokemon: Pokemon = <Pokemon>{ };
   title = 'celebi';
+  message = "";
 
   constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router) { }
 
@@ -49,9 +50,8 @@ export class PokedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.pokemon = result;
-      console.log(result);
+      this.message = "You added " + this.pokemon.name;
       this.addPokemon(result);
     });
   }
@@ -62,9 +62,8 @@ export class PokedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.pokemon.id = result;
-      console.log(result);
+      this.message = "You deleted " + this.pokemon.id;
       this.removePokemon(result);
     });
   }
@@ -85,9 +84,8 @@ export class PokedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.pokemon = result;
-      console.log(result);
+      this.message = "You updated " + this.pokemon.name;
       this.updatePokemon(result);
     });
   }
