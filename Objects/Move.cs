@@ -28,5 +28,6 @@ namespace Objects
         //navigational Properties
 
         public ICollection<LevelupMove> LevelUpMoves { get; set; }
+        //for context
     }
 }
