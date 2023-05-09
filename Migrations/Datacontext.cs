@@ -12,6 +12,8 @@ namespace Migrations
 
         public DbSet<LevelupMove> LevelupMoves { get; set; }
 
+        public DbSet<Move> Moves { get; set; }
+
         public DataContext() { }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
@@ -165,7 +167,7 @@ namespace Migrations
                 );
 
             modelBuilder.Entity<LevelupMove>().HasData(
-                new LevelupMove { Id = 1, Level = 1, PokemonId = 1 } 
+                new LevelupMove { Id = 1, Level = 1, PokemonId = 1, MoveId = 1 } 
                 );
 
             modelBuilder.Entity<IdentityRole>().HasData(

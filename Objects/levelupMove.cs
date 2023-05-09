@@ -11,5 +11,7 @@ namespace Objects
 
         //Navigation Properties
         public int PokemonId { get; set; }
+
+        public int MoveId { get; set; }
     }
 }

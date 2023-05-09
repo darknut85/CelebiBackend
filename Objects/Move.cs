@@ -24,5 +24,9 @@ namespace Objects
         public double Priority { get; set; }
 
         public string Target { get; set; } = string.Empty;
+        
+        //navigational Properties
+
+        public ICollection<LevelupMove> LevelUpMoves { get; set; }
     }
 }

@@ -27,7 +27,9 @@ namespace Services
 
         public List<Move> Get()
         {
-            return dataContext.Set<Move>().OrderBy(x => x.Name).ToList();
+            List<Move> moveList =  dataContext.Set<Move>().OrderBy(x => x.Name).ToList();
+            dataContext.Set<LevelupMove>().ToList();
+            return moveList;
         }
 
         public List<Move> Search(string query)
