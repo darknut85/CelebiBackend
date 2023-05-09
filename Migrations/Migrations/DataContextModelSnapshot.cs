@@ -50,14 +50,14 @@ namespace Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0fe5232a-1bda-4244-a539-e5ac13079380",
+                            Id = "4312670e-56fc-416d-9388-61fc59f56819",
                             ConcurrencyStamp = "aec62267-a49a-400e-b4cc-305a6f08a6f2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4337351d-c0b0-44cd-96e6-299fd4a3a5de",
+                            Id = "3609bc32-f4ee-4ef0-a046-fabb9bdffd5a",
                             ConcurrencyStamp = "b0c191f3-d89d-462e-8e7b-63afeffab947",
                             Name = "User",
                             NormalizedName = "USER"
@@ -155,9 +155,9 @@ namespace Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d4bd13c8-be03-48d7-af2a-e6c0578285a9",
+                            Id = "bb98d311-f669-4ae4-9dbd-d32f36ef5f61",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0583a9a9-9d62-479a-a960-082b4efd3ab9",
+                            ConcurrencyStamp = "886c288f-6f69-4237-b870-b5cc20aa399c",
                             Email = "new.user@newUser.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -165,15 +165,15 @@ namespace Migrations.Migrations
                             NormalizedUserName = "NEWUSER",
                             PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e3c5156d-92e9-4e80-a625-03fa27bd2ddb",
+                            SecurityStamp = "dfdf546b-dd14-4d58-9fa4-264500573b40",
                             TwoFactorEnabled = false,
                             UserName = "NewUser"
                         },
                         new
                         {
-                            Id = "69b6a67d-073e-42d9-9500-b32ad236d0e3",
+                            Id = "c1021c51-7ee0-4aa0-9b71-2bb8b27f8e4f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0503a58e-b1a3-41f5-a043-45d732954176",
+                            ConcurrencyStamp = "323f22ff-d4d5-4023-a6ba-715e64cba0b9",
                             Email = "reall.admin@admin.eal",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -181,7 +181,7 @@ namespace Migrations.Migrations
                             NormalizedUserName = "REALADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAECB/+o448AU5IIFcCRY3zS4TONAqem2LTyezhBXOcUPu/FIgL4itYZmtRiUbxT4kgg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "857e74f3-4e9c-4806-9346-84fcea3d1487",
+                            SecurityStamp = "1ca86d8a-916e-4113-8902-d0c913920c78",
                             TwoFactorEnabled = false,
                             UserName = "RealAdmin"
                         });
@@ -266,6 +266,35 @@ namespace Migrations.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Objects.LevelupMove", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Level")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PokemonId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
+
+                    b.ToTable("LevelupMoves");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Level = 1,
+                            PokemonId = 1
+                        });
                 });
 
             modelBuilder.Entity("Objects.Move", b =>
@@ -631,6 +660,20 @@ namespace Migrations.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Objects.LevelupMove", b =>
+                {
+                    b.HasOne("Objects.Pokemon", null)
+                        .WithMany("LevelUpMoves")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Objects.Pokemon", b =>
+                {
+                    b.Navigation("LevelUpMoves");
                 });
 #pragma warning restore 612, 618
         }

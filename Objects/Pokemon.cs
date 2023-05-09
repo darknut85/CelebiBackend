@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Objects
 {
@@ -51,6 +53,8 @@ namespace Objects
 
         public double SPDEV { get; set; }
 
+        //navigational Properties
 
+        public ICollection<LevelupMove> LevelUpMoves { get; set; }
     }
 }

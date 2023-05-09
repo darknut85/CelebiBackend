@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Migrations.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230419120824_users")]
-    partial class users
+    [Migration("20230509112120_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,14 +53,14 @@ namespace Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4f39a600-56e2-4204-80fd-d38cbf156eff",
+                            Id = "4312670e-56fc-416d-9388-61fc59f56819",
                             ConcurrencyStamp = "aec62267-a49a-400e-b4cc-305a6f08a6f2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "7fa21ea0-f11b-4c73-a54f-3f2527fd10e8",
+                            Id = "3609bc32-f4ee-4ef0-a046-fabb9bdffd5a",
                             ConcurrencyStamp = "b0c191f3-d89d-462e-8e7b-63afeffab947",
                             Name = "User",
                             NormalizedName = "USER"
@@ -158,9 +158,9 @@ namespace Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "84352829-2372-4460-a0c2-65d7f4509212",
+                            Id = "bb98d311-f669-4ae4-9dbd-d32f36ef5f61",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a58b460f-261e-4635-9e7c-9a90f06398ef",
+                            ConcurrencyStamp = "886c288f-6f69-4237-b870-b5cc20aa399c",
                             Email = "new.user@newUser.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -168,15 +168,15 @@ namespace Migrations.Migrations
                             NormalizedUserName = "NEWUSER",
                             PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "110ad665-500b-4350-bade-4a63fa975edd",
+                            SecurityStamp = "dfdf546b-dd14-4d58-9fa4-264500573b40",
                             TwoFactorEnabled = false,
                             UserName = "NewUser"
                         },
                         new
                         {
-                            Id = "e2066f3e-5cff-4c63-a389-468e9ca5358f",
+                            Id = "c1021c51-7ee0-4aa0-9b71-2bb8b27f8e4f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "be4d8eab-e071-49a7-9c35-765d9aa73e2f",
+                            ConcurrencyStamp = "323f22ff-d4d5-4023-a6ba-715e64cba0b9",
                             Email = "reall.admin@admin.eal",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -184,7 +184,7 @@ namespace Migrations.Migrations
                             NormalizedUserName = "REALADMIN",
                             PasswordHash = "AQAAAAEAACcQAAAAECB/+o448AU5IIFcCRY3zS4TONAqem2LTyezhBXOcUPu/FIgL4itYZmtRiUbxT4kgg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3f4ea29c-fb3b-496a-b966-db95c3ff8d7a",
+                            SecurityStamp = "1ca86d8a-916e-4113-8902-d0c913920c78",
                             TwoFactorEnabled = false,
                             UserName = "RealAdmin"
                         });
@@ -269,6 +269,133 @@ namespace Migrations.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Objects.LevelupMove", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Level")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PokemonId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
+
+                    b.ToTable("LevelupMoves");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Level = 1,
+                            PokemonId = 1
+                        });
+                });
+
+            modelBuilder.Entity("Objects.Move", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Accuracy")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("BasePower")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("BattleEffect")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<double>("EffectRate")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<double>("PowerPoints")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("Priority")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Target")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Move");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Accuracy = 95.0,
+                            BasePower = 35.0,
+                            BattleEffect = "A NORMAL-type attack. Many Pokémon know this attack right from the start.",
+                            EffectRate = 0.0,
+                            Name = "Tackle",
+                            PowerPoints = 35.0,
+                            Priority = 0.0,
+                            Target = "selected target",
+                            Type = "Normal"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Accuracy = 100.0,
+                            BasePower = 35.0,
+                            BattleEffect = "A NORMAL-type attack. Sharp claws are used to inflict damage on the target.",
+                            EffectRate = 0.0,
+                            Name = "Scratch",
+                            PowerPoints = 40.0,
+                            Priority = 0.0,
+                            Target = "selected target",
+                            Type = "Normal"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Accuracy = 100.0,
+                            BasePower = 0.0,
+                            BattleEffect = "A technique that lowers the target's ATTACK power. Can normally be used up to six times.",
+                            EffectRate = 0.0,
+                            Name = "Growl",
+                            PowerPoints = 40.0,
+                            Priority = 0.0,
+                            Target = "All opponent Pokémon in range",
+                            Type = "Normal"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Accuracy = 100.0,
+                            BasePower = 0.0,
+                            BattleEffect = "A technique that lowers the target's DEFENSE. Useful against tough, armored Pokémon.",
+                            EffectRate = 0.0,
+                            Name = "Tail Whip",
+                            PowerPoints = 30.0,
+                            Priority = 0.0,
+                            Target = "All opponent Pokémon in range",
+                            Type = "Normal"
+                        });
                 });
 
             modelBuilder.Entity("Objects.Pokemon", b =>
@@ -458,6 +585,32 @@ namespace Migrations.Migrations
                             Type1 = "Fire",
                             Type2 = "",
                             Weight = 8.5
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ATK = 64.0,
+                            ATKEV = 64.0,
+                            CaptureRate = 45.0,
+                            Classification = "Flame Pokemon",
+                            DEF = 58.0,
+                            DEFEV = 58.0,
+                            DexEntry = 5,
+                            GrowthRate = 1059860.0,
+                            HP = 58.0,
+                            HPEV = 58.0,
+                            Height = 1.1000000000000001,
+                            Name = "Charmeleon",
+                            PokedexEntry = "When it swings its burning tail, it elevates the temperature to unbearably high levels.",
+                            SPATK = 65.0,
+                            SPATKEV = 65.0,
+                            SPD = 80.0,
+                            SPDEF = 65.0,
+                            SPDEFEV = 65.0,
+                            SPDEV = 80.0,
+                            Type1 = "Fire",
+                            Type2 = "",
+                            Weight = 19.0
                         });
                 });
 
@@ -510,6 +663,20 @@ namespace Migrations.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Objects.LevelupMove", b =>
+                {
+                    b.HasOne("Objects.Pokemon", null)
+                        .WithMany("LevelUpMoves")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Objects.Pokemon", b =>
+                {
+                    b.Navigation("LevelUpMoves");
                 });
 #pragma warning restore 612, 618
         }

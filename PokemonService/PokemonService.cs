@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Migrations;
 using Objects;
 using System.Diagnostics.CodeAnalysis;
@@ -27,8 +28,9 @@ namespace Services
 
         public List<Pokemon> Get()
         {
-
-            return dataContext.Set<Pokemon>().OrderBy(x => x.DexEntry).ToList();
+            List<Pokemon> pokemonList = dataContext.Set<Pokemon>().OrderBy(x => x.DexEntry).ToList();
+            dataContext.Set<LevelupMove>().ToList();
+            return pokemonList;
         }
 
         public List<Pokemon> Search(string query)

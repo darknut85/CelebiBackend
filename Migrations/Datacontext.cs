@@ -10,6 +10,8 @@ namespace Migrations
     {
         public DbSet<Pokemon> Pokemons { get; set; }
 
+        public DbSet<LevelupMove> LevelupMoves { get; set; }
+
         public DataContext() { }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
@@ -160,6 +162,10 @@ namespace Migrations
                     GrowthRate = 1059860,
                     CaptureRate = 45
                 }
+                );
+
+            modelBuilder.Entity<LevelupMove>().HasData(
+                new LevelupMove { Id = 1, Level = 1, PokemonId = 1 } 
                 );
 
             modelBuilder.Entity<IdentityRole>().HasData(
