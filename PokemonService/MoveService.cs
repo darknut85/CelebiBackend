@@ -18,6 +18,7 @@ namespace Services
         {
 
             Move? move = dataContext.Set<Move>().FirstOrDefault(x => x.Id == id);
+            dataContext.Set<LevelupMove>().ToList();
             if (move != null)
             {
                 return move;

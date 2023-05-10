@@ -1,3 +1,5 @@
+import { LevelupMove } from "./levelupMove";
+
 export interface Move {
     id: number;
 
@@ -18,4 +20,6 @@ export interface Move {
     priority: number;
 
     target: string;
+
+    levelUpMoves: LevelupMove[];
 }

@@ -34,7 +34,7 @@ export class PokedexPageComponent implements OnInit {
     growthRate: 0,
     hp: 0, atk: 0, def: 0, spatk: 0, spdef: 0, spd: 0,
     hpev: 0, atkev: 0, defev: 0, spatkev: 0, spdefev: 0, spdev: 0,
-    levelUpMoves: [{id: 0, level: 0, pokemonId: 0, moveId: 0},{id: 0, level: 0, pokemonId: 0, moveId: 0}]
+    levelUpMoves: [{id: 0, level: 0, pokemonId: 0, moveId: 0}]
   };
   ngOnInit()
   {
@@ -43,17 +43,24 @@ export class PokedexPageComponent implements OnInit {
     { 
       const id = params.get('id');
       this.pokemonService.getPokemonByID(Number(id)).subscribe((data: Pokemon) => 
-      { 
-        data.levelUpMoves.forEach(levelup => {
-          this.route.paramMap.subscribe((params) =>
-            { 
-              const id = params.get('id');
-              this.moveService.getMoveByID(Number(id)).subscribe((da: Move) => 
+      {
+        if(data.levelUpMoves == null)
+        {
+          data.levelUpMoves = this.pokemon.levelUpMoves;
+        }
+        else
+        {
+          data.levelUpMoves.forEach(levelup => {
+            this.route.paramMap.subscribe((params) =>
               { 
-                this.lMoves.push(da);
+                const id = params.get('id');
+                this.moveService.getMoveByID(Number(id)).subscribe((da: Move) => 
+                { 
+                  this.lMoves.push(da);
+                });
               });
-            });
-        });
+          });
+        }
 
         this.pokemon = data; 
         this.assignMatchups(data.type1, data.type2);
