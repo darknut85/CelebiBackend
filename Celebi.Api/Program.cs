@@ -57,6 +57,7 @@ namespace Celebi.Api
             builder.Services.AddScoped<IPokemonService, PokemonService>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IMoveService, MoveService>();
+            builder.Services.AddScoped<ILevelupService, LevelupService>();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

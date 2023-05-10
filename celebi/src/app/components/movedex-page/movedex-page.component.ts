@@ -38,10 +38,9 @@ export class MovedexPageComponent implements OnInit{
         else
         {
           data.levelUpMoves.forEach(levelup => {
-            this.route.paramMap.subscribe((params) =>
+            this.route.paramMap.subscribe(() =>
               { 
-                const id = params.get('id');
-                this.pokemonService.getPokemonByID(Number(id)).subscribe((da: Pokemon) => 
+                this.pokemonService.getPokemonByID(Number(levelup.pokemonId)).subscribe((da: Pokemon) => 
                 { 
                   this.lPokemon.push(da);
                 });
