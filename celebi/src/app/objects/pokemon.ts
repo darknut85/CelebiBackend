@@ -1,3 +1,5 @@
+import { LevelupMove } from "./levelupMove";
+
 export interface Pokemon{
     id: number;
 
@@ -44,4 +46,6 @@ export interface Pokemon{
     spdefev: number;
 
     spdev: number;
+
+    levelUpMoves: LevelupMove[];
 }

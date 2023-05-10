@@ -110,5 +110,53 @@
                 <td>{{pokemon.spd * 2 + 5}} - {{pokemon.spd * 2 + 98}}</td>
             </tr>
         </table>
+        <table>
+            <tr>
+                <th>Moves learned by leveling up </th>
+                <th>Type: </th>
+                <th>PP: </th>
+                <th>Base Power: </th>
+                <th>Accuracy: </th>
+                <th>Effect %: </th>
+                <th>Description: </th>
+            </tr>
+            <tr>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <td>{{moves.name}}</td>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <td>{{moves.type}}</td>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <td>{{moves.powerPoints}}</td>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <td>{{moves.basePower}}</td>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <td>{{moves.accuracy}}</td>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <td>{{moves.effectRate}}</td>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <td>{{moves.battleEffect}}</td>
+                    </a>
+                </td>
+            </tr>
+        </table>
     </body>
 </html>

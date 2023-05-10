@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Pokemon } from 'src/app/objects/pokemon';
 import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 import { TypeMatchup } from 'src/app/objects/typeMatchups';
+import { Move } from 'src/app/objects/move';
+import { MoveService } from '../movedex-red-blue/movedex-red-blue.service';
 
 @Component({
   selector: 'app-pokedex-page',
@@ -11,12 +13,13 @@ import { TypeMatchup } from 'src/app/objects/typeMatchups';
 })
 export class PokedexPageComponent implements OnInit {
   
-  constructor(private pokemonService: PokemonService, private route: ActivatedRoute) { }
+  constructor(private pokemonService: PokemonService, private route: ActivatedRoute, private moveService: MoveService) { }
   userName = "";
 
   typing1: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   typing2: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   typingFinal: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  lMoves: Move[] = [];
 
   pokemon: Pokemon = 
   {
@@ -30,7 +33,8 @@ export class PokedexPageComponent implements OnInit {
     captureRate: 0,
     growthRate: 0,
     hp: 0, atk: 0, def: 0, spatk: 0, spdef: 0, spd: 0,
-    hpev: 0, atkev: 0, defev: 0, spatkev: 0, spdefev: 0, spdev: 0
+    hpev: 0, atkev: 0, defev: 0, spatkev: 0, spdefev: 0, spdev: 0,
+    levelUpMoves: [{id: 0, level: 0, pokemonId: 0, moveId: 0},{id: 0, level: 0, pokemonId: 0, moveId: 0}]
   };
   ngOnInit()
   {
@@ -40,6 +44,17 @@ export class PokedexPageComponent implements OnInit {
       const id = params.get('id');
       this.pokemonService.getPokemonByID(Number(id)).subscribe((data: Pokemon) => 
       { 
+        data.levelUpMoves.forEach(levelup => {
+          this.route.paramMap.subscribe((params) =>
+            { 
+              const id = params.get('id');
+              this.moveService.getMoveByID(Number(id)).subscribe((da: Move) => 
+              { 
+                this.lMoves.push(da);
+              });
+            });
+        });
+
         this.pokemon = data; 
         this.assignMatchups(data.type1, data.type2);
       });
