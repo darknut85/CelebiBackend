@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Pokemon } from 'src/app/objects/pokemon';
 import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 import { TypeMatchup } from 'src/app/objects/typeMatchups';
-import { LevelupMove } from 'src/app/objects/levelupMove';
+import { Move } from 'src/app/objects/move';
+import { MoveService } from '../movedex-red-blue/movedex-red-blue.service';
 
 @Component({
   selector: 'app-pokedex-page',
@@ -12,12 +13,13 @@ import { LevelupMove } from 'src/app/objects/levelupMove';
 })
 export class PokedexPageComponent implements OnInit {
   
-  constructor(private pokemonService: PokemonService, private route: ActivatedRoute) { }
+  constructor(private pokemonService: PokemonService, private route: ActivatedRoute, private moveService: MoveService) { }
   userName = "";
 
   typing1: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   typing2: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   typingFinal: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  lMoves: Move[] = [];
 
   pokemon: Pokemon = 
   {
@@ -42,9 +44,19 @@ export class PokedexPageComponent implements OnInit {
       const id = params.get('id');
       this.pokemonService.getPokemonByID(Number(id)).subscribe((data: Pokemon) => 
       { 
+        data.levelUpMoves.forEach(levelup => {
+          this.route.paramMap.subscribe((params) =>
+            { 
+              const id = params.get('id');
+              this.moveService.getMoveByID(Number(id)).subscribe((da: Move) => 
+              { 
+                this.lMoves.push(da);
+              });
+            });
+        });
+
         this.pokemon = data; 
         this.assignMatchups(data.type1, data.type2);
-        console.log(this.pokemon);
       });
     });
   }

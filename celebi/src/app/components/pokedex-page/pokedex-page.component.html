@@ -112,12 +112,15 @@
             
             <tr>
                 <td>Moves learned by leveling up</td>
-                <td *ngFor="let moves of pokemon.levelUpMoves">
-                    {{moves.id}}
-                    {{moves.pokemonId}}
-                    {{moves.moveId}}
-                    {{moves.level}}
-                </td>
+                <div *ngFor="let moves of lMoves">
+                    <td>{{moves.name}}</td>
+                    <td>Type: {{moves.type}}</td>
+                    <td>PP: {{moves.powerPoints}}</td>
+                    <td>Base Power: {{moves.basePower}}</td>
+                    <td>Accuracy: {{moves.accuracy}}</td>
+                    <td>Effect %: {{moves.effectRate}}</td>
+                    <td>{{moves.battleEffect}}</td>
+                </div>
             </tr>
         </table>
     </body>
