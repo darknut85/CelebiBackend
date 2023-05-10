@@ -19,6 +19,7 @@ namespace Services
         {
 
             Pokemon? pokemon = dataContext.Set<Pokemon>().FirstOrDefault(x => x.Id == id);
+            dataContext.Set<LevelupMove>().ToList();
             if (pokemon != null)
             {
                 return pokemon;

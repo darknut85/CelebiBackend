@@ -109,6 +109,16 @@
                 <td>{{pokemon.spatk * 2 + 5}} - {{pokemon.spatk * 2 + 98}}</td>
                 <td>{{pokemon.spd * 2 + 5}} - {{pokemon.spd * 2 + 98}}</td>
             </tr>
+            
+            <tr>
+                <td>Moves learned by leveling up</td>
+                <td *ngFor="let moves of pokemon.levelUpMoves">
+                    {{moves.id}}
+                    {{moves.pokemonId}}
+                    {{moves.moveId}}
+                    {{moves.level}}
+                </td>
+            </tr>
         </table>
     </body>
 </html>

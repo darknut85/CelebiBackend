@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Pokemon } from 'src/app/objects/pokemon';
 import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 import { TypeMatchup } from 'src/app/objects/typeMatchups';
+import { LevelupMove } from 'src/app/objects/levelupMove';
 
 @Component({
   selector: 'app-pokedex-page',
@@ -30,7 +31,8 @@ export class PokedexPageComponent implements OnInit {
     captureRate: 0,
     growthRate: 0,
     hp: 0, atk: 0, def: 0, spatk: 0, spdef: 0, spd: 0,
-    hpev: 0, atkev: 0, defev: 0, spatkev: 0, spdefev: 0, spdev: 0
+    hpev: 0, atkev: 0, defev: 0, spatkev: 0, spdefev: 0, spdev: 0,
+    levelUpMoves: [{id: 0, level: 0, pokemonId: 0, moveId: 0},{id: 0, level: 0, pokemonId: 0, moveId: 0}]
   };
   ngOnInit()
   {
@@ -42,6 +44,7 @@ export class PokedexPageComponent implements OnInit {
       { 
         this.pokemon = data; 
         this.assignMatchups(data.type1, data.type2);
+        console.log(this.pokemon);
       });
     });
   }
