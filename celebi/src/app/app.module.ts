@@ -35,6 +35,8 @@ import { MovedexPageComponent } from './components/movedex-page/movedex-page.com
 import { MovedexAddComponent } from './components/movedex-add/movedex-add.component';
 import { MovedexUpdateComponent } from './components/movedex-update/movedex-update.component';
 import { MovedexDeleteComponent } from './components/movedex-delete/movedex-delete.component';
+import { LevelupComponent } from './components/levelup/levelup.component';
+import { LevelupService } from './components/levelup/levelup.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +56,8 @@ import { MovedexDeleteComponent } from './components/movedex-delete/movedex-dele
     MovedexPageComponent,
     MovedexAddComponent,
     MovedexUpdateComponent,
-    MovedexDeleteComponent
+    MovedexDeleteComponent,
+    LevelupComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +76,7 @@ import { MovedexDeleteComponent } from './components/movedex-delete/movedex-dele
   providers: [
     PokemonService,
     MoveService,
+    LevelupService,
     AdminService,
     AuthService, 
     AuthGuard,

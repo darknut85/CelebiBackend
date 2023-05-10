@@ -5,7 +5,7 @@ using Objects;
 
 namespace Celebi.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class LevelupController : ControllerBase
     {
@@ -28,7 +28,7 @@ namespace Celebi.Api.Controllers
             return _levelupService.Get(id);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create(LevelupMove levelupMove)
         {
@@ -37,7 +37,7 @@ namespace Celebi.Api.Controllers
             return Ok(levelupMove);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("id")]
         public IActionResult Delete(int id)
         {
@@ -46,7 +46,7 @@ namespace Celebi.Api.Controllers
             return Ok(delete);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public IActionResult Put(LevelupMove levelupMove)
         {
