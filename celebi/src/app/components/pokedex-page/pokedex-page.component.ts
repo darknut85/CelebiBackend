@@ -94,3 +94,8 @@ export class PokedexPageComponent implements OnInit {
     return typeMatchup.types[typeName];
   }
 }
+
+//current pokemon is selected pokemon
+//allow to select a move for the current pokemon
+//allow to enter move level
+//button to send connection between move and pokemon to database
