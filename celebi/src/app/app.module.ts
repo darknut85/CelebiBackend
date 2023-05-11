@@ -37,6 +37,8 @@ import { MovedexUpdateComponent } from './components/movedex-update/movedex-upda
 import { MovedexDeleteComponent } from './components/movedex-delete/movedex-delete.component';
 import { LevelupComponent } from './components/levelup/levelup.component';
 import { LevelupService } from './components/levelup/levelup.service';
+import { AssignMoveToPokemonComponent } from './components/assign-move-to-pokemon/assign-move-to-pokemon.component';
+import { AssignPokemonToMoveComponent } from './components/assign-pokemon-to-move/assign-pokemon-to-move.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +59,9 @@ import { LevelupService } from './components/levelup/levelup.service';
     MovedexAddComponent,
     MovedexUpdateComponent,
     MovedexDeleteComponent,
-    LevelupComponent
+    LevelupComponent,
+    AssignMoveToPokemonComponent,
+    AssignPokemonToMoveComponent
   ],
   imports: [
     BrowserModule,
