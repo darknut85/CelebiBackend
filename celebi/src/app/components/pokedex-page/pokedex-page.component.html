@@ -158,5 +158,21 @@
                 </td>
             </tr>
         </table>
+        <button (click)="addLevelupMove()">
+            Add Move
+        </button>
+        <div mat-dialog-content>
+            <mat-form-field>
+                <mat-select [(value)]="selectedMove" (selectionChange)="findMove(selectedMove)">
+                    <div *ngFor="let move of marray">
+                        <mat-option value={{move.name}}>{{move.name}}</mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                Level:<mat-label></mat-label>
+                <input matInput [(ngModel)]="level">
+              </mat-form-field>
+        </div>
     </body>
 </html>

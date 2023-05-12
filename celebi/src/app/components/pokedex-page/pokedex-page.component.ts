@@ -5,6 +5,8 @@ import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 import { TypeMatchup } from 'src/app/objects/typeMatchups';
 import { Move } from 'src/app/objects/move';
 import { MoveService } from '../movedex-red-blue/movedex-red-blue.service';
+import { LevelupService } from '../levelup/levelup.service';
+import { LevelupMove } from 'src/app/objects/levelupMove';
 
 @Component({
   selector: 'app-pokedex-page',
@@ -13,13 +15,18 @@ import { MoveService } from '../movedex-red-blue/movedex-red-blue.service';
 })
 export class PokedexPageComponent implements OnInit {
   
-  constructor(private pokemonService: PokemonService, private route: ActivatedRoute, private moveService: MoveService) { }
+  constructor(private pokemonService: PokemonService, private route: ActivatedRoute, private moveService: MoveService,
+    private levelupService: LevelupService) { }
   userName = "";
-
+  selectedMove = 'selectedMove';
+  marray: Move[] = [];
   typing1: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   typing2: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   typingFinal: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   lMoves: Move[] = [];
+  allMoves: Move[] = [];
+  move: Move = <Move>{ };
+  level: number = 0;
 
   pokemon: Pokemon = 
   {
@@ -38,6 +45,9 @@ export class PokedexPageComponent implements OnInit {
   };
   ngOnInit()
   {
+    this.moveService.getMove().subscribe((data: Move[]) => {
+      this.marray = data;
+      });
     this.userName = this.pokemonService.displayLogin();
     this.route.paramMap.subscribe((params) =>
     { 
@@ -93,9 +103,19 @@ export class PokedexPageComponent implements OnInit {
     let typeName = typeMatchup.typeNames.indexOf(type);
     return typeMatchup.types[typeName];
   }
-}
 
-//current pokemon is selected pokemon
-//allow to select a move for the current pokemon
-//allow to enter move level
-//button to send connection between move and pokemon to database
+  findMove(name: string): void{
+    const move = this.marray.find(x => x.name === name);
+    if( move != undefined)
+    {
+      this.move = move;
+    }
+  }
+
+  addLevelupMove(): void{
+    let levelUpMove: LevelupMove = {id: 0, pokemonId: this.pokemon.id, moveId: this.move.id, level: this.level}
+    this.levelupService.addLevelupMove(levelUpMove).subscribe((response) => {
+      location.reload();
+    });
+  }
+}
