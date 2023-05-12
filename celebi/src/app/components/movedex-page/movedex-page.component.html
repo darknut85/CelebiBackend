@@ -114,5 +114,21 @@
                 </td>
             </tr>
         </table>
+        <button (click)="addLevelupMove()">
+            Add Pokemon
+        </button>
+        <div mat-dialog-content>
+            <mat-form-field>
+                <mat-select [(value)]="selectedPokemon" (selectionChange)="findPokemon(selectedPokemon)">
+                    <div *ngFor="let pokemon of parray">
+                        <mat-option value={{pokemon.name}}>{{pokemon.name}}</mat-option>
+                    </div>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                Level:<mat-label></mat-label>
+                <input matInput [(ngModel)]="level">
+              </mat-form-field>
+        </div>
     </body>
 </html>
