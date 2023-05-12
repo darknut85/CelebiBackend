@@ -16,12 +16,14 @@ export class AuthService {
     }
 
     public isLoggedIn() {
+        if(localStorage.getItem("token_Id") == null){
+            return false;
+        }
         return !this.getExpiration();
     }
 
     getExpiration() {
         const expiration = localStorage.getItem("token_Id");
-
         if(expiration != null)
         {
             const expiry = (JSON.parse(atob(expiration.split('.')[1]))).exp;
