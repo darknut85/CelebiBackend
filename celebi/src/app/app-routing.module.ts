@@ -9,12 +9,12 @@ import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { Front2Component } from './components/front2/front2.component';
+import { FrontComponent } from './components/front/front.component';
 import { MovedexRedBlueComponent } from './components/movedex-red-blue/movedex-red-blue.component';
 import { MovedexPageComponent } from './components/movedex-page/movedex-page.component';
 
 const routes: Routes = [
-  { path: 'front', component: Front2Component },
+  { path: 'front', component: FrontComponent },
   { path: '', redirectTo:'front', pathMatch: 'full'},
   { path: 'pokedexRedBlue', component: PokedexRedBlueComponent },
   { path: 'home', component: HomeComponent },

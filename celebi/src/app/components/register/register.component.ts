@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/objects/user';
-import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
+import { AdminService } from '../admin/admin.service';
 
 @Component({
   selector: 'app-register',
@@ -12,9 +12,12 @@ import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit{
+  
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, 
+    private router: Router, private adminService: AdminService) { }
   userName = "";
   ngOnInit(): void {
-    this.userName = this.pokemonService.displayLogin();
+    this.userName = this.adminService.displayLogin();
   }
     form: FormGroup = this.formBuilder.group({
       userName: ['',Validators.required],
@@ -30,8 +33,6 @@ export class RegisterComponent implements OnInit{
       })
   }
   
-    constructor(private formBuilder: FormBuilder, private http: HttpClient, 
-                private router: Router, private pokemonService: PokemonService) { }
   
     submit(): void {
       this.http.post(this.apiURL, this.form.getRawValue(),{responseType:'text'})

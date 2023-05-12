@@ -7,6 +7,7 @@ import { MovedexAddComponent } from '../movedex-add/movedex-add.component';
 import { MovedexUpdateComponent } from '../movedex-update/movedex-update.component';
 import { Delete } from 'src/app/objects/delete';
 import { MovedexDeleteComponent } from '../movedex-delete/movedex-delete.component';
+import { AdminService } from '../admin/admin.service';
 
 @Component({
   selector: 'app-movedex-red-blue',
@@ -20,7 +21,8 @@ export class MovedexRedBlueComponent implements OnInit {
   move: Move = <Move>{ };
   title = 'celebi';
 
-  constructor( private moveService: MoveService, private dialog: MatDialog, private router: Router) { }
+  constructor( private moveService: MoveService, private dialog: MatDialog, private router: Router,
+    private adminService: AdminService) { }
 
   marray: Move[] = [];
   delete: Delete = {delete: false};
@@ -28,7 +30,7 @@ export class MovedexRedBlueComponent implements OnInit {
   message = "";
 
   ngOnInit() {
-      this.userName = this.moveService.displayLogin();
+      this.userName = this.adminService.displayLogin();
       this.moveService.getMove().subscribe((data: Move[]) => {
       this.marray = data;
     });
@@ -38,7 +40,7 @@ export class MovedexRedBlueComponent implements OnInit {
     const dialogRef = this.dialog.open(MovedexAddComponent, {
       data: {
         id: this.move.id,
-        name: this.move.name, 
+        name: this.move.name
         },
     });
 
@@ -84,7 +86,7 @@ export class MovedexRedBlueComponent implements OnInit {
 
   //POST
   addMove(move: Move){
-    this.moveService.addMove(move).subscribe((response) => {
+    this.moveService.addMove(move).subscribe(response => {
       this.router.navigate(['/movedexRedBlue']);
       this.refresh();
     });

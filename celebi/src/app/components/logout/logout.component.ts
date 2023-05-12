@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-logout',
@@ -6,10 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent {
-  constructor(){}
+  constructor(private authService: AuthService){}
 
   ngOnInit(): void {
-    localStorage.removeItem("token_Id");
-    localStorage.removeItem("username");
+    this.authService.logout();
   }
 }

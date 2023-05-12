@@ -7,6 +7,7 @@ import { Move } from 'src/app/objects/move';
 import { MoveService } from '../movedex-red-blue/movedex-red-blue.service';
 import { LevelupService } from '../levelup/levelup.service';
 import { LevelupMove } from 'src/app/objects/levelupMove';
+import { AdminService } from '../admin/admin.service';
 
 @Component({
   selector: 'app-pokedex-page',
@@ -16,7 +17,7 @@ import { LevelupMove } from 'src/app/objects/levelupMove';
 export class PokedexPageComponent implements OnInit {
   
   constructor(private pokemonService: PokemonService, private route: ActivatedRoute, private moveService: MoveService,
-    private levelupService: LevelupService) { }
+    private levelupService: LevelupService, private adminService: AdminService) { }
   userName = "";
   selectedMove = 'selectedMove';
   marray: Move[] = [];
@@ -48,7 +49,11 @@ export class PokedexPageComponent implements OnInit {
     this.moveService.getMove().subscribe((data: Move[]) => {
       this.marray = data;
       });
-    this.userName = this.pokemonService.displayLogin();
+    this.userName = this.adminService.displayLogin();
+    this.addMoveToSelectionBox();
+  }
+
+  addMoveToSelectionBox(){
     this.route.paramMap.subscribe((params) =>
     { 
       const id = params.get('id');
@@ -114,7 +119,7 @@ export class PokedexPageComponent implements OnInit {
 
   addLevelupMove(): void{
     let levelUpMove: LevelupMove = {id: 0, pokemonId: this.pokemon.id, moveId: this.move.id, level: this.level}
-    this.levelupService.addLevelupMove(levelUpMove).subscribe((response) => {
+    this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
       location.reload();
     });
   }

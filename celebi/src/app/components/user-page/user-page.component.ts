@@ -27,10 +27,14 @@ export class UserPageComponent {
 
   ngOnInit()
   {
-    this.userName = this.pokemonService.displayLogin();
+    this.userName = this.adminService.displayLogin();
       this.adminService.getUsers().subscribe((data: User[]) => {
       this.uarray = data;
     });
+    this.AddUsersToSelectionBox();
+  }
+
+  AddUsersToSelectionBox(){
     this.route.paramMap.subscribe((params) =>
     { 
       const id = params.get('id');

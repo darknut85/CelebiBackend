@@ -6,6 +6,7 @@ import { Pokemon } from 'src/app/objects/pokemon';
 import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 import { LevelupMove } from 'src/app/objects/levelupMove';
 import { LevelupService } from '../levelup/levelup.service';
+import { AdminService } from '../admin/admin.service';
 
 @Component({
   selector: 'app-movedex-page',
@@ -14,7 +15,7 @@ import { LevelupService } from '../levelup/levelup.service';
 })
 export class MovedexPageComponent implements OnInit{
   constructor(private moveService: MoveService, private route: ActivatedRoute, private pokemonService: PokemonService,
-    private levelupService: LevelupService) { }
+    private levelupService: LevelupService, private adminService: AdminService) { }
   userName = "";
   selectedPokemon = 'selectedPokemon';
   lPokemon: Pokemon[] = [];
@@ -36,12 +37,17 @@ export class MovedexPageComponent implements OnInit{
   {
     this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
       this.parray = data;
-      });
-    this.userName = this.moveService.displayLogin();
+    });
+
+    this.userName = this.adminService.displayLogin();
+    
+    this.addPokemonToSelectionBox();
+  }
+
+  addPokemonToSelectionBox(): void{
     this.route.paramMap.subscribe((params) =>
     { 
-      const id = params.get('id');
-      this.moveService.getMoveByID(Number(id)).subscribe((data: Move) => 
+      this.moveService.getMoveByID(Number(params.get('id'))).subscribe((data: Move) => 
       {
         if(data.levelUpMoves == null)
         {
@@ -73,8 +79,13 @@ export class MovedexPageComponent implements OnInit{
   }
 
   addLevelupMove(): void{
-    let levelUpMove: LevelupMove = {id: 0, pokemonId: this.pokemon.id, moveId: this.move.id, level: this.level}
-    this.levelupService.addLevelupMove(levelUpMove).subscribe(() => {
+    this.levelupService.addLevelupMove(
+      {
+        id: 0, 
+        pokemonId: this.pokemon.id, 
+        moveId: this.move.id, 
+        level: this.level
+      }).subscribe(() => {
       location.reload();
     });
   }

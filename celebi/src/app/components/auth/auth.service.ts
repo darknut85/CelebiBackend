@@ -4,22 +4,22 @@ import { Injectable } from "@angular/core";
 export class AuthService {
      
     constructor() { }
-      
+    
+    login(res: string, user: string){
+        localStorage.setItem("token_Id",res);
+        localStorage.setItem("username",user);
+    }
+
     logout() {
-        localStorage.removeItem("id_token");
-        localStorage.removeItem("expires_at");
+        localStorage.removeItem("token_Id");
+        localStorage.removeItem("username");
     }
 
     public isLoggedIn() {
         return !this.getExpiration();
     }
 
-    isLoggedOut() {
-        return !this.isLoggedIn();
-    }
-
     getExpiration() {
-        
         const expiration = localStorage.getItem("token_Id");
 
         if(expiration != null)

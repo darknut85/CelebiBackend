@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
+import { AdminService } from '../admin/admin.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +7,9 @@ import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(private pokemonService: PokemonService){}
+  constructor(private adminService: AdminService){}
   userName = "";
   ngOnInit(): void {
-    this.userName = this.pokemonService.displayLogin();
+    this.userName = this.adminService.displayLogin();
   }
 }

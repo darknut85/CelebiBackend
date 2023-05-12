@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { PokedexDeleteComponent } from '../pokedex-delete/pokedex-delete.component';
 import { PokedexUpdateComponent } from '../pokedex-update/pokedex-update.component';
 import { Delete } from 'src/app/objects/delete';
+import { AdminService } from '../admin/admin.service';
 
 @Component({
   selector: 'pokedexRedBlue-root',
@@ -22,13 +23,14 @@ export class PokedexRedBlueComponent implements OnInit {
   title = 'celebi';
   message = "";
 
-  constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router) { }
+  constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router, 
+    private adminService: AdminService) { }
 
   parray: Pokemon[] = [];
   delete: Delete = {delete: false};
   userName = "";
   ngOnInit() {
-      this.userName = this.pokemonService.displayLogin();
+      this.userName = this.adminService.displayLogin();
       this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
       this.parray = data;
     });
@@ -38,14 +40,7 @@ export class PokedexRedBlueComponent implements OnInit {
     const dialogRef = this.dialog.open(PokedexAddComponent, {
       data: {
         id: this.pokemon.id,
-        name: this.pokemon.name, 
-        dexEntry: this.pokemon.dexEntry, 
-        type1: this.pokemon.type1, 
-        type2: this.pokemon.type2, 
-        height: this.pokemon.height, 
-        weight: this.pokemon.weight,
-        classification: this.pokemon.classification,
-        pokedexEntry: this.pokemon.pokedexEntry
+        name: this.pokemon.name
         },
     });
 
@@ -72,14 +67,7 @@ export class PokedexRedBlueComponent implements OnInit {
     const dialogRef = this.dialog.open(PokedexUpdateComponent, {
       data: {
         id: this.pokemon.id,
-        name: this.pokemon.name, 
-        dexEntry: this.pokemon.dexEntry, 
-        type1: this.pokemon.type1, 
-        type2: this.pokemon.type2, 
-        height: this.pokemon.height, 
-        weight: this.pokemon.weight,
-        classification: this.pokemon.classification,
-        pokedexEntry: this.pokemon.pokedexEntry
+        name: this.pokemon.name
         },
     });
 

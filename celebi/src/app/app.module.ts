@@ -28,7 +28,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AdminService } from './components/admin/admin.service';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { Front2Component } from './components/front2/front2.component';
+import { FrontComponent } from './components/front/front.component';
 import { MovedexRedBlueComponent } from './components/movedex-red-blue/movedex-red-blue.component';
 import { MoveService } from './components/movedex-red-blue/movedex-red-blue.service';
 import { MovedexPageComponent } from './components/movedex-page/movedex-page.component';
@@ -51,7 +51,7 @@ import { LevelupService } from './components/levelup/levelup.service';
     AdminComponent,
     UserPageComponent,
     LogoutComponent,
-    Front2Component,
+    FrontComponent,
     MovedexRedBlueComponent,
     MovedexPageComponent,
     MovedexAddComponent,

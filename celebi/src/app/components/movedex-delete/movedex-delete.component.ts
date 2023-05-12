@@ -20,17 +20,17 @@ export class MovedexDeleteComponent {
   moveId: number = -1;
 
   ngOnInit() {
-  this.moveService.getMove().subscribe((data: Move[]) => {
-  this.marray = data;
-  });
+    this.moveService.getMove().subscribe((data: Move[]) => {
+    this.marray = data;
+    });
   }
 
   findId(name: string): void{
-  const move = this.marray.find(x => x.name === name);
-  if( move != undefined)
-  {
-  this.moveId = move.id;
-  }
+    const move = this.marray.find(x => x.name === name);
+    if( move != undefined)
+    {
+      this.moveId = move.id;
+    }
   }
 
   onNoClick(): void{

@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
+import { AdminService } from '../admin/admin.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,18 +23,17 @@ export class LoginComponent {
     })
 }
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private pokemonService: PokemonService) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router,
+    private adminService: AdminService, private authService: AuthService) { }
   userName = "";
   ngOnInit(): void {
-    this.userName = this.pokemonService.displayLogin();
+    this.userName = this.adminService.displayLogin();
   }
   submit(): void {
     this.http.post(this.apiURL, this.form.getRawValue(),{responseType:'text'})
       .subscribe( res => 
         {
-          localStorage.setItem("token_Id",res);
-          const user = this.form.controls['userName'].value;
-          localStorage.setItem("username",user);
+          this.authService.login(res, this.form.controls['userName'].value);
           this.router.navigate(['/home']);
 
         },() => this.router.navigate(['/login']));

@@ -5,6 +5,7 @@ import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from 'src/app/objects/user';
 import { Role } from 'src/app/objects/role';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AdminService {
             'Content-Type': 'application/json'
         })
     }
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient, private authService: AuthService) {}
     getUsers(): Observable < User[] > {
         return this.httpClient.get <User[]> (this.apiURL + '/GetAllUsers').pipe(catchError(this.errorHandler));
     }
@@ -53,5 +54,19 @@ export class AdminService {
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
         return throwError(errorMessage);
+    }
+
+    displayLogin(): string
+    {
+        if(this.authService.isLoggedIn())
+        {
+            const token = localStorage.getItem("username");
+            if(token != null)
+            {
+                return token;
+            }
+            return "";
+        }
+        return "";
     }
 }
