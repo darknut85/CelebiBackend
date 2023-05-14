@@ -18,13 +18,13 @@
             </mat-select>
         </mat-form-field>
         
-        <li>
+        <li *ngIf="isVisible">
             <button (click)="openAddDialog()">Add new Pokemon</button>
         </li>
-        <li>
+        <li *ngIf="isVisible">
             <button (click)="openDeleteDialog()">Delete Pokemon</button>
         </li>
-        <li>
+        <li *ngIf="isVisible">
             <button (click)="openUpdateDialog()">Update Pokemon</button>
         </li>
         <i>{{message}}</i>

@@ -9,6 +9,7 @@ import { PokedexDeleteComponent } from '../pokedex-delete/pokedex-delete.compone
 import { PokedexUpdateComponent } from '../pokedex-update/pokedex-update.component';
 import { Delete } from 'src/app/objects/delete';
 import { AdminService } from '../admin/admin.service';
+import { Role } from 'src/app/objects/role';
 
 @Component({
   selector: 'pokedexRedBlue-root',
@@ -22,6 +23,9 @@ export class PokedexRedBlueComponent implements OnInit {
   pokemon: Pokemon = <Pokemon>{ };
   title = 'celebi';
   message = "";
+  roles: Role[] = [];
+  r: Role = {name: ""};
+  isVisible: boolean = false;
 
   constructor(private pokemonService: PokemonService, private dialog: MatDialog, private router: Router, 
     private adminService: AdminService) { }
@@ -29,10 +33,12 @@ export class PokedexRedBlueComponent implements OnInit {
   parray: Pokemon[] = [];
   delete: Delete = {delete: false};
   userName = "";
+
   ngOnInit() {
       this.userName = this.adminService.displayLogin();
       this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
       this.parray = data;
+      this.AuthorizedToView();
     });
   }
 
@@ -112,5 +118,19 @@ export class PokedexRedBlueComponent implements OnInit {
   
   refresh(): void{
     window.location.reload();
+  }
+  
+  AuthorizedToView() {
+    this.adminService.getRoles(String(this.userName)).subscribe((role: Role[]) => {
+      role.forEach(element => {
+        this.r = {name:element.toString()};
+        this.roles.push(this.r);
+      });
+      this.roles.forEach(x => {
+        if(x.name == "Admin"){
+          this.isVisible = true;
+        }
+      });
+    });
   }
 }
