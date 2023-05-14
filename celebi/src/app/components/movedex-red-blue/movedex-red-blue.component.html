@@ -17,13 +17,13 @@
             </mat-select>
         </mat-form-field>
         
-        <li>
+        <li *ngIf="isVisible">
             <button (click)="openAddDialog()">Add new Move</button>
         </li>
-        <li>
+        <li *ngIf="isVisible">
             <button (click)="openUpdateDialog()">Update Move</button>
         </li>
-        <li>
+        <li *ngIf="isVisible">
             <button (click)="openDeleteDialog()">Delete Move</button>
         </li>
         <i>{{message}}</i>

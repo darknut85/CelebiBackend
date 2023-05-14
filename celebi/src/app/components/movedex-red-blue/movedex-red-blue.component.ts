@@ -8,6 +8,7 @@ import { MovedexUpdateComponent } from '../movedex-update/movedex-update.compone
 import { Delete } from 'src/app/objects/delete';
 import { MovedexDeleteComponent } from '../movedex-delete/movedex-delete.component';
 import { AdminService } from '../admin/admin.service';
+import { Role } from 'src/app/objects/role';
 
 @Component({
   selector: 'app-movedex-red-blue',
@@ -28,9 +29,13 @@ export class MovedexRedBlueComponent implements OnInit {
   delete: Delete = {delete: false};
   userName = "";
   message = "";
+  isVisible = false;
+  roles: Role[] = [];
+  r: Role = {name: ""};
 
   ngOnInit() {
       this.userName = this.adminService.displayLogin();
+      this.AuthorizedToView(this.userName);
       this.moveService.getMove().subscribe((data: Move[]) => {
       this.marray = data;
     });
@@ -109,5 +114,19 @@ export class MovedexRedBlueComponent implements OnInit {
 
   refresh(): void{
     window.location.reload();
+  }
+
+  AuthorizedToView(userName: string) {
+    this.adminService.getRoles(String(userName)).subscribe((role: Role[]) => {
+      role.forEach(element => {
+        this.r = {name:element.toString()};
+        this.roles.push(this.r);
+      });
+      this.roles.forEach(x => {
+        if(x.name == "Admin"){
+          this.isVisible = true;
+        }
+      });
+    });
   }
 }

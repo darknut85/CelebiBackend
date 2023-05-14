@@ -35,10 +35,10 @@ export class PokedexRedBlueComponent implements OnInit {
   userName = "";
 
   ngOnInit() {
-      this.userName = this.adminService.displayLogin();
-      this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
+    this.userName = this.adminService.displayLogin();
+    this.AuthorizedToView(this.userName);
+    this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
       this.parray = data;
-      this.AuthorizedToView();
     });
   }
 
@@ -120,8 +120,8 @@ export class PokedexRedBlueComponent implements OnInit {
     window.location.reload();
   }
   
-  AuthorizedToView() {
-    this.adminService.getRoles(String(this.userName)).subscribe((role: Role[]) => {
+  AuthorizedToView(userName: string) {
+    this.adminService.getRoles(String(userName)).subscribe((role: Role[]) => {
       role.forEach(element => {
         this.r = {name:element.toString()};
         this.roles.push(this.r);

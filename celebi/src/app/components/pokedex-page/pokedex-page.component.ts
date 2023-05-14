@@ -8,6 +8,7 @@ import { MoveService } from '../movedex-red-blue/movedex-red-blue.service';
 import { LevelupService } from '../levelup/levelup.service';
 import { LevelupMove } from 'src/app/objects/levelupMove';
 import { AdminService } from '../admin/admin.service';
+import { Role } from 'src/app/objects/role';
 
 @Component({
   selector: 'app-pokedex-page',
@@ -28,6 +29,9 @@ export class PokedexPageComponent implements OnInit {
   allMoves: Move[] = [];
   move: Move = <Move>{ };
   level: number = 0;
+  isVisible = false;
+  roles: Role[] = [];
+  r: Role = {name: ""};
 
   pokemon: Pokemon = 
   {
@@ -50,6 +54,7 @@ export class PokedexPageComponent implements OnInit {
       this.marray = data;
       });
     this.userName = this.adminService.displayLogin();
+    this.AuthorizedToView(this.userName);
     this.addMoveToSelectionBox();
   }
 
@@ -121,6 +126,20 @@ export class PokedexPageComponent implements OnInit {
     let levelUpMove: LevelupMove = {id: 0, pokemonId: this.pokemon.id, moveId: this.move.id, level: this.level}
     this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
       location.reload();
+    });
+  }
+
+  AuthorizedToView(userName: string) {
+    this.adminService.getRoles(String(userName)).subscribe((role: Role[]) => {
+      role.forEach(element => {
+        this.r = {name:element.toString()};
+        this.roles.push(this.r);
+      });
+      this.roles.forEach(x => {
+        if(x.name == "Admin"){
+          this.isVisible = true;
+        }
+      });
     });
   }
 }
