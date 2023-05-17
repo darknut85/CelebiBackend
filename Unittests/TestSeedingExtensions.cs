@@ -29,6 +29,15 @@ namespace Unittests
             };
             dataContext.AddRange(moves);
 
+            List<LevelupMove> levelups = new List<LevelupMove>()
+            {
+                new LevelupMove()
+                { Id = 200, Level = 2, MoveId = 2, PokemonId = 2 },
+                new LevelupMove()
+                { Id = 201, Level = 3, MoveId = 3, PokemonId = 3}
+            };
+            dataContext.AddRange(levelups);
+
             dataContext.SaveChanges();
         }
 

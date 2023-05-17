@@ -6,51 +6,36 @@ using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
 using Xunit;
 
-namespace Unittests.MoveServiceTests
+namespace Unittests.LevelupServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class GetIdMove : IDisposable
+    public class GetUp : IDisposable
     {
-        readonly MoveService moveService;
+        readonly LevelupService levelupService;
         readonly DbContextOptions<DataContext> options;
         DataContext context;
-
-        public GetIdMove()
+        readonly PokemonService pokemonService;
+        readonly MoveService moveService;
+        public GetUp()
         {
-
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
             context = new(options);
             context.DefaultSetup();
             moveService = new MoveService(context);
+            pokemonService = new PokemonService(context);
+            levelupService = new LevelupService(context, moveService, pokemonService);
         }
 
         [Fact]
-        public void GetId_Should_ReturnMove()
+        public void Get_Should_ReturnList()
         {
             //arrange
 
             //act
-            Move move = moveService.Get(150);
+            List<LevelupMove> moveList = levelupService.Get();
 
             //assert
-            Assert.True(move.Id == 150);
-            Assert.True(move.Name == "Psychic");
-        }
-
-        [Theory]
-        [InlineData(0)]
-        [InlineData(int.MaxValue)]
-        [InlineData(int.MinValue)]
-        public void GetId_Should_ReturnNoMove(int id)
-        {
-            //arrange
-
-            //act
-            Move move = moveService.Get(id);
-
-            //assert
-            Assert.True(move.Id == 0);
-            Assert.True(move.Name == "");
+            Assert.True(moveList.Any());
         }
 
         public void Dispose()

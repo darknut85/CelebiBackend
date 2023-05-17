@@ -1,22 +1,22 @@
 ﻿using Interfaces;
 using Migrations;
 using Objects;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
     public class LevelupService : ILevelupService
     {
         private readonly DataContext dataContext;
+        private readonly MoveService moveService;
+        private readonly PokemonService pokemonService;
 
-        public LevelupService(DataContext dataContext)
+        public LevelupService(DataContext dataContext, MoveService moveService, 
+            PokemonService pokemonService)
         {
             this.dataContext = dataContext;
+            this.moveService = moveService;
+            this.pokemonService = pokemonService;
         }
 
         public LevelupMove Get(int id)
@@ -48,6 +48,13 @@ namespace Services
             
             if (newLevelupMove != null)
                 return new LevelupMove();
+
+            newLevelupMove = Get(levelupMove.Id);
+            if(newLevelupMove.Id == levelupMove.Id)
+            {
+                return new LevelupMove();
+            }
+
             dataContext.Set<LevelupMove>().Add(levelupMove);
             SaveChanges();
             return levelupMove;

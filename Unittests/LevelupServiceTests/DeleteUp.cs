@@ -6,53 +6,50 @@ using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
 using Xunit;
 
-namespace Unittests.MoveServiceTests
+namespace Unittests.LevelupServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class GetIdMove : IDisposable
+    public class DeleteUp : IDisposable
     {
-        readonly MoveService moveService;
+        readonly LevelupService levelupService;
         readonly DbContextOptions<DataContext> options;
         DataContext context;
+        readonly PokemonService pokemonService;
+        readonly MoveService moveService;
 
-        public GetIdMove()
+        public DeleteUp()
         {
 
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
             context = new(options);
             context.DefaultSetup();
             moveService = new MoveService(context);
+            pokemonService = new PokemonService(context);
+            levelupService = new LevelupService(context, moveService, pokemonService);
+        }
+        [Fact]
+        public void Delete_Should_DeleteLevelupMove()
+        {
+            //arrange
+
+            //act
+            Delete deleted = levelupService.Delete(1);
+
+            //assert
+            Assert.True(deleted.Deleted);
         }
 
         [Fact]
-        public void GetId_Should_ReturnMove()
+        public void Delete_Should_NotDeleteLevelupMove()
         {
             //arrange
 
             //act
-            Move move = moveService.Get(150);
+            Delete deleted = levelupService.Delete(999);
 
             //assert
-            Assert.True(move.Id == 150);
-            Assert.True(move.Name == "Psychic");
+            Assert.False(deleted.Deleted);
         }
-
-        [Theory]
-        [InlineData(0)]
-        [InlineData(int.MaxValue)]
-        [InlineData(int.MinValue)]
-        public void GetId_Should_ReturnNoMove(int id)
-        {
-            //arrange
-
-            //act
-            Move move = moveService.Get(id);
-
-            //assert
-            Assert.True(move.Id == 0);
-            Assert.True(move.Name == "");
-        }
-
         public void Dispose()
         {
             context.Database.EnsureDeleted();

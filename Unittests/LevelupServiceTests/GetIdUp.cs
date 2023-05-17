@@ -6,51 +6,55 @@ using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
 using Xunit;
 
-namespace Unittests.MoveServiceTests
+namespace Unittests.LevelupServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class GetIdMove : IDisposable
+    public class GetIdUp : IDisposable
     {
-        readonly MoveService moveService;
+        readonly LevelupService levelupService;
         readonly DbContextOptions<DataContext> options;
         DataContext context;
+        readonly PokemonService pokemonService;
+        readonly MoveService moveService;
 
-        public GetIdMove()
+        public GetIdUp()
         {
 
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
             context = new(options);
             context.DefaultSetup();
             moveService = new MoveService(context);
+            pokemonService = new PokemonService(context);
+            levelupService = new LevelupService(context, moveService, pokemonService);
         }
 
         [Fact]
-        public void GetId_Should_ReturnMove()
+        public void GetId_Should_ReturnLevelupMove()
         {
             //arrange
 
             //act
-            Move move = moveService.Get(150);
+            LevelupMove levelup = levelupService.Get(200);
 
             //assert
-            Assert.True(move.Id == 150);
-            Assert.True(move.Name == "Psychic");
+            Assert.True(levelup.Id == 200);
+            Assert.True(levelup.Level == 2);
         }
 
         [Theory]
         [InlineData(0)]
         [InlineData(int.MaxValue)]
         [InlineData(int.MinValue)]
-        public void GetId_Should_ReturnNoMove(int id)
+        public void GetId_Should_ReturnNoLevelupMove(int id)
         {
             //arrange
 
             //act
-            Move move = moveService.Get(id);
+            LevelupMove move = levelupService.Get(id);
 
             //assert
             Assert.True(move.Id == 0);
-            Assert.True(move.Name == "");
+            Assert.True(move.Level == 0);
         }
 
         public void Dispose()

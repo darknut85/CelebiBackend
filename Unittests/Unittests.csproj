@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="LevelupServiceTests\" />
     <Folder Include="UserServiceTests\" />
   </ItemGroup>
 
