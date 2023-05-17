@@ -9,17 +9,18 @@ using Xunit;
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class Create
+    public class Create : IDisposable
     {
         readonly Pokemon pokemon;
         readonly Pokemon existingPokemon;
         readonly Pokemon emptyPokemon;
         readonly PokemonService pokemonService;
         readonly DbContextOptions<DataContext> options;
+        DataContext context;
 
 
         public Create() 
-        { 
+        {
             pokemon = new Pokemon() 
             {
                 Name = "Chikorita", DexEntry = 152, 
@@ -33,7 +34,7 @@ namespace Unittests.PokemonServiceTests
             existingPokemon = new Pokemon() { Id = 150, Name = "Mewtwo" };
             emptyPokemon = new Pokemon();
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
-            DataContext context = new(options);
+            context = new(options);
             context.DefaultSetup();
             pokemonService = new PokemonService(context);
 
@@ -75,6 +76,11 @@ namespace Unittests.PokemonServiceTests
             //assert
             Assert.Equal("", newPokemon.Name);
             Assert.Equal(0, newPokemon.DexEntry);
+        }
+
+        public void Dispose()
+        {
+            context.Database.EnsureDeleted();
         }
     }
 }

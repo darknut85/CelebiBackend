@@ -9,16 +9,17 @@ using Objects;
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class Deletes
+    public class Deletes: IDisposable
     {
         readonly PokemonService pokemonService;
         readonly DbContextOptions<DataContext> options;
+        DataContext context;
 
         public Deletes()
         {
 
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
-            DataContext context = new(options);
+            context = new(options);
             context.DefaultSetup();
             pokemonService = new PokemonService(context);
         }
@@ -44,6 +45,10 @@ namespace Unittests.PokemonServiceTests
 
             //assert
             Assert.False(deleted.Deleted);
+        }
+        public void Dispose()
+        {
+            context.Database.EnsureDeleted();
         }
     }
 }

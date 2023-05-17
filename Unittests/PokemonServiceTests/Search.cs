@@ -9,15 +9,16 @@ using Xunit;
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class Search
+    public class Search : IDisposable
     {
         readonly PokemonService pokemonService;
         readonly DbContextOptions<DataContext> options;
+        DataContext context;
 
         public Search()
         {
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
-            DataContext context = new(options);
+            context = new(options);
             context.DefaultSetup();
             pokemonService = new PokemonService(context);
         }
@@ -71,6 +72,11 @@ namespace Unittests.PokemonServiceTests
             List<Pokemon>? a = pokemonService.Search("random text that does not exist");
 
             Assert.True(a.Count == 0);
+        }
+
+        public void Dispose()
+        {
+            context.Database.EnsureDeleted();
         }
     }
 }

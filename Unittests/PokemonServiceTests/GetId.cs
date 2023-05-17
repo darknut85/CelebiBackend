@@ -9,16 +9,17 @@ using Xunit;
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class GetId
+    public class GetId: IDisposable
     {
         readonly PokemonService pokemonService;
         readonly DbContextOptions<DataContext> options;
+        DataContext context;
 
         public GetId()
         {
 
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
-            DataContext context = new(options);
+            context = new(options);
             context.DefaultSetup();
             pokemonService = new PokemonService(context);
         }
@@ -50,6 +51,11 @@ namespace Unittests.PokemonServiceTests
             //assert
             Assert.True(pokemon.Id == 0);
             Assert.True(pokemon.Name == "");
+        }
+
+        public void Dispose()
+        {
+            context.Database.EnsureDeleted();
         }
     }
 }
