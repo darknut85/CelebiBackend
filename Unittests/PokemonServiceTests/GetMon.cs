@@ -1,51 +1,39 @@
 using Microsoft.EntityFrameworkCore;
 using Migrations;
+using Objects;
 using Services;
 using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
 using Xunit;
-using Objects;
 
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class Deletes: IDisposable
+    public class GetMon : IDisposable
     {
         readonly PokemonService pokemonService;
         readonly DbContextOptions<DataContext> options;
         DataContext context;
-
-        public Deletes()
+        public GetMon()
         {
-
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
             context = new(options);
             context.DefaultSetup();
             pokemonService = new PokemonService(context);
         }
+
         [Fact]
-        public void Delete_Should_DeletePokemon()
+        public void Get_Should_ReturnList()
         {
             //arrange
 
             //act
-            Delete deleted = pokemonService.Delete(5);
+            List<Pokemon> pokemonList = pokemonService.Get();
 
             //assert
-            Assert.True(deleted.Deleted);
+            Assert.True(pokemonList.Any());
         }
 
-        [Fact]
-        public void Delete_Should_NotDeletePokemon()
-        {
-            //arrange
-
-            //act
-            Delete deleted = pokemonService.Delete(999);
-
-            //assert
-            Assert.False(deleted.Deleted);
-        }
         public void Dispose()
         {
             context.Database.EnsureDeleted();

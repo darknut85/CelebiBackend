@@ -17,8 +17,18 @@ namespace Unittests
                 new Pokemon() 
                 { Name = "Mew", DexEntry = 151, Type1 = "Psychic", Type2 = "", Height = 2, Weight = 2, Classification = "???", PokedexEntry = "..." }
             };
-
             dataContext.AddRange(pokemons);
+
+            List<Move> moves = new List<Move>()
+            {
+                new Move()
+                { Name = "Psychic", Type = "Psychic", PowerPoints = 0, Target = "", Priority = 0, Accuracy = 0, Id = 150, EffectRate = 0, BattleEffect = "", BasePower = 0},
+                new Move()
+                { Name = "FireBlast", Type = "Fire", PowerPoints = 0, Target = "", Priority = 0, Accuracy = 0, Id = 151, EffectRate = 0, BattleEffect = "", BasePower = 0}
+
+            };
+            dataContext.AddRange(moves);
+
             dataContext.SaveChanges();
         }
 

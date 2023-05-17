@@ -9,7 +9,7 @@ using Xunit;
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class Update :IDisposable
+    public class UpdateMon : IDisposable
     {
         readonly Pokemon pokemon;
         readonly Pokemon emptyPokemon;
@@ -17,7 +17,7 @@ namespace Unittests.PokemonServiceTests
         readonly DbContextOptions<DataContext> options;
         DataContext context;
 
-        public Update() 
+        public UpdateMon() 
         {
             pokemon = new Pokemon()
             {

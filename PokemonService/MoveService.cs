@@ -37,6 +37,7 @@ namespace Services
         {
             return dataContext.Set<Move>().OrderBy(x => x.Name)
                 .Where(x => x.Name.Contains(query) ||
+                x.BattleEffect.Contains(query) ||
                 x.Type == query).ToList();
         }
 

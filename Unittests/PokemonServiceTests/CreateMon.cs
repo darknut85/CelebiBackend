@@ -9,7 +9,7 @@ using Xunit;
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class Create : IDisposable
+    public class CreateMon : IDisposable
     {
         readonly Pokemon pokemon;
         readonly Pokemon existingPokemon;
@@ -19,7 +19,7 @@ namespace Unittests.PokemonServiceTests
         DataContext context;
 
 
-        public Create() 
+        public CreateMon() 
         {
             pokemon = new Pokemon() 
             {

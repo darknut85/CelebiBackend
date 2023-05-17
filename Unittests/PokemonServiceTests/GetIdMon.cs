@@ -9,13 +9,13 @@ using Xunit;
 namespace Unittests.PokemonServiceTests
 {
     [ExcludeFromCodeCoverage]
-    public class GetId: IDisposable
+    public class GetIdMon: IDisposable
     {
         readonly PokemonService pokemonService;
         readonly DbContextOptions<DataContext> options;
         DataContext context;
 
-        public GetId()
+        public GetIdMon()
         {
 
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
