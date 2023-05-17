@@ -13,17 +13,13 @@ namespace Unittests.LevelupServiceTests
     {
         readonly LevelupService levelupService;
         readonly DbContextOptions<DataContext> options;
-        DataContext context;
-        readonly PokemonService pokemonService;
-        readonly MoveService moveService;
+        readonly DataContext context;
         public GetUp()
         {
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
             context = new(options);
             context.DefaultSetup();
-            moveService = new MoveService(context);
-            pokemonService = new PokemonService(context);
-            levelupService = new LevelupService(context, moveService, pokemonService);
+            levelupService = new LevelupService(context);
         }
 
         [Fact]

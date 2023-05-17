@@ -8,15 +8,10 @@ namespace Services
     public class LevelupService : ILevelupService
     {
         private readonly DataContext dataContext;
-        private readonly MoveService moveService;
-        private readonly PokemonService pokemonService;
 
-        public LevelupService(DataContext dataContext, MoveService moveService, 
-            PokemonService pokemonService)
+        public LevelupService(DataContext dataContext)
         {
             this.dataContext = dataContext;
-            this.moveService = moveService;
-            this.pokemonService = pokemonService;
         }
 
         public LevelupMove Get(int id)
@@ -40,6 +35,10 @@ namespace Services
         
         public LevelupMove Create(LevelupMove levelupMove)
         {
+            if(levelupMove.MoveId == 0 || levelupMove.PokemonId == 0 ) 
+            {
+                return new LevelupMove();
+            }
             LevelupMove? newLevelupMove = Get().Where(
                 x => x.MoveId == levelupMove.MoveId &&
                 x.PokemonId == levelupMove.PokemonId &&
@@ -49,8 +48,8 @@ namespace Services
             if (newLevelupMove != null)
                 return new LevelupMove();
 
-            newLevelupMove = Get(levelupMove.Id);
-            if(newLevelupMove.Id == levelupMove.Id)
+            LevelupMove otherNewLevelupMove = Get(levelupMove.Id);
+            if(otherNewLevelupMove.Id == levelupMove.Id && levelupMove.Id != 0)
             {
                 return new LevelupMove();
             }

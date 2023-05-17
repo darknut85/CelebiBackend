@@ -14,8 +14,6 @@ namespace Unittests.LevelupServiceTests
         readonly LevelupService levelupService;
         readonly DbContextOptions<DataContext> options;
         DataContext context;
-        readonly PokemonService pokemonService;
-        readonly MoveService moveService;
 
         public DeleteUp()
         {
@@ -23,9 +21,7 @@ namespace Unittests.LevelupServiceTests
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
             context = new(options);
             context.DefaultSetup();
-            moveService = new MoveService(context);
-            pokemonService = new PokemonService(context);
-            levelupService = new LevelupService(context, moveService, pokemonService);
+            levelupService = new LevelupService(context);
         }
         [Fact]
         public void Delete_Should_DeleteLevelupMove()
