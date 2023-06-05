@@ -1,4 +1,5 @@
-﻿using Migrations;
+﻿using Microsoft.AspNetCore.Identity;
+using Migrations;
 using Objects;
 using System.Diagnostics.CodeAnalysis;
 using TestSupport.EfHelpers;
@@ -37,6 +38,29 @@ namespace Unittests
                 { Id = 201, Level = 3, MoveId = 3, PokemonId = 3}
             };
             dataContext.AddRange(levelups);
+
+            List<IdentityUser> identityUsers = new List<IdentityUser>()
+            {
+                new IdentityUser()
+                {
+                    UserName = "Juan",
+                    PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==",
+                    Email = "new.juan@newJuan.com",
+                    NormalizedEmail = "NEW.JUAN@NEWJUAN.COM",
+                    NormalizedUserName = "NEWJUAN",
+                    EmailConfirmed = true
+                },
+                new IdentityUser()
+                {
+                    UserName = "Emma",
+                    PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==",
+                    Email = "new.Emma@newv.com",
+                    NormalizedEmail = "NEW.EMMA@NEWEMMA.COM",
+                    NormalizedUserName = "NEWEMMA",
+                    EmailConfirmed = true
+                }
+            };
+            dataContext.AddRange(identityUsers);
 
             dataContext.SaveChanges();
         }

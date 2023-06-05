@@ -30,8 +30,4 @@
     <ProjectReference Include="..\PokemonService\Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UserServiceTests\" />
-  </ItemGroup>
-
 </Project>
