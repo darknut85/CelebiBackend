@@ -42,12 +42,6 @@ namespace Services
         public List<IdentityUser> GetUsers()
         {
             var data = _dataContext.Set<IdentityRole>().ToList();
-            foreach (var item in data)
-            {
-                Debug.WriteLine(item);
-            }
-            Debug.WriteLine("Debug works");
-
             return _dataContext.Set<IdentityUser>().OrderBy(x => x.Id).ToList();
         }
 
