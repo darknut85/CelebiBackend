@@ -6,6 +6,7 @@ using Objects;
 
 namespace Celebi.Api.Controllers
 {
+    //move userservice logic to the controller
     [Route("api/[controller]")]
     [ApiController]
     public class TokenController : ControllerBase

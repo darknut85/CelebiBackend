@@ -39,29 +39,6 @@ namespace Unittests
             };
             dataContext.AddRange(levelups);
 
-            List<IdentityUser> identityUsers = new List<IdentityUser>()
-            {
-                new IdentityUser()
-                {
-                    UserName = "Juan",
-                    PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==",
-                    Email = "new.juan@newJuan.com",
-                    NormalizedEmail = "NEW.JUAN@NEWJUAN.COM",
-                    NormalizedUserName = "NEWJUAN",
-                    EmailConfirmed = true
-                },
-                new IdentityUser()
-                {
-                    UserName = "Emma",
-                    PasswordHash = "AQAAAAEAACcQAAAAEDwVLvLsPe2ydTBJ4DS5w+fMM9MX5pzjNRvjo/105TDE2LMp8rxKsrAAwc4Dh/yQFg==",
-                    Email = "new.Emma@newv.com",
-                    NormalizedEmail = "NEW.EMMA@NEWEMMA.COM",
-                    NormalizedUserName = "NEWEMMA",
-                    EmailConfirmed = true
-                }
-            };
-            dataContext.AddRange(identityUsers);
-
             dataContext.SaveChanges();
         }
 
