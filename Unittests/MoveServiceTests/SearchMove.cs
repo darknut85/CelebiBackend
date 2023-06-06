@@ -48,6 +48,7 @@ namespace Unittests.MoveServiceTests
 
             //assert
             Assert.False(moveList.Any());
+            Assert.True(moveList.Count == 0);
         }
 
         [Fact]
@@ -60,17 +61,6 @@ namespace Unittests.MoveServiceTests
 
             //assert
             Assert.True(moveList.Count == 4);
-        }
-
-        [Fact]
-        public void Search_Should_ReturnZeroEntries()
-        {
-            //arrange
-
-            //act & assert
-            List<Move>? a = moveService.Search("random text that does not exist");
-
-            Assert.True(a.Count == 0);
         }
 
         public void Dispose()
