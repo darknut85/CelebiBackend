@@ -51,15 +51,6 @@ namespace Services
             return result;
         }
 
-        [ExcludeFromCodeCoverage]
-        private async Task CreateStandardRoles()
-        {
-            bool roleExists = await _roleManager.RoleExistsAsync("User");
-            bool adminExists = await _roleManager.RoleExistsAsync("Admin");
-            if (!roleExists) { await _roleManager.CreateAsync(new IdentityRole("User")); }
-            if (!adminExists) { await _roleManager.CreateAsync(new IdentityRole("Admin")); }
-        }
-
         public async Task<bool> Register(Register register)
         {
             await CreateStandardRoles();
@@ -111,50 +102,6 @@ namespace Services
             return Authenticate(userCredential.UserName, userCredential.Password, role);
         }
 
-        public string Authenticate(string username, string password, string userRole = "User")
-        {
-            List<IdentityUser> iuser = GetUsers();
-            if (!iuser.Any(x => x.UserName.Equals(username)))
-                return "";
-
-            IdentityUser? loginUser = iuser.FirstOrDefault(x => x.UserName == username);
-
-            if (loginUser == null)
-                return "";
-
-            PasswordVerificationResult passresult = _userManager.PasswordHasher.VerifyHashedPassword(loginUser, loginUser.PasswordHash, password);
-
-            if (passresult != PasswordVerificationResult.Success)
-                return "";
-
-            string? configString = _configuration.GetValue<string>("JwtConfig:key");
-
-            if (configString == null)
-                return "";
-
-            SymmetricSecurityKey? securityKey = new(Encoding.ASCII.GetBytes(configString));
-            SigningCredentials credentials = new(securityKey, SecurityAlgorithms.HmacSha256);
-            Claim[] claims = new Claim[]
-            {
-                new Claim(ClaimTypes.Name, username),
-                new Claim(ClaimTypes.Role, userRole)
-            };
-
-            JwtSecurityTokenHandler tokenHandler = new();
-
-            SecurityTokenDescriptor tokenDescriptor = new()
-            {
-                Issuer = _configuration["JwtConfig:Issuer"],
-                Audience = _configuration["JwtConfig:Audience"],
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = credentials
-            };
-
-            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
-        }
-
         public async Task<string> AddRoleToUser(string role, string userName)
         {
             IdentityUser? user = await _userManager.FindByNameAsync(userName);
@@ -204,6 +151,58 @@ namespace Services
                 return "The role has been removed from the user";
             }
             return "The role has not been removed from the user";
+        }
+
+
+
+        [ExcludeFromCodeCoverage]
+        private async Task CreateStandardRoles()
+        {
+            bool roleExists = await _roleManager.RoleExistsAsync("User");
+            bool adminExists = await _roleManager.RoleExistsAsync("Admin");
+            if (!roleExists) { await _roleManager.CreateAsync(new IdentityRole("User")); }
+            if (!adminExists) { await _roleManager.CreateAsync(new IdentityRole("Admin")); }
+        }
+
+        [ExcludeFromCodeCoverage]
+        public string Authenticate(string username, string password, string userRole = "User")
+        {
+            IdentityUser loginUser = GetUser(username);
+
+            if (loginUser.UserName == "")
+                return "";
+
+            PasswordVerificationResult passresult = _userManager.PasswordHasher.VerifyHashedPassword(loginUser, loginUser.PasswordHash, password);
+
+            if (passresult != PasswordVerificationResult.Success)
+                return "";
+
+            string? configString = _configuration.GetValue<string>("JwtConfig:key");
+
+            if (configString == null)
+                return "";
+
+            SymmetricSecurityKey? securityKey = new(Encoding.ASCII.GetBytes(configString));
+            SigningCredentials credentials = new(securityKey, SecurityAlgorithms.HmacSha256);
+            Claim[] claims = new Claim[]
+            {
+                new Claim(ClaimTypes.Name, username),
+                new Claim(ClaimTypes.Role, userRole)
+            };
+
+            JwtSecurityTokenHandler tokenHandler = new();
+
+            SecurityTokenDescriptor tokenDescriptor = new()
+            {
+                Issuer = _configuration["JwtConfig:Issuer"],
+                Audience = _configuration["JwtConfig:Audience"],
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = credentials
+            };
+
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

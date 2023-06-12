@@ -53,6 +53,7 @@ namespace Unittests.UserServiceTests
             IList<string> role = new List<string>() {"User", "Admin" };
             userManagerMock.Setup(r => r.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult(identityUser));
             userManagerMock.Setup(r => r.GetRolesAsync(identityUser)).Returns(Task.FromResult(role));
+            
 
 
             //act

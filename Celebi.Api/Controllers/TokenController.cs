@@ -98,7 +98,7 @@ namespace Celebi.Api.Controllers
 
         [HttpDelete("Roles")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> RmemoveRole(string userName, string role)
+        public async Task<IActionResult> RemoveRole(string userName, string role)
         {
             var message = await _userService.RemoveRoleFromUser(role, userName);
 
