@@ -11,7 +11,6 @@ using System.Text;
 
 namespace Services
 {
-    [ExcludeFromCodeCoverage]
     public class UserService : IUserService
     {
         private readonly DataContext _dataContext;
@@ -52,16 +51,27 @@ namespace Services
             return result;
         }
 
-        public async Task<bool> Register(Register register)
+        [ExcludeFromCodeCoverage]
+        private async Task CreateStandardRoles()
         {
-
             bool roleExists = await _roleManager.RoleExistsAsync("User");
             bool adminExists = await _roleManager.RoleExistsAsync("Admin");
             if (!roleExists) { await _roleManager.CreateAsync(new IdentityRole("User")); }
             if (!adminExists) { await _roleManager.CreateAsync(new IdentityRole("Admin")); }
+        }
+
+        public async Task<bool> Register(Register register)
+        {
+
+            await CreateStandardRoles();
 
             IdentityUser? userExists = await _userManager.FindByNameAsync(register.Username);
             if (userExists != null)
+            {
+                return false;
+            }
+            IdentityRole roleExists = await _roleManager.FindByNameAsync(register.Role);
+            if (roleExists == null)
             {
                 return false;
             }
@@ -79,21 +89,12 @@ namespace Services
 
                 await result;
 
-                if (result.IsCompletedSuccessfully)
-                {
-                    IdentityUser? newUser = await _userManager.FindByNameAsync(register.Username);
-                    Task<IdentityResult> irole = _userManager.AddToRoleAsync(newUser, register.Role);
-                    irole.Wait();
-                    if (irole.IsCompletedSuccessfully)
-                    {
-                        return true;
-                    }
-                    return false;
-                }
-                else
-                {
-                    return false;
-                }
+                IdentityUser? newUser = await _userManager.FindByNameAsync(register.Username);
+                Task<IdentityResult> irole = _userManager.AddToRoleAsync(newUser, register.Role);
+
+                irole.Wait();
+
+                return irole.IsCompletedSuccessfully;           
             }
         }
 
