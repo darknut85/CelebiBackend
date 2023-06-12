@@ -5,11 +5,13 @@ using Migrations;
 using Moq;
 using Objects;
 using Services;
+using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
 using Xunit;
 
 namespace Unittests.UserServiceTests
 {
+    [ExcludeFromCodeCoverage]
     public class AddRoleToUser : IDisposable
     {
         readonly UserService userService;
@@ -96,6 +98,7 @@ namespace Unittests.UserServiceTests
             }.AsQueryable();
             userManagerMock.Setup(r => r.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult(identityUser));
             userManagerMock.Setup(r => r.GetRolesAsync(identityUser)).Returns(Task.FromResult(role));
+            roleManagerMock.Setup(r => r.Roles).Returns(roleQueries);
 
             //act
             string isAdded = await userService.AddRoleToUser("User", "Juan");
