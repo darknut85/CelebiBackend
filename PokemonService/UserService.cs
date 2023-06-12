@@ -62,7 +62,6 @@ namespace Services
 
         public async Task<bool> Register(Register register)
         {
-
             await CreateStandardRoles();
 
             IdentityUser? userExists = await _userManager.FindByNameAsync(register.Username);
