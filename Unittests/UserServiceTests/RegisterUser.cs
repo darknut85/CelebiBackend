@@ -5,7 +5,6 @@ using Services;
 using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
 using Xunit;
-using Microsoft.Extensions.Configuration;
 using Moq;
 using Objects;
 
@@ -17,12 +16,13 @@ namespace Unittests.UserServiceTests
         readonly UserService userService;
         readonly DbContextOptions<DataContext> options;
         private readonly DataContext context;
-        private readonly IConfiguration _configuration;
         private readonly Mock<RoleManager<IdentityRole>> roleManagerMock;
         private readonly Mock<UserManager<IdentityUser>> userManagerMock;
         private readonly IdentityUser identityUser;
         private readonly IdentityRole identityRole;
         private readonly Register register;
+        private readonly IdentityUser emptyId;
+        private readonly IdentityRole emptyRole;
 
         public RegisterUser()
         {
@@ -68,7 +68,7 @@ namespace Unittests.UserServiceTests
             context.DefaultSetup();
 
 
-            userService = new UserService(context, userManagerMock.Object, roleManagerMock.Object, _configuration);
+            userService = new UserService(context, userManagerMock.Object, roleManagerMock.Object);
         }
 
         //make new user
@@ -78,7 +78,7 @@ namespace Unittests.UserServiceTests
             //arrange
             userManagerMock.Setup(r => r.CreateAsync(identityUser, "")).ReturnsAsync(new IdentityResult() { });
             userManagerMock.Setup(r => r.AddToRoleAsync(identityUser, "")).ReturnsAsync(new IdentityResult() {});
-            userManagerMock.SetupSequence( r => r.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult((IdentityUser)null)).Returns(Task.FromResult(identityUser));
+            userManagerMock.SetupSequence( r => r.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult(emptyId)).Returns(Task.FromResult(identityUser));
             roleManagerMock.Setup(r => r.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult(identityRole));
 
             //act
@@ -105,8 +105,8 @@ namespace Unittests.UserServiceTests
         public async Task Get_Should_NotCreateUser_IfRoleDoesNotExist()
         {
             //arrange
-            userManagerMock.Setup(r => r.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult((IdentityUser)null));
-            roleManagerMock.Setup(r => r.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult((IdentityRole)null));
+            userManagerMock.Setup(r => r.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult(emptyId));
+            roleManagerMock.Setup(r => r.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult(emptyRole));
 
             //act
             bool isRegistered = await userService.Register(register);
@@ -119,6 +119,7 @@ namespace Unittests.UserServiceTests
         public void Dispose()
         {
             context.Database.EnsureDeleted();
+            GC.SuppressFinalize(this);
         }
     }
 }

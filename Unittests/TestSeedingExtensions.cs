@@ -11,7 +11,7 @@ namespace Unittests
     {
         public static void PokemonSetup(this DataContext dataContext)
         {
-            List<Pokemon> pokemons = new List<Pokemon>()
+            List<Pokemon> pokemons = new()
             {
                 new Pokemon() 
                 { Name = "Mewtwo", DexEntry = 150, Type1 = "Psychic", Type2 = "", Height = 2, Weight = 2, Classification = "???", PokedexEntry = "..." },
@@ -20,7 +20,7 @@ namespace Unittests
             };
             dataContext.AddRange(pokemons);
 
-            List<Move> moves = new List<Move>()
+            List<Move> moves = new()
             {
                 new Move()
                 { Name = "Psychic", Type = "Psychic", PowerPoints = 0, Target = "", Priority = 0, Accuracy = 0, Id = 150, EffectRate = 0, BattleEffect = "", BasePower = 0},
@@ -30,7 +30,7 @@ namespace Unittests
             };
             dataContext.AddRange(moves);
 
-            List<LevelupMove> levelups = new List<LevelupMove>()
+            List<LevelupMove> levelups = new()
             {
                 new LevelupMove()
                 { Id = 200, Level = 2, MoveId = 2, PokemonId = 2 },
@@ -39,7 +39,7 @@ namespace Unittests
             };
             dataContext.AddRange(levelups);
 
-            List<IdentityUser> identityUsers = new List<IdentityUser>()
+            List<IdentityUser> identityUsers = new()
             {
                 new IdentityUser()
                 {

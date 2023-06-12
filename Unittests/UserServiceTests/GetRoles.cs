@@ -5,7 +5,6 @@ using Services;
 using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
 using Xunit;
-using Microsoft.Extensions.Configuration;
 using Moq;
 
 namespace Unittests.UserServiceTests
@@ -16,13 +15,12 @@ namespace Unittests.UserServiceTests
         readonly UserService userService;
         readonly DbContextOptions<DataContext> options;
         private readonly DataContext context;
-        private readonly IConfiguration _configuration;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly Mock<RoleManager<IdentityRole>> roleManagerMock;
         private readonly Mock<UserManager<IdentityUser>> userManagerMock;
 
         public GetRoles()
         {
-            IdentityUser identityUser = new IdentityUser()
+            IdentityUser identityUser = new()
             {
                 Id = "125",
                 UserName = "Juan",
@@ -36,6 +34,7 @@ namespace Unittests.UserServiceTests
             List<string>? roles = new() { "User" };
 
             userManagerMock = new Mock<UserManager<IdentityUser>>(Mock.Of<IUserStore<IdentityUser>>(), null, null, null, null, null, null, null, null);
+            roleManagerMock = new Mock<RoleManager<IdentityRole>>(Mock.Of<IRoleStore<IdentityRole>>(), null, null, null, null);
 
             userManagerMock.Setup(x => x.GetRolesAsync(It.IsAny<IdentityUser>())).ReturnsAsync(roles);
 
@@ -44,14 +43,14 @@ namespace Unittests.UserServiceTests
             context.DefaultSetup();
 
 
-            userService = new UserService(context, userManagerMock.Object, _roleManager, _configuration);
+            userService = new UserService(context, userManagerMock.Object, roleManagerMock.Object);
         }
 
         [Fact]
         public void Get_Should_ReturnListAsync()
         {
             //arrange
-            IdentityUser identityUser = new IdentityUser()
+            IdentityUser identityUser = new()
             {
                 Id = "125",
                 UserName = "Juan",
@@ -72,6 +71,7 @@ namespace Unittests.UserServiceTests
         public void Dispose()
         {
             context.Database.EnsureDeleted();
+            GC.SuppressFinalize(this);
         }
     }
 }

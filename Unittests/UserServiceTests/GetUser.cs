@@ -5,7 +5,7 @@ using Services;
 using System.Diagnostics.CodeAnalysis;
 using Test.Helpers;
 using Xunit;
-using Microsoft.Extensions.Configuration;
+using Moq;
 
 namespace Unittests.UserServiceTests
 {
@@ -15,16 +15,18 @@ namespace Unittests.UserServiceTests
         readonly UserService userService;
         readonly DbContextOptions<DataContext> options;
         private readonly DataContext context;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _configuration;
+        private readonly Mock<UserManager<IdentityUser>> userManagerMock;
+        private readonly Mock<RoleManager<IdentityRole>> roleManagerMock;
 
         public GetUser()
         {
+            userManagerMock = new Mock<UserManager<IdentityUser>>(Mock.Of<IUserStore<IdentityUser>>(), null, null, null, null, null, null, null, null);
+            roleManagerMock = new Mock<RoleManager<IdentityRole>>(Mock.Of<IRoleStore<IdentityRole>>(), null, null, null, null);
+            
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
             context = new(options);
             context.DefaultSetup();
-            userService = new UserService(context, _userManager, _roleManager, _configuration);
+            userService = new UserService(context, userManagerMock.Object, roleManagerMock.Object);
         }
 
         [Fact]
@@ -54,6 +56,7 @@ namespace Unittests.UserServiceTests
         public void Dispose()
         {
             context.Database.EnsureDeleted();
+            GC.SuppressFinalize(this);
         }
     }
 }

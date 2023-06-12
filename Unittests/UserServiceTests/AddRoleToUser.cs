@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Migrations;
 using Moq;
 using Objects;
@@ -17,7 +16,6 @@ namespace Unittests.UserServiceTests
         readonly UserService userService;
         readonly DbContextOptions<DataContext> options;
         private readonly DataContext context;
-        private readonly IConfiguration _configuration;
         private readonly Mock<RoleManager<IdentityRole>> roleManagerMock;
         private readonly Mock<UserManager<IdentityUser>> userManagerMock;
         private readonly IdentityUser identityUser;
@@ -30,7 +28,7 @@ namespace Unittests.UserServiceTests
             context = new(options);
             context.DefaultSetup();
 
-            userService = new UserService(context, userManagerMock.Object, roleManagerMock.Object, _configuration);
+            userService = new UserService(context, userManagerMock.Object, roleManagerMock.Object);
 
             identityUser = new IdentityUser()
             {
@@ -48,7 +46,7 @@ namespace Unittests.UserServiceTests
         public async Task Get_Should_AddRole()
         {
             //arrange
-            UserCredential userCredential = new UserCredential() { Id = 1, Password = "", UserName = "" };
+            UserCredential userCredential = new() { Id = 1, Password = "", UserName = "" };
             IList<string> role = new List<string>() { "Admin" };
             IQueryable<IdentityRole> roleQueries = new List<IdentityRole>() {
                 new IdentityRole()
@@ -76,7 +74,7 @@ namespace Unittests.UserServiceTests
         public async Task Get_Should_NotAddRole_WhenUserDoesNotExist()
         {
             //arrange
-            UserCredential userCredential = new UserCredential() { Id = 1, Password = "", UserName = "" };
+            UserCredential userCredential = new() { Id = 1, Password = "", UserName = "" };
             IList<string> role = new List<string>() { "Admin" };
             IdentityUser noName = new() { UserName = ""};
             userManagerMock.Setup(r => r.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult(noName));
@@ -92,7 +90,7 @@ namespace Unittests.UserServiceTests
         public async Task Get_Should_NotAddRole_WhenRoleDoesNotExist()
         {
             //arrange
-            UserCredential userCredential = new UserCredential() { Id = 1, Password = "", UserName = "" };
+            UserCredential userCredential = new() { Id = 1, Password = "", UserName = "" };
             IList<string> role = new List<string>() { "Admin" };
             IQueryable<IdentityRole> roleQueries = new List<IdentityRole>() {
             }.AsQueryable();
@@ -111,7 +109,7 @@ namespace Unittests.UserServiceTests
         public async Task Get_Should_NotAddRole_WhenUserAlreadyHasRole()
         {
             //arrange
-            UserCredential userCredential = new UserCredential() { Id = 1, Password = "", UserName = "" };
+            UserCredential userCredential = new() { Id = 1, Password = "", UserName = "" };
             IList<string> role = new List<string>() { "Admin" };
             IQueryable<IdentityRole> roleQueries = new List<IdentityRole>() {
                 new IdentityRole()
@@ -137,6 +135,7 @@ namespace Unittests.UserServiceTests
         public void Dispose()
         {
             context.Database.EnsureDeleted();
+            GC.SuppressFinalize(this);
         }
     }
 }

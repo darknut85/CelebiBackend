@@ -16,10 +16,10 @@ namespace Services
         private readonly DataContext _dataContext;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration? _configuration;
 
         public UserService(DataContext dataContext, UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager, IConfiguration configuration) 
+            RoleManager<IdentityRole> roleManager, IConfiguration? configuration = null) 
         {
             _dataContext = dataContext;
             _userManager = userManager;
@@ -60,7 +60,7 @@ namespace Services
             {
                 return false;
             }
-            IdentityRole roleExists = await _roleManager.FindByNameAsync(register.Role);
+            IdentityRole? roleExists = await _roleManager.FindByNameAsync(register.Role);
             if (roleExists == null)
             {
                 return false;
@@ -177,7 +177,7 @@ namespace Services
             if (passresult != PasswordVerificationResult.Success)
                 return "";
 
-            string? configString = _configuration.GetValue<string>("JwtConfig:key");
+            string? configString = _configuration?.GetValue<string>("JwtConfig:key");
 
             if (configString == null)
                 return "";
@@ -194,8 +194,8 @@ namespace Services
 
             SecurityTokenDescriptor tokenDescriptor = new()
             {
-                Issuer = _configuration["JwtConfig:Issuer"],
-                Audience = _configuration["JwtConfig:Audience"],
+                Issuer = _configuration?["JwtConfig:Issuer"],
+                Audience = _configuration?["JwtConfig:Audience"],
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = credentials
