@@ -26,7 +26,6 @@ export class PokedexPageComponent implements OnInit {
   typing2: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   typingFinal: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   lMoves: Move[] = [];
-  allMoves: Move[] = [];
   move: Move = <Move>{ };
   level: number = 0;
   isVisible = false;
@@ -122,11 +121,41 @@ export class PokedexPageComponent implements OnInit {
     }
   }
 
+  findOwnedMove(id: string): void{
+    const move = this.marray.find(x => x.id.toString() === id);
+    if( move != undefined)
+    {
+      this.move = move;
+    }
+  }
+  getMoveById(id:Number): string{
+    const move = this.marray.find(x => x.id === id);
+    if( move != undefined)
+    {
+      return move.name;
+    }
+    return "";
+  }
+
   addLevelupMove(): void{
     let levelUpMove: LevelupMove = {id: 0, pokemonId: this.pokemon.id, moveId: this.move.id, level: this.level}
     this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
       location.reload();
     });
+  }
+
+  removeLevelupMove(): void{
+
+    let levelupMove = this.pokemon.levelUpMoves.find(x => x.moveId == this.move.id && x.pokemonId == this.pokemon.id)?.id
+    console.log(this.pokemon.id);
+    console.log(this.move.id);
+    console.log(levelupMove)
+    if(levelupMove != undefined)
+    {
+      this.levelupService.removeLevelupMove(levelupMove).subscribe(response => {
+        location.reload();
+      });
+    }
   }
 
   AuthorizedToView(userName: string) {
