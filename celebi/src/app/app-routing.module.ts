@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PokedexRedBlueComponent } from './components/pokedexRedBlue/pokedexRedBlue.component';
-import { HomeComponent } from './components/home/home.component';
-import { PokedexPageComponent } from './components/pokedex-page/pokedex-page.component';
-import { LoginComponent } from './components/login/login.component';
-import { AuthGuard } from './components/auth/authguard.service';
-import { RegisterComponent } from './components/register/register.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { UserPageComponent } from './components/user-page/user-page.component';
-import { LogoutComponent } from './components/logout/logout.component';
-import { FrontComponent } from './components/front/front.component';
-import { MovedexRedBlueComponent } from './components/movedex-red-blue/movedex-red-blue.component';
-import { MovedexPageComponent } from './components/movedex-page/movedex-page.component';
+import { PokedexRedBlueComponent } from './components/pokedex/pokedexRedBlue/pokedexRedBlue.component';
+import { HomeComponent } from './components/homepage/home/home.component';
+import { PokedexPageComponent } from './components/pokedex/pokedex-page/pokedex-page.component';
+import { LoginComponent } from './components/users/login/login.component';
+import { AuthGuard } from './components/users/auth/authguard.service';
+import { RegisterComponent } from './components/users/register/register.component';
+import { AdminComponent } from './components/users/admin/admin.component';
+import { UserPageComponent } from './components/users/user-page/user-page.component';
+import { LogoutComponent } from './components/users/logout/logout.component';
+import { FrontComponent } from './components/homepage/front/front.component';
+import { MovedexRedBlueComponent } from './components/movedex/movedex-red-blue/movedex-red-blue.component';
+import { MovedexPageComponent } from './components/movedex/movedex-page/movedex-page.component';
 
 const routes: Routes = [
   { path: 'front', component: FrontComponent },

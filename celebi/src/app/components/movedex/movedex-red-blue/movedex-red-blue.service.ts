@@ -4,9 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Move } from 'src/app/objects/move';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../users/auth/auth.service';
 import { Delete } from 'src/app/objects/delete';
-import { AdminService } from '../admin/admin.service';
+import { AdminService } from '../../users/admin/admin.service';
 
 @Injectable({
   providedIn: 'root'

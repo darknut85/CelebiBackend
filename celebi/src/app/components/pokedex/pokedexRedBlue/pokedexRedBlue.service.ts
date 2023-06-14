@@ -5,7 +5,7 @@ import {  Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Pokemon } from 'src/app/objects/pokemon';
 import { Delete } from 'src/app/objects/delete';
-import { AdminService } from '../admin/admin.service';
+import { AdminService } from '../../users/admin/admin.service';
 
 @Injectable({
   providedIn: 'root'

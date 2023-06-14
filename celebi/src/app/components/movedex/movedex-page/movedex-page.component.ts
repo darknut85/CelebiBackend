@@ -3,9 +3,9 @@ import { MoveService } from '../movedex-red-blue/movedex-red-blue.service';
 import { ActivatedRoute } from '@angular/router';
 import { Move } from 'src/app/objects/move';
 import { Pokemon } from 'src/app/objects/pokemon';
-import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
-import { LevelupService } from '../levelup/levelup.service';
-import { AdminService } from '../admin/admin.service';
+import { PokemonService } from '../../pokedex/pokedexRedBlue/pokedexRedBlue.service';
+import { LevelupService } from '../../misc/levelup/levelup.service';
+import { AdminService } from '../../users/admin/admin.service';
 import { Role } from 'src/app/objects/role';
 
 @Component({

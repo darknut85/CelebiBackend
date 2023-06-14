@@ -3,7 +3,7 @@ import { AdminService } from '../admin/admin.service';
 import { User } from 'src/app/objects/user';
 import { ActivatedRoute } from '@angular/router';
 import { Role } from 'src/app/objects/role';
-import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
+import { PokemonService } from '../../pokedex/pokedexRedBlue/pokedexRedBlue.service';
 
 @Component({
   selector: 'app-user-page',

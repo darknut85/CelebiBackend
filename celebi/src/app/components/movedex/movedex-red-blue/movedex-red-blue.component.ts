@@ -7,7 +7,7 @@ import { MovedexAddComponent } from '../movedex-add/movedex-add.component';
 import { MovedexUpdateComponent } from '../movedex-update/movedex-update.component';
 import { Delete } from 'src/app/objects/delete';
 import { MovedexDeleteComponent } from '../movedex-delete/movedex-delete.component';
-import { AdminService } from '../admin/admin.service';
+import { AdminService } from '../../users/admin/admin.service';
 import { Role } from 'src/app/objects/role';
 
 @Component({

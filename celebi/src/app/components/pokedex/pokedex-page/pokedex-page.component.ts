@@ -4,10 +4,10 @@ import { Pokemon } from 'src/app/objects/pokemon';
 import { PokemonService } from '../pokedexRedBlue/pokedexRedBlue.service';
 import { TypeMatchup } from 'src/app/objects/typeMatchups';
 import { Move } from 'src/app/objects/move';
-import { MoveService } from '../movedex-red-blue/movedex-red-blue.service';
-import { LevelupService } from '../levelup/levelup.service';
+import { MoveService } from '../../movedex/movedex-red-blue/movedex-red-blue.service';
+import { LevelupService } from '../../misc/levelup/levelup.service';
 import { LevelupMove } from 'src/app/objects/levelupMove';
-import { AdminService } from '../admin/admin.service';
+import { AdminService } from '../../users/admin/admin.service';
 import { Role } from 'src/app/objects/role';
 
 @Component({

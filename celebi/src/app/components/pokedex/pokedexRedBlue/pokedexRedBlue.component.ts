@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { PokedexDeleteComponent } from '../pokedex-delete/pokedex-delete.component';
 import { PokedexUpdateComponent } from '../pokedex-update/pokedex-update.component';
 import { Delete } from 'src/app/objects/delete';
-import { AdminService } from '../admin/admin.service';
+import { AdminService } from '../../users/admin/admin.service';
 import { Role } from 'src/app/objects/role';
 
 @Component({
