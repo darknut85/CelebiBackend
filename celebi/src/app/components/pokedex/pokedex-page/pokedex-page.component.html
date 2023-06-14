@@ -119,6 +119,7 @@
                 <th>Accuracy: </th>
                 <th>Effect %: </th>
                 <th>Description: </th>
+                <th>Level: </th>
             </tr>
             <tr>
                 <td>
@@ -154,6 +155,11 @@
                 <td>
                     <a *ngFor="let moves of lMoves">
                         <div>{{moves.battleEffect}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let move of pokemon.levelUpMoves">
+                        <div>{{move.level}}</div>
                     </a>
                 </td>
             </tr>
