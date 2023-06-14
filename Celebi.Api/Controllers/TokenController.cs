@@ -70,7 +70,6 @@ namespace Celebi.Api.Controllers
         }
 
         [HttpPost("Register")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register([FromBody] Register register)
         {
             bool completed = await _userService.Register(register);

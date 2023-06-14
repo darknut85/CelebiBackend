@@ -19,12 +19,15 @@ export class RegisterComponent implements OnInit{
   ngOnInit(): void {
     this.userName = this.adminService.displayLogin();
   }
+    disabledfield: boolean = true;
     form: FormGroup = this.formBuilder.group({
       userName: ['',Validators.required],
       email: ['', Validators.required],
       password: ['',Validators.required],
-      role: ['',Validators.required]
+      role: [{value:'User', disabled: this.disabledfield},Validators.required ]
     });
+    
+    
   
     private apiURL = "https://localhost:7282/api/Token/Register";
     httpOptions = {
@@ -37,15 +40,14 @@ export class RegisterComponent implements OnInit{
     submit(): void {
       this.http.post(this.apiURL, this.form.getRawValue(),{responseType:'text'})
         .subscribe( res => 
-          {const user: User = 
+          {
+            const user: User = 
             {
               userName: this.form.controls['userName'].value, 
               email: this.form.controls['email'].value,
               password: this.form.controls['password'].value,
-              role: this.form.controls['role'].value
+              role: 'User'
             };
-            
-            const role: string = "User";
             this.addUser(user);
             this.router.navigate(['/home']);
   
