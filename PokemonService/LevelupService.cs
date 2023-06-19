@@ -40,7 +40,9 @@ namespace Services
                 return new LevelupMove();
             }
             LevelupMove? newLevelupMove = Get().Where(
-                x => x.MoveId == levelupMove.MoveId &&
+                x => 
+                x.IsTm == levelupMove.IsTm &&
+                x.MoveId == levelupMove.MoveId &&
                 x.PokemonId == levelupMove.PokemonId &&
                 x.Level == levelupMove.Level
                 ).FirstOrDefault();
