@@ -132,5 +132,19 @@
                   </mat-form-field>
             </div>
         </li>
+        <li *ngIf="isVisible">
+            <button (click)="removeLevelupMove()">
+                Remove Pokemon
+            </button>
+            <div mat-dialog-content>
+                <mat-form-field>
+                    <mat-select [(value)]="selectedPokemon" (selectionChange)="findOwnedPokemon(selectedPokemon)">
+                        <div *ngFor="let move of move.levelUpMoves">
+                            <mat-option value={{move.pokemonId}}>{{getPokemonById(move.pokemonId)}}: {{move.level}}</mat-option>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </li>
     </body>
 </html>

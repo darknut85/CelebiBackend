@@ -81,6 +81,23 @@ export class MovedexPageComponent implements OnInit{
     }
   }
 
+  findOwnedPokemon(id: string): void{
+    const pokemon = this.parray.find(x => x.id.toString() === id);
+    if( pokemon != undefined)
+    {
+      this.pokemon = pokemon;
+    }
+  }
+
+  getPokemonById(id:Number): string{
+    const pokemon = this.parray.find(x => x.id === id);
+    if( pokemon != undefined)
+    {
+      return pokemon.name;
+    }
+    return "";
+  }
+
   addLevelupMove(): void{
     this.levelupService.addLevelupMove(
       {
@@ -91,6 +108,20 @@ export class MovedexPageComponent implements OnInit{
       }).subscribe(() => {
       location.reload();
     });
+  }
+
+  removeLevelupMove(): void{
+
+    let levelupMove = this.pokemon.levelUpMoves.find(x => x.moveId == this.move.id && x.pokemonId == this.pokemon.id)?.id
+    console.log(this.pokemon.id);
+    console.log(this.move.id);
+    console.log(levelupMove)
+    if(levelupMove != undefined)
+    {
+      this.levelupService.removeLevelupMove(levelupMove).subscribe(response => {
+        location.reload();
+      });
+    }
   }
 
   AuthorizedToView(userName: string) {
