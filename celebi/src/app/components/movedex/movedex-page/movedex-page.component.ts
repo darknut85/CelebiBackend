@@ -122,7 +122,6 @@ export class MovedexPageComponent implements OnInit{
     else
     {
       levelUpMove.isTm = true;
-      levelUpMove.level = -1;
     }
     this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
       location.reload();
