@@ -21,6 +21,8 @@ export class MovedexPageComponent implements OnInit{
   selectedPokemon = 'selectedPokemon';
   lPokemon: Pokemon[] = [];
   tPokemon: Pokemon[] = [];
+  lLevels: LevelupMove[] = [];
+  tLevels: LevelupMove[] = [];
   parray: Pokemon[] = [];
 
   allPokemon: Pokemon[] = [];
@@ -70,10 +72,12 @@ export class MovedexPageComponent implements OnInit{
                   if(levelup.isTm == false)
                   {
                     this.lPokemon.push(da);
+                    this.lLevels.push(levelup);
                   }
                   else
                   {
                     this.tPokemon.push(da);
+                    this.tLevels.push(levelup);
                   }
                 });
               });

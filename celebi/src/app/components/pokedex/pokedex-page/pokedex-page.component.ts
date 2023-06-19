@@ -27,6 +27,9 @@ export class PokedexPageComponent implements OnInit {
   typingFinal: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   lMoves: Move[] = [];
   tMoves: Move[] = [];
+  lLevels: LevelupMove[] = [];
+  tLevels: LevelupMove[] = [];
+
   move: Move = <Move>{ };
   level: number = 0;
   isVisible = false;
@@ -79,10 +82,12 @@ export class PokedexPageComponent implements OnInit {
                   if(levelup.isTm == false)
                   {
                     this.lMoves.push(da);
+                    this.lLevels.push(levelup)
                   }
                   else
                   {
                     this.tMoves.push(da);
+                    this.tLevels.push(levelup)
                   }
                 });
               });
