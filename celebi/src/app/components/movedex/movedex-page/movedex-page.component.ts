@@ -113,9 +113,6 @@ export class MovedexPageComponent implements OnInit{
   removeLevelupMove(): void{
 
     let levelupMove = this.pokemon.levelUpMoves.find(x => x.moveId == this.move.id && x.pokemonId == this.pokemon.id)?.id
-    console.log(this.pokemon.id);
-    console.log(this.move.id);
-    console.log(levelupMove)
     if(levelupMove != undefined)
     {
       this.levelupService.removeLevelupMove(levelupMove).subscribe(response => {
