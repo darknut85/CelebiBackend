@@ -164,8 +164,62 @@
                 </td>
             </tr>
         </table>
+        <table>
+            <tr>
+                <th>Moves learned by TM </th>
+                <th>Type: </th>
+                <th>PP: </th>
+                <th>Base Power: </th>
+                <th>Accuracy: </th>
+                <th>Effect %: </th>
+                <th>Description: </th>
+                <th>Level: </th>
+            </tr>
+            <tr>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <div>{{moves.name}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <div>{{moves.type}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <div>{{moves.powerPoints}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <div>{{moves.basePower}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <div>{{moves.accuracy}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <div>{{moves.effectRate}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let moves of lMoves">
+                        <div>{{moves.battleEffect}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let move of pokemon.levelUpMoves">
+                        <div>{{move.level}}</div>
+                    </a>
+                </td>
+            </tr>
+        </table>
         <li *ngIf="isVisible">
-            <button (click)="addLevelupMove()">
+            <button (click)="addLevelupMove(isTm)">
                 Add Move
             </button>
             <div mat-dialog-content>
@@ -179,6 +233,13 @@
                 <mat-form-field appearance="fill">
                     Level:<mat-label></mat-label>
                     <input matInput [(ngModel)]="level">
+                </mat-form-field>
+                <mat-form-field>
+                    IS a TM:<mat-label></mat-label>
+                    <mat-select [(value)]="isTm">
+                        <mat-option value="true">yes</mat-option>
+                        <mat-option value="false">no</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
         </li>

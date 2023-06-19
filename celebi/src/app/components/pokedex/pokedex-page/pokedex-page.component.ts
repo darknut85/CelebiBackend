@@ -31,6 +31,7 @@ export class PokedexPageComponent implements OnInit {
   isVisible = false;
   roles: Role[] = [];
   r: Role = {name: ""};
+  isTm: string = "false";
 
   pokemon: Pokemon = 
   {
@@ -70,12 +71,16 @@ export class PokedexPageComponent implements OnInit {
         else
         {
           data.levelUpMoves.forEach(levelup => {
-            //add if
             this.route.paramMap.subscribe(() =>
               { 
                 this.moveService.getMoveByID(Number(levelup.moveId)).subscribe((da: Move) => 
-                { 
-                  this.lMoves.push(da);
+                {
+                  console.log(levelup.isTm)
+                  console.log(levelup)
+                  if(levelup.isTm == false)
+                  {
+                    this.lMoves.push(da);
+                  }
                 });
               });
           });
@@ -138,8 +143,17 @@ export class PokedexPageComponent implements OnInit {
     return "";
   }
 
-  addLevelupMove(): void{
+  addLevelupMove(isTm: string): void{
     let levelUpMove: LevelupMove = {id: 0, pokemonId: this.pokemon.id, moveId: this.move.id, level: this.level, isTm: false}
+    if(isTm == "false")
+    {
+      levelUpMove.isTm = false;
+    }
+    else
+    {
+      levelUpMove.isTm = true;
+    }
+    console.log(levelUpMove)
     this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
       location.reload();
     });
