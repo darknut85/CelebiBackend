@@ -20,7 +20,7 @@ namespace Unittests.LevelupServiceTests
 
         public CreateUp()
         {
-            levelup = new LevelupMove() { Level = 44, PokemonId = 1, MoveId = 1 };
+            levelup = new LevelupMove() { Level = 44, PokemonId = 1, MoveId = 1, IsTm = true };
             existingLevelup = new LevelupMove() { Id = 200, Level = 100, PokemonId = 1, MoveId = 1 };
             emptyLevelup = new LevelupMove();
             options = this.CreatePostgreSqlUniqueClassOptions<DataContext>();
@@ -44,6 +44,7 @@ namespace Unittests.LevelupServiceTests
             //assert
             Assert.True(newLevelup.Id == levelup.Id);
             Assert.True(newLevelup.PokemonId == levelup.PokemonId);
+            Assert.True(newLevelup.IsTm == levelup.IsTm);
         }
 
         [Theory]
