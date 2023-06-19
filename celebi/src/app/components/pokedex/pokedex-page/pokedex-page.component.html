@@ -190,7 +190,7 @@
                 <mat-form-field>
                     <mat-select [(value)]="selectedMove" (selectionChange)="findOwnedMove(selectedMove)">
                         <div *ngFor="let move of pokemon.levelUpMoves">
-                            <mat-option value={{move.moveId}}>{{getMoveById(move.moveId)}}: {{move.level}}</mat-option>
+                            <mat-option value={{move.id}}>{{getMoveById(move.moveId)}}: {{move.level}}</mat-option>
                         </div>
                     </mat-select>
                 </mat-form-field>
