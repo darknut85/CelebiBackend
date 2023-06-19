@@ -45,7 +45,7 @@ export class PokedexPageComponent implements OnInit {
     growthRate: 0,
     hp: 0, atk: 0, def: 0, spatk: 0, spdef: 0, spd: 0,
     hpev: 0, atkev: 0, defev: 0, spatkev: 0, spdefev: 0, spdev: 0,
-    levelUpMoves: [{id: 0, level: 0, pokemonId: 0, moveId: 0}]
+    levelUpMoves: [{id: 0, level: 0, pokemonId: 0, moveId: 0, isTm: false}]
   };
   ngOnInit()
   {
@@ -70,6 +70,7 @@ export class PokedexPageComponent implements OnInit {
         else
         {
           data.levelUpMoves.forEach(levelup => {
+            //add if
             this.route.paramMap.subscribe(() =>
               { 
                 this.moveService.getMoveByID(Number(levelup.moveId)).subscribe((da: Move) => 
@@ -138,7 +139,7 @@ export class PokedexPageComponent implements OnInit {
   }
 
   addLevelupMove(): void{
-    let levelUpMove: LevelupMove = {id: 0, pokemonId: this.pokemon.id, moveId: this.move.id, level: this.level}
+    let levelUpMove: LevelupMove = {id: 0, pokemonId: this.pokemon.id, moveId: this.move.id, level: this.level, isTm: false}
     this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
       location.reload();
     });

@@ -6,4 +6,6 @@ export interface LevelupMove{
     pokemonId: number;
 
     moveId: Number;
+
+    isTm: boolean;
 }

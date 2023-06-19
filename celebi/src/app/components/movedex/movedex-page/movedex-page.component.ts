@@ -34,7 +34,7 @@ export class MovedexPageComponent implements OnInit{
     powerPoints: 0, basePower: 0, accuracy: 0,
     battleEffect: "", 
     effectRate: 0, priority: 0, target: "",
-    levelUpMoves: [{id: 0, level: 0, pokemonId: 0, moveId: 0}]
+    levelUpMoves: [{id: 0, level: 0, pokemonId: 0, moveId: 0, isTm: false}]
   }
   
   ngOnInit()
@@ -105,7 +105,8 @@ export class MovedexPageComponent implements OnInit{
         id: 0, 
         pokemonId: this.pokemon.id, 
         moveId: this.move.id, 
-        level: this.level
+        level: this.level,
+        isTm: false
       }).subscribe(() => {
       location.reload();
     });
