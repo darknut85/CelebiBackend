@@ -76,8 +76,6 @@ export class PokedexPageComponent implements OnInit {
               { 
                 this.moveService.getMoveByID(Number(levelup.moveId)).subscribe((da: Move) => 
                 {
-                  console.log(levelup.isTm)
-                  console.log(levelup)
                   if(levelup.isTm == false)
                   {
                     this.lMoves.push(da);
@@ -157,8 +155,8 @@ export class PokedexPageComponent implements OnInit {
     else
     {
       levelUpMove.isTm = true;
+      levelUpMove.level = 0;
     }
-    console.log(levelUpMove)
     this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
       location.reload();
     });

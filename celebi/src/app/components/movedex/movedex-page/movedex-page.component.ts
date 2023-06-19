@@ -7,6 +7,7 @@ import { PokemonService } from '../../pokedex/pokedexRedBlue/pokedexRedBlue.serv
 import { LevelupService } from '../../misc/levelup/levelup.service';
 import { AdminService } from '../../users/admin/admin.service';
 import { Role } from 'src/app/objects/role';
+import { LevelupMove } from 'src/app/objects/levelupMove';
 
 @Component({
   selector: 'app-movedex-page',
@@ -19,6 +20,7 @@ export class MovedexPageComponent implements OnInit{
   userName = "";
   selectedPokemon = 'selectedPokemon';
   lPokemon: Pokemon[] = [];
+  tPokemon: Pokemon[] = [];
   parray: Pokemon[] = [];
 
   allPokemon: Pokemon[] = [];
@@ -28,6 +30,7 @@ export class MovedexPageComponent implements OnInit{
   roles: Role[] = [];
   r: Role = {name: ""};
   levelupLevel: number = 0;
+  isTm: string = "false";
 
   move: Move = {
     id: 0, name: "", type: "",
@@ -64,7 +67,14 @@ export class MovedexPageComponent implements OnInit{
               { 
                 this.pokemonService.getPokemonByID(Number(levelup.pokemonId)).subscribe((da: Pokemon) => 
                 { 
-                  this.lPokemon.push(da);
+                  if(levelup.isTm == false)
+                  {
+                    this.lPokemon.push(da);
+                  }
+                  else
+                  {
+                    this.tPokemon.push(da);
+                  }
                 });
               });
           });
@@ -99,15 +109,18 @@ export class MovedexPageComponent implements OnInit{
     return "";
   }
 
-  addLevelupMove(): void{
-    this.levelupService.addLevelupMove(
-      {
-        id: 0, 
-        pokemonId: this.pokemon.id, 
-        moveId: this.move.id, 
-        level: this.level,
-        isTm: false
-      }).subscribe(() => {
+  addLevelupMove(isTm: string): void{
+    let levelUpMove: LevelupMove = {id: 0, pokemonId: this.pokemon.id, moveId: this.move.id, level: this.level, isTm: false}
+    if(isTm == "false")
+    {
+      levelUpMove.isTm = false;
+    }
+    else
+    {
+      levelUpMove.isTm = true;
+      levelUpMove.level = 0;
+    }
+    this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
       location.reload();
     });
   }

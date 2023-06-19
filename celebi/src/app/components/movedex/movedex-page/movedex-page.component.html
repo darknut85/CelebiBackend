@@ -114,8 +114,68 @@
                 </td>
             </tr>
         </table>
+        <table>
+            <tr>
+                <th>Moves learned by TM </th>
+                <th>Number: </th>
+                <th>Type: </th>
+                <th>HP: </th>
+                <th>ATK: </th>
+                <th>DEF: </th>
+                <th>SPEC: </th>
+                <th>SPD: </th>
+                <th>Level: </th>
+            </tr>
+            <tr>
+                <td>
+                    <a *ngFor="let pokemon of tPokemon">
+                        <div>{{pokemon.name}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let pokemon of tPokemon">
+                        <div>{{pokemon.dexEntry}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let pokemon of tPokemon">
+                        <div>{{pokemon.type1}} / {{pokemon.type2}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let pokemon of tPokemon">
+                        <div>{{pokemon.hp}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let pokemon of tPokemon">
+                        <div>{{pokemon.atk}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let pokemon of tPokemon">
+                        <div>{{pokemon.def}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let pokemon of tPokemon">
+                        <div>{{pokemon.spatk}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let pokemon of tPokemon">
+                        <div>{{pokemon.spd}}</div>
+                    </a>
+                </td>
+                <td>
+                    <a *ngFor="let move of move.levelUpMoves">
+                        <div>{{move.level}}</div>
+                    </a>
+                </td>
+            </tr>
+        </table>
         <li *ngIf="isVisible">
-            <button (click)="addLevelupMove()">
+            <button (click)="addLevelupMove(isTm)">
                 Add Pokemon
             </button>
             <div mat-dialog-content>
@@ -129,7 +189,14 @@
                 <mat-form-field appearance="fill">
                     Level:<mat-label></mat-label>
                     <input matInput [(ngModel)]="level">
-                  </mat-form-field>
+                </mat-form-field>
+                <mat-form-field>
+                IS a TM:<mat-label></mat-label>
+                <mat-select [(value)]="isTm">
+                    <mat-option value="true">yes</mat-option>
+                    <mat-option value="false">no</mat-option>
+                </mat-select>
+                </mat-form-field>
             </div>
         </li>
         <li *ngIf="isVisible">
