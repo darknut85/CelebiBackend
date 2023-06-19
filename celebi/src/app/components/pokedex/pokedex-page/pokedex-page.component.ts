@@ -155,7 +155,7 @@ export class PokedexPageComponent implements OnInit {
     else
     {
       levelUpMove.isTm = true;
-      levelUpMove.level = 0;
+      levelUpMove.level = -1;
     }
     this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
       location.reload();
