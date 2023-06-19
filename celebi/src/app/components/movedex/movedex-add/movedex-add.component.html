@@ -1,52 +1,52 @@
 <div mat-dialog-content>
-    <p>Add a new Pokemon</p>
-    <mat-form-field appearance="fill">
-      Name:<mat-label></mat-label>
-      <input matInput [(ngModel)]="data.name">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-      Type:<mat-label></mat-label>
-      <input matInput [(ngModel)]="data.type">
-    </mat-form-field>
+  <p>Add a new Pokemon</p>
+  <mat-form-field appearance="fill">
+    Name:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
   
-    <mat-form-field appearance="fill">
-      Power Points:<mat-label></mat-label>
-      <input matInput [(ngModel)]="data.powerPoints">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-      Base Power:<mat-label></mat-label>
-      <input matInput [(ngModel)]="data.basePower">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-        Accuracy:<mat-label></mat-label>
-        <input matInput [(ngModel)]="data.accuracy">
-      </mat-form-field>
+  <mat-form-field appearance="fill">
+    Type:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.type">
+  </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      Battle Effect:<mat-label></mat-label>
-      <input matInput [(ngModel)]="data.battleEffect">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-      Effect Rate:<mat-label></mat-label>
-      <input matInput [(ngModel)]="data.effectRate">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-      Priority:<mat-label></mat-label>
-      <input matInput [(ngModel)]="data.priority">
-    </mat-form-field>
+  <mat-form-field appearance="fill">
+    Power Points:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.powerPoints">
+  </mat-form-field>
   
-    <mat-form-field appearance="fill">
-      Target:<mat-label></mat-label>
-      <input matInput [(ngModel)]="data.target">
-    </mat-form-field>
-  </div>
+  <mat-form-field appearance="fill">
+    Base Power:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.basePower">
+  </mat-form-field>
   
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Undo</button>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add the move</button>
-  </div>
+  <mat-form-field appearance="fill">
+      Accuracy:<mat-label></mat-label>
+      <input matInput [(ngModel)]="data.accuracy">
+    </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    Battle Effect:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.battleEffect">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    Effect Rate:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.effectRate">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    Priority:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.priority">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    Target:<mat-label></mat-label>
+    <input matInput [(ngModel)]="data.target">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Undo</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add the move</button>
+</div>
