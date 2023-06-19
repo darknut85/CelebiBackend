@@ -27,6 +27,7 @@ export class MovedexPageComponent implements OnInit{
   isVisible = false;
   roles: Role[] = [];
   r: Role = {name: ""};
+  levelupLevel: number = 0;
 
   move: Move = {
     id: 0, name: "", type: "",
@@ -111,8 +112,8 @@ export class MovedexPageComponent implements OnInit{
   }
 
   removeLevelupMove(): void{
+    let levelupMove = Number(this.selectedPokemon);
 
-    let levelupMove = this.pokemon.levelUpMoves.find(x => x.moveId == this.move.id && x.pokemonId == this.pokemon.id)?.id
     if(levelupMove != undefined)
     {
       this.levelupService.removeLevelupMove(levelupMove).subscribe(response => {
