@@ -167,7 +167,7 @@ namespace Migrations
                 );
 
             modelBuilder.Entity<LevelupMove>().HasData(
-                new LevelupMove { Id = 1, Level = 1, PokemonId = 1, MoveId = 1 } 
+                new LevelupMove { Id = 1, Level = 1, PokemonId = 1, MoveId = 1, IsTm = false } 
                 );
 
             modelBuilder.Entity<IdentityRole>().HasData(

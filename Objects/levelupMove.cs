@@ -9,6 +9,8 @@ namespace Objects
 
         public int Level { get; set; }
 
+        public bool IsTm { get; set; }
+
         //Navigation Properties
         public int PokemonId { get; set; }
 
