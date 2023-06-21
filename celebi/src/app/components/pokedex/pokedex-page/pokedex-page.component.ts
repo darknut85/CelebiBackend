@@ -9,6 +9,7 @@ import { LevelupService } from '../../misc/levelup/levelup.service';
 import { LevelupMove } from 'src/app/objects/levelupMove';
 import { AdminService } from '../../users/admin/admin.service';
 import { Role } from 'src/app/objects/role';
+import { LevelByEntry } from 'src/app/objects/levelByEntry';
 
 @Component({
   selector: 'app-pokedex-page',
@@ -29,6 +30,8 @@ export class PokedexPageComponent implements OnInit {
   tMoves: Move[] = [];
   lLevels: LevelupMove[] = [];
   tLevels: LevelupMove[] = [];
+  llevelByEntry: LevelByEntry[] = [];
+  tlevelByEntry: LevelByEntry[] = [];
 
   move: Move = <Move>{ };
   level: number = 0;
@@ -62,6 +65,13 @@ export class PokedexPageComponent implements OnInit {
     this.addMoveToSelectionBox();
   }
 
+  ngDoCheck(): void {
+    this.llevelByEntry = this.llevelByEntry.sort((a,b) => a.dexEntry - b.dexEntry);
+    this.tlevelByEntry = this.tlevelByEntry.sort((a,b) => a.dexEntry - b.dexEntry);
+    this.llevelByEntry = this.llevelByEntry.sort((a,b) => a.level - b.level);
+    this.tlevelByEntry = this.tlevelByEntry.sort((a,b) => a.level - b.level);
+  }
+
   addMoveToSelectionBox(){
     this.route.paramMap.subscribe((params) =>
     { 
@@ -83,11 +93,15 @@ export class PokedexPageComponent implements OnInit {
                   {
                     this.lMoves.push(da);
                     this.lLevels.push(levelup)
+                    let a: LevelByEntry = {level: levelup.level, dexEntry: da.id};
+                    this.llevelByEntry.push(a);
                   }
                   else
                   {
                     this.tMoves.push(da);
                     this.tLevels.push(levelup)
+                    let a: LevelByEntry = {level: levelup.level, dexEntry: da.id};
+                    this.tlevelByEntry.push(a);
                   }
                 });
               });
