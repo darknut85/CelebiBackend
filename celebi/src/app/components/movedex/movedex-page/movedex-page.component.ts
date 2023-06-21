@@ -83,6 +83,8 @@ export class MovedexPageComponent implements OnInit{
               });
           });
         }
+        this.tPokemon.sort((a,b) => a.dexEntry - b.dexEntry);
+        this.lPokemon.sort((a,b) => a.dexEntry - b.dexEntry);
         this.move = data;
       });
     });
