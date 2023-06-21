@@ -8,6 +8,7 @@ import { LevelupService } from '../../misc/levelup/levelup.service';
 import { AdminService } from '../../users/admin/admin.service';
 import { Role } from 'src/app/objects/role';
 import { LevelupMove } from 'src/app/objects/levelupMove';
+import { LevelByEntry } from 'src/app/objects/levelByEntry';
 
 @Component({
   selector: 'app-movedex-page',
@@ -17,21 +18,26 @@ import { LevelupMove } from 'src/app/objects/levelupMove';
 export class MovedexPageComponent implements OnInit, DoCheck{
   constructor(private moveService: MoveService, private route: ActivatedRoute, private pokemonService: PokemonService,
     private levelupService: LevelupService, private adminService: AdminService) { }
+  
+  
+  llevelByEntry: LevelByEntry[] = [];
+  tlevelByEntry: LevelByEntry[] = [];
+  lbe: LevelByEntry = {level: 0, dexEntry: 0};
+
   userName = "";
   selectedPokemon = 'selectedPokemon';
   lPokemon: Pokemon[] = [];
   tPokemon: Pokemon[] = [];
   lLevels: LevelupMove[] = [];
   tLevels: LevelupMove[] = [];
-  parray: Pokemon[] = [];
 
+  parray: Pokemon[] = [];
   allPokemon: Pokemon[] = [];
   pokemon: Pokemon = <Pokemon>{ };
   level: number = 0;
   isVisible = false;
   roles: Role[] = [];
   r: Role = {name: ""};
-  levelupLevel: number = 0;
   isTm: string = "false";
 
   move: Move = {
@@ -56,8 +62,11 @@ export class MovedexPageComponent implements OnInit, DoCheck{
   ngDoCheck(): void {
     this.tPokemon = this.tPokemon.sort((a,b) => a.dexEntry - b.dexEntry);
     this.lPokemon = this.lPokemon.sort((a,b) => a.dexEntry - b.dexEntry);
+    this.llevelByEntry = this.llevelByEntry.sort((a,b) => a.level - b.level);
+    this.tlevelByEntry = this.tlevelByEntry.sort((a,b) => a.level - b.level);
+    this.llevelByEntry = this.llevelByEntry.sort((a,b) => a.dexEntry - b.dexEntry);
+    this.tlevelByEntry = this.tlevelByEntry.sort((a,b) => a.dexEntry - b.dexEntry);
   }
-  //this.lPokemon = this.lPokemon.sort((a,b) => a.dexEntry - b.dexEntry);
   
   addPokemonToSelectionBox(): void{
     this.route.paramMap.subscribe((params) =>
@@ -79,16 +88,21 @@ export class MovedexPageComponent implements OnInit, DoCheck{
                   {
                     this.lPokemon.push(da);
                     this.lLevels.push(levelup);
+                    let a: LevelByEntry = {level: levelup.level, dexEntry: da.dexEntry};
+                    this.llevelByEntry.push(a);
                   }
                   else
                   {
                     this.tPokemon.push(da);
                     this.tLevels.push(levelup);
+                    let a: LevelByEntry = {level: levelup.level, dexEntry: da.dexEntry};
+                    this.tlevelByEntry.push(a);
                   }
                 });
               });
           });
         }
+        
         this.move = data;
       });
     });
