@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { MoveService } from '../movedex-red-blue/movedex-red-blue.service';
 import { ActivatedRoute } from '@angular/router';
 import { Move } from 'src/app/objects/move';
@@ -14,7 +14,7 @@ import { LevelupMove } from 'src/app/objects/levelupMove';
   templateUrl: './movedex-page.component.html',
   styleUrls: ['./movedex-page.component.css']
 })
-export class MovedexPageComponent implements OnInit{
+export class MovedexPageComponent implements OnInit, DoCheck{
   constructor(private moveService: MoveService, private route: ActivatedRoute, private pokemonService: PokemonService,
     private levelupService: LevelupService, private adminService: AdminService) { }
   userName = "";
@@ -53,6 +53,12 @@ export class MovedexPageComponent implements OnInit{
     this.addPokemonToSelectionBox();
   }
 
+  ngDoCheck(): void {
+    this.tPokemon = this.tPokemon.sort((a,b) => a.dexEntry - b.dexEntry);
+    this.lPokemon = this.lPokemon.sort((a,b) => a.dexEntry - b.dexEntry);
+  }
+  //this.lPokemon = this.lPokemon.sort((a,b) => a.dexEntry - b.dexEntry);
+  
   addPokemonToSelectionBox(): void{
     this.route.paramMap.subscribe((params) =>
     { 
@@ -83,8 +89,6 @@ export class MovedexPageComponent implements OnInit{
               });
           });
         }
-        this.tPokemon.sort((a,b) => a.dexEntry - b.dexEntry);
-        this.lPokemon.sort((a,b) => a.dexEntry - b.dexEntry);
         this.move = data;
       });
     });
