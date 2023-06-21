@@ -12,6 +12,8 @@ import { LogoutComponent } from './components/users/logout/logout.component';
 import { FrontComponent } from './components/homepage/front/front.component';
 import { MovedexRedBlueComponent } from './components/movedex/movedex-red-blue/movedex-red-blue.component';
 import { MovedexPageComponent } from './components/movedex/movedex-page/movedex-page.component';
+import { ProfileComponent } from './components/users/profile/profile.component';
+import { RoleGuard } from './components/users/auth/role-guard.service';
 
 const routes: Routes = [
   { path: 'front', component: FrontComponent },
@@ -23,9 +25,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'logout', component: LogoutComponent},
-  { path: 'userPage/:id', component: UserPageComponent,canActivate:[AuthGuard] },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
-  { path: 'movedexRedBlue', component: MovedexRedBlueComponent }
+  { path: 'userPage/:id', component: UserPageComponent,canActivate:[RoleGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [RoleGuard] },
+  { path: 'movedexRedBlue', component: MovedexRedBlueComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

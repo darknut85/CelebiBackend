@@ -32,27 +32,6 @@ export class AuthGuard implements CanActivate
             this.router.navigate(['login']);
         }
 
-        let userName = this.adminService.displayLogin();
-        this.AuthorizedToView(userName);
-        if(!this.isAdmin)
-        {
-            this.router.navigate(['home']);
-        }
-
         return loggedIn;
     }
-
-    AuthorizedToView(userName: string) {
-        this.adminService.getRoles(String(userName)).subscribe((role: Role[]) => {
-          role.forEach(element => {
-            this.r = {name:element.toString()};
-            this.roles.push(this.r);
-          });
-          this.roles.forEach(x => {
-            if(x.name == "Admin"){
-              this.isAdmin = true;
-            }
-          });
-        });
-      }
 }

@@ -37,6 +37,8 @@ import { MovedexUpdateComponent } from './components/movedex/movedex-update/move
 import { MovedexDeleteComponent } from './components/movedex/movedex-delete/movedex-delete.component';
 import { LevelupComponent } from './components/misc/levelup/levelup.component';
 import { LevelupService } from './components/misc/levelup/levelup.service';
+import { ProfileComponent } from './components/users/profile/profile.component';
+import { RoleGuard } from './components/users/auth/role-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +59,8 @@ import { LevelupService } from './components/misc/levelup/levelup.service';
     MovedexAddComponent,
     MovedexUpdateComponent,
     MovedexDeleteComponent,
-    LevelupComponent
+    LevelupComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +83,7 @@ import { LevelupService } from './components/misc/levelup/levelup.service';
     AdminService,
     AuthService, 
     AuthGuard,
+    RoleGuard,
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true},
   ],
   bootstrap: [AppComponent]
