@@ -43,6 +43,25 @@ namespace Services
             return _dataContext.Set<IdentityUser>().OrderBy(x => x.Id).ToList();
         }
 
+        public IdentityUser Update(IdentityUser user)
+        {
+            _dataContext.Set<IdentityUser>().Update(user);
+            IdentityUser q = GetUser(user.UserName);
+            if (q != null)
+            {
+                if (q.UserName == user.UserName)
+                {
+                    if (q.UserName != "0")
+                    {
+                        _dataContext.Set<IdentityUser>().Update(user);
+                        SaveChanges();
+                        return user;
+                    }
+                }
+            }
+            return new IdentityUser();
+        }
+
         public IList<string> GetRoles(IdentityUser user)
         {
             Task<IList<string>>? roles = _userManager.GetRolesAsync(user);
@@ -203,6 +222,12 @@ namespace Services
 
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        [ExcludeFromCodeCoverage]
+        public void SaveChanges()
+        {
+            dataContext.SaveChanges();
         }
     }
 }

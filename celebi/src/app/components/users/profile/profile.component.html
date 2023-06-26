@@ -7,9 +7,11 @@
             <h1>CelebiDotNet</h1>
         </div>
     </div>
-    <p>Role</p>
-    <p>Email</p>
+    <p>Email: {{user.email}}</p>
 
+    <p *ngFor="let role of roles">
+        Role: {{role.name}}
+    </p>
     <p>Change UserName</p>
     <p>Change Email</p>
     <p>Change password</p>
