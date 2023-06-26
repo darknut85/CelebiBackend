@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Interfaces;
 using Objects;
+using Services;
 
 namespace Celebi.Api.Controllers
 {
@@ -89,6 +90,21 @@ namespace Celebi.Api.Controllers
                 return BadRequest("User wasn't created");
             }
             return Ok("User created");
+        }
+
+        [HttpPut("Change Password")]
+        public async Task<IActionResult> ChangePassword([FromBody] IdentityUser identity, string oldPassword, string newPassword)
+        {
+            IdentityResult result = _userService.UpdatePassword(identity, oldPassword, newPassword);
+            return Ok(result);
+
+        }
+
+        [HttpPut("Change Email")]
+        public async Task<IActionResult> ChangeEmail([FromBody] IdentityUser identity, string oldEmail, string newEmail)
+        {
+            IdentityResult result = _userService.UpdatePassword(identity, oldEmail, newEmail);
+            return Ok(result);
         }
 
         [HttpGet("Roles")]

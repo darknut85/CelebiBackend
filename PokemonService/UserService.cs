@@ -43,24 +43,19 @@ namespace Services
             return _dataContext.Set<IdentityUser>().OrderBy(x => x.Id).ToList();
         }
 
-        public IdentityUser Update(IdentityUser user)
+        public IdentityResult UpdateEmail(IdentityUser user, string newMail, string token)
         {
-            _dataContext.Set<IdentityUser>().Update(user);
-            IdentityUser q = GetUser(user.UserName);
-            if (q != null)
-            {
-                if (q.UserName == user.UserName)
-                {
-                    if (q.UserName != "0")
-                    {
-                        _dataContext.Set<IdentityUser>().Update(user);
-                        SaveChanges();
-                        return user;
-                    }
-                }
-            }
-            return new IdentityUser();
+            Task<IdentityResult> identity = _userManager.ChangeEmailAsync(user, newMail, token);
+            return identity.Result;
         }
+
+        public IdentityResult UpdatePassword(IdentityUser user, string currentPassword, string newPassword)
+        {
+            Task<IdentityResult> identity = _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            return identity.Result;
+        }
+
+        //public IdentityUser UpdateUsername(IdentityUser user, string currentUsername, string newUsername) { }
 
         public IList<string> GetRoles(IdentityUser user)
         {
@@ -222,12 +217,6 @@ namespace Services
 
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
-        }
-
-        [ExcludeFromCodeCoverage]
-        public void SaveChanges()
-        {
-            dataContext.SaveChanges();
         }
     }
 }
