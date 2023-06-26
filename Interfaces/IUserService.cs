@@ -24,10 +24,10 @@ namespace Interfaces
         string Authenticate(string username, string password, string role = "User");
 
         //update password
-        IdentityResult UpdatePassword(IdentityUser user, string currentPassword, string newPassword);
+        IdentityResult UpdatePassword(string userName, string currentPassword, string newPassword);
 
         //update email
-        IdentityResult UpdateEmail(IdentityUser user, string newMail, string token);
+        IdentityResult UpdateEmail(string userName, string newMail, string token);
 
         //add role to user
         Task<string> AddRoleToUser(string role, string userName);

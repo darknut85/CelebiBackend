@@ -43,15 +43,15 @@ namespace Services
             return _dataContext.Set<IdentityUser>().OrderBy(x => x.Id).ToList();
         }
 
-        public IdentityResult UpdateEmail(IdentityUser user, string newMail, string token)
+        public IdentityResult UpdateEmail(string userName, string newMail, string token)
         {
-            Task<IdentityResult> identity = _userManager.ChangeEmailAsync(user, newMail, token);
+            Task<IdentityResult> identity = _userManager.ChangeEmailAsync(GetUser(userName), newMail, token);
             return identity.Result;
         }
 
-        public IdentityResult UpdatePassword(IdentityUser user, string currentPassword, string newPassword)
+        public IdentityResult UpdatePassword(string userName, string currentPassword, string newPassword)
         {
-            Task<IdentityResult> identity = _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            Task<IdentityResult> identity = _userManager.ChangePasswordAsync(GetUser(userName), currentPassword, newPassword);
             return identity.Result;
         }
 

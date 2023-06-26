@@ -93,7 +93,7 @@ namespace Celebi.Api.Controllers
         }
 
         [HttpPut("Change Password")]
-        public async Task<IActionResult> ChangePassword([FromBody] IdentityUser identity, string oldPassword, string newPassword)
+        public async Task<IActionResult> ChangePassword([FromBody] string identity, string oldPassword, string newPassword)
         {
             IdentityResult result = _userService.UpdatePassword(identity, oldPassword, newPassword);
             return Ok(result);
@@ -101,7 +101,7 @@ namespace Celebi.Api.Controllers
         }
 
         [HttpPut("Change Email")]
-        public async Task<IActionResult> ChangeEmail([FromBody] IdentityUser identity, string oldEmail, string newEmail)
+        public async Task<IActionResult> ChangeEmail([FromBody] string identity, string oldEmail, string newEmail)
         {
             IdentityResult result = _userService.UpdatePassword(identity, oldEmail, newEmail);
             return Ok(result);

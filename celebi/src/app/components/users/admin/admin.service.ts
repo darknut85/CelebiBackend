@@ -33,6 +33,17 @@ export class AdminService {
         return this.httpClient.get < User > (this.apiURL + '/GetOneUser', { params }).pipe(catchError(this.errorHandler));
     }
 
+    updateEmail(userName: string, oldmail: string, newMail: string)
+    {
+        let params = new HttpParams().set('userName', userName).set('oldmail', oldmail).set('newMail', newMail);
+        console.log(params);
+    }
+
+    updatePassword()
+    {
+
+    }
+
     getRoles(userName: string): Observable < Role[] > {
         return this.httpClient.get < Role[] > (this.apiURL + '/GetRolesOfUser?userName=' + userName).pipe(catchError(this.errorHandler));
     }
