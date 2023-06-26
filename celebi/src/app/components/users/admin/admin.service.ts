@@ -23,9 +23,14 @@ export class AdminService {
         return this.httpClient.get <User[]> (this.apiURL + '/GetAllUsers').pipe(catchError(this.errorHandler));
     }
 
+    getSelf(userName: string): Observable < User > {
+        let params = new HttpParams().set('userName', userName);
+        return this.httpClient.get < User > (this.apiURL + '/GetSelf', { params }).pipe(catchError(this.errorHandler));
+    }
+
     getUserByID(userName: string): Observable < User > {
         let params = new HttpParams().set('userName', userName);
-        return this.httpClient.get < User > (this.apiURL + '/GetOneUser', { params }).pipe(catchError(this.errorHandler))
+        return this.httpClient.get < User > (this.apiURL + '/GetOneUser', { params }).pipe(catchError(this.errorHandler));
     }
 
     getRoles(userName: string): Observable < Role[] > {

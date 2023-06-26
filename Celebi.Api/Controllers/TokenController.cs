@@ -42,6 +42,18 @@ namespace Celebi.Api.Controllers
             return Ok(user);
         }
 
+        [HttpGet("GetSelf")]
+        [Authorize(Roles = "Admin,User")]
+        public IActionResult FindSelf(string userName)
+        {
+            IdentityUser? user = _userService.GetUser(userName);
+            if (user == null)
+            {
+                return BadRequest("User does not exist");
+            }
+            return Ok(user);
+        }
+
         [HttpGet("GetRolesOfUser")]
         [Authorize(Roles = "Admin")]
         public IActionResult GetRolesOfUser(string userName) 
