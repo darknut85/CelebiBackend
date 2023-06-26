@@ -13,7 +13,15 @@
         Role: {{role.name}}
     </p>
     <p>Change UserName</p>
-    <p>Change Email</p>
+    <p>Change your email</p>
+            <mat-form-field appearance="fill">
+            Old Email:<mat-label></mat-label>
+            <input matInput [(ngModel)]="user.role">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+            New Email:<mat-label></mat-label>
+            <input matInput [(ngModel)]="user.role">
+            </mat-form-field>
     <p>Change password</p>
 </body>
 
