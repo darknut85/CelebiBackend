@@ -31,15 +31,19 @@
     <p>Change your password</p>
             <mat-form-field appearance="fill">
             Old Password:<mat-label></mat-label>
-            <input matInput [(ngModel)]="oldPassword">
+            <input matInput [(ngModel)]="oldPassword"  type="password">
             </mat-form-field>
             <mat-form-field appearance="fill">
             New Password:<mat-label></mat-label>
-            <input matInput [(ngModel)]="newPassword">
+            <input matInput [(ngModel)]="newPassword" type="password">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+            Confirm New Password:<mat-label></mat-label>
+            <input matInput [(ngModel)]="confirmedNewPassword" type="password">
             </mat-form-field>
     <div mat-dialog-actions>
         <button mat-button (click)="ChangePassword()">Change your password</button>
     </div>
-    <p>Change password</p>
+    {{passwordMessage}}
 </body>
 

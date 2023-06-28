@@ -26,7 +26,9 @@ export class ProfileComponent implements OnInit {
   oldPassword = "";
   newPassword = "";
   newUsername = "";
+  confirmedNewPassword="";
   roles: Role[] = [];
+  passwordMessage = "";
 
   ngOnInit()
   {
@@ -67,11 +69,18 @@ export class ProfileComponent implements OnInit {
   }
 
   ChangePassword(){
-    this.route.paramMap.subscribe(() =>
-    { 
-      this.adminService.updatePassword(this.userName, this.oldPassword, this.newPassword).subscribe((data: Role) => {
-        location.reload();
+    if(this.confirmedNewPassword == this.newPassword)
+    {
+      this.route.paramMap.subscribe(() =>
+      { 
+        this.adminService.updatePassword(this.userName, this.oldPassword, this.newPassword).subscribe((data: Role) => {
+          location.reload();
+        });
       });
-    });
+    }
+    else
+    {
+      this.passwordMessage = "Your new password does not match your new confirmed password"
+    }
   }
 }
