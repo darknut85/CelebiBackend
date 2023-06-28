@@ -77,12 +77,19 @@ namespace Services
 
         public async Task<bool> UpdatePassword(string userName, string currentPassword, string newPassword)
         {
-            Task<IdentityResult> identity = _userManager.ChangePasswordAsync(GetUser(userName), currentPassword, newPassword);
-            identity.Wait();
-            return identity.IsCompletedSuccessfully;
-        }
+            var user = await _userManager.FindByNameAsync(userName);
 
-        //public IdentityUser UpdateUsername(IdentityUser user, string currentUsername, string newUsername) { }
+            if (user == null)
+            {
+                return false;
+            }
+
+            var updated = await _userManager.ChangePasswordAsync(user, currentPassword,newPassword);
+
+            return updated.Succeeded;
+
+            //password not hashed
+        }
 
         public IList<string> GetRoles(IdentityUser user)
         {
