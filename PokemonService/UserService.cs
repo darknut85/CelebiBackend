@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Migrations;
 using Objects;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -54,6 +53,22 @@ namespace Services
             }
 
             user.Email = newMail;
+
+            var updated = await _userManager.UpdateAsync(user);
+
+            return updated.Succeeded;
+        }
+
+        public async Task<bool> UpdateUsername(string userName, string newName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.UserName = newName;
 
             var updated = await _userManager.UpdateAsync(user);
 

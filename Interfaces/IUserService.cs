@@ -29,6 +29,9 @@ namespace Interfaces
         //update email
         Task<bool> UpdateEmail(string userName, string newMail);
 
+        //update username
+        Task<bool> UpdateUsername(string userName, string newName);
+
         //add role to user
         Task<string> AddRoleToUser(string role, string userName);
 
