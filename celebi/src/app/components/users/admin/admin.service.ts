@@ -38,6 +38,11 @@ export class AdminService {
         return this.httpClient.put < Role > (this.apiURL + '/ChangeEmail',userName, { params }).pipe(catchError(this.errorHandler));
     }
 
+    updateUsername(userName: string, newName: string): Observable < Role > {
+        let params = new HttpParams().set('userName', userName).set('newName', newName);
+        return this.httpClient.put < Role > (this.apiURL + '/ChangeUserName',userName, { params }).pipe(catchError(this.errorHandler));
+    }
+
     updatePassword()
     {
 

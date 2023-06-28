@@ -13,6 +13,13 @@
         Role: {{role.name}}
     </p>
     <p>Change UserName</p>
+    <mat-form-field appearance="fill">
+        New Username:<mat-label></mat-label>
+        <input matInput [(ngModel)]="newUsername">
+        </mat-form-field>
+        <div mat-dialog-actions>
+            <button mat-button (click)="ChangeUserName()">Change your username</button>
+        </div>
     <p>Change your email</p>
             <mat-form-field appearance="fill">
             New Email:<mat-label></mat-label>

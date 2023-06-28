@@ -145,29 +145,36 @@ namespace Services
 
         public async Task<string> AddRoleToUser(string role, string userName)
         {
-            IdentityUser? user = await _userManager.FindByNameAsync(userName);
-            if (user.UserName == "")
-                return "The user does not exist";
-
-            IList<string> roles = GetRoles(user);
-
-            IQueryable<IdentityRole> roleExists = _roleManager.Roles;
-
-            IdentityRole? irole = roleExists.Where(x => x.Name.Equals(role)).FirstOrDefault();
-            if (irole == null) 
-                return "The role does not exist";
-
-            string? hasRole = roles.Where(x => x == role).FirstOrDefault();
-            if (hasRole != null)
-                return "The user already as the role";
-
-            Task<IdentityResult> iresult = _userManager.AddToRoleAsync(user, role);
-            iresult.Wait();
-            if (iresult.IsCompletedSuccessfully)
+            try
             {
-                return "The role has been added to the user";
+                IdentityUser? user = await _userManager.FindByNameAsync(userName);
+                if (user.UserName == "")
+                    return "The user does not exist";
+
+                IList<string> roles = GetRoles(user);
+
+                IQueryable<IdentityRole> roleExists = _roleManager.Roles;
+
+                IdentityRole? irole = roleExists.Where(x => x.Name.Equals(role)).FirstOrDefault();
+                if (irole == null)
+                    return "The role does not exist";
+
+                string? hasRole = roles.Where(x => x == role).FirstOrDefault();
+                if (hasRole != null)
+                    return "The user already as the role";
+
+                Task<IdentityResult> iresult = _userManager.AddToRoleAsync(user, role);
+                iresult.Wait();
+                if (iresult.IsCompletedSuccessfully)
+                {
+                    return "The role has been added to the user";
+                }
+                return "The role has not been added to the user";
             }
-            return "The role has not been added to the user";
+            catch (Exception ex) 
+            {
+                return ex.Message;
+            }
         }
 
         public async Task<string> RemoveRoleFromUser(string role, string userName)

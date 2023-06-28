@@ -114,9 +114,9 @@ namespace Celebi.Api.Controllers
         }
 
         [HttpPut("ChangeUserName")]
-        public async Task<IActionResult> ChangeUserName(string userName, string newEmail)
+        public async Task<IActionResult> ChangeUserName(string userName, string newName)
         {
-            bool result = await _userService.UpdateUsername(userName, newEmail);
+            bool result = await _userService.UpdateUsername(userName, newName);
             Role role = new();
             if (result)
             {

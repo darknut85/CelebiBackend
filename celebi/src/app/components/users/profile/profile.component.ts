@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   };
   message = "";
   newMail = "";
+  newUsername = "";
   roles: Role[] = [];
 
   ngOnInit()
@@ -45,12 +46,19 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  ChangeMail(){
+  ChangeUserName(){
+    this.route.paramMap.subscribe(() =>
+    { 
+      this.adminService.updateUsername(this.userName, this.newUsername).subscribe((data: Role) => {
+        location.reload();
+      });
+    });
+  }
 
+  ChangeMail(){
     this.route.paramMap.subscribe(() =>
     { 
       this.adminService.updateEmail(this.userName, this.newMail).subscribe((data: Role) => {
-        console.log(data);
         location.reload();
       });
     });
