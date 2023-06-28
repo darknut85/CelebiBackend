@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
     role: ""
   };
   message = "";
+  newMail = "";
   roles: Role[] = [];
 
   ngOnInit()
@@ -43,5 +44,9 @@ export class ProfileComponent implements OnInit {
         });
       });
     });
+  }
+
+  ChangeMail(){
+    this.adminService.updateEmail(this.userName, this.newMail);
   }
 }

@@ -17,6 +17,9 @@ namespace Celebi.Api
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders()
+                //.AddTokenProvider<IUserTwoFactorTokenProvider<IdentityUser>>("IUserTwoFactorTokenProvider")
+                .AddTokenProvider<EmailTokenProvider<IdentityUser>>("EmailTokenProvider")
                 .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("MyTokenProvider");
 
             builder.Services.AddCors();

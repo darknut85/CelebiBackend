@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Migrations;
 using Objects;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -43,16 +44,39 @@ namespace Services
             return _dataContext.Set<IdentityUser>().OrderBy(x => x.Id).ToList();
         }
 
-        public IdentityResult UpdateEmail(string userName, string newMail, string token)
+        public async Task<bool> UpdateEmail(string userName, string newMail)
         {
-            Task<IdentityResult> identity = _userManager.ChangeEmailAsync(GetUser(userName), newMail, token);
-            return identity.Result;
+            var user = await _userManager.FindByNameAsync(userName);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Email = newMail;
+
+            await _userManager.UpdateAsync(user);
+
+            return true;
+
+            //await _userManager.SetEmailAsync(user, newMail);
+            //var newToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            //await _userManager.ConfirmEmailAsync(user, newToken);.
+
+
+            //var tokenMail = await _userManager.GenerateChangeEmailTokenAsync(user, newMail);
+            //IdentityResult identity = await _userManager.ChangeEmailAsync(user, newMail, tokenMail);
+            //return identity.Succeeded;
+            //return true;
+
+            //method does not work yet
         }
 
-        public IdentityResult UpdatePassword(string userName, string currentPassword, string newPassword)
+        public async Task<bool> UpdatePassword(string userName, string currentPassword, string newPassword)
         {
             Task<IdentityResult> identity = _userManager.ChangePasswordAsync(GetUser(userName), currentPassword, newPassword);
-            return identity.Result;
+            identity.Wait();
+            return identity.IsCompletedSuccessfully;
         }
 
         //public IdentityUser UpdateUsername(IdentityUser user, string currentUsername, string newUsername) { }

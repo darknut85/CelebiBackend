@@ -33,10 +33,11 @@ export class AdminService {
         return this.httpClient.get < User > (this.apiURL + '/GetOneUser', { params }).pipe(catchError(this.errorHandler));
     }
 
-    updateEmail(userName: string, oldmail: string, newMail: string)
+    updateEmail(userName: string, newMail: string)
     {
-        let params = new HttpParams().set('userName', userName).set('oldmail', oldmail).set('newMail', newMail);
-        console.log(params);
+        let params = new HttpParams().set('userName', userName).set('newEmail', newMail);
+            console.log(params);
+            this.httpClient.put(this.apiURL + '/Change Email', { params }).pipe(catchError(this.errorHandler));
     }
 
     updatePassword()

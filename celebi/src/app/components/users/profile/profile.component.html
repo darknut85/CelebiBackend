@@ -15,12 +15,8 @@
     <p>Change UserName</p>
     <p>Change your email</p>
             <mat-form-field appearance="fill">
-            Old Email:<mat-label></mat-label>
-            <input matInput [(ngModel)]="user.role">
-            </mat-form-field>
-            <mat-form-field appearance="fill">
             New Email:<mat-label></mat-label>
-            <input matInput [(ngModel)]="user.role">
+            <input matInput [(ngModel)]="newMail">
             </mat-form-field>
     <div mat-dialog-actions>
         <button mat-button (click)="ChangeMail()">Change your mail</button>
