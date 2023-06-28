@@ -23,6 +23,8 @@ export class ProfileComponent implements OnInit {
   };
   message = "";
   newMail = "";
+  oldPassword = "";
+  newPassword = "";
   newUsername = "";
   roles: Role[] = [];
 
@@ -59,6 +61,15 @@ export class ProfileComponent implements OnInit {
     this.route.paramMap.subscribe(() =>
     { 
       this.adminService.updateEmail(this.userName, this.newMail).subscribe((data: Role) => {
+        location.reload();
+      });
+    });
+  }
+
+  ChangePassword(){
+    this.route.paramMap.subscribe(() =>
+    { 
+      this.adminService.updatePassword(this.userName, this.oldPassword, this.newPassword).subscribe((data: Role) => {
         location.reload();
       });
     });

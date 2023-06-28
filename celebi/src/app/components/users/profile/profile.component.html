@@ -28,6 +28,18 @@
     <div mat-dialog-actions>
         <button mat-button (click)="ChangeMail()">Change your mail</button>
     </div>
+    <p>Change your password</p>
+            <mat-form-field appearance="fill">
+            Old Password:<mat-label></mat-label>
+            <input matInput [(ngModel)]="oldPassword">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+            New Password:<mat-label></mat-label>
+            <input matInput [(ngModel)]="newPassword">
+            </mat-form-field>
+    <div mat-dialog-actions>
+        <button mat-button (click)="ChangePassword()">Change your password</button>
+    </div>
     <p>Change password</p>
 </body>
 

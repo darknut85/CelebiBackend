@@ -43,9 +43,9 @@ export class AdminService {
         return this.httpClient.put < Role > (this.apiURL + '/ChangeUserName',userName, { params }).pipe(catchError(this.errorHandler));
     }
 
-    updatePassword()
-    {
-
+    updatePassword(userName: string, oldWord: string, newWord: string): Observable < Role > {
+        let params = new HttpParams().set('userName', userName).set('oldPassword', oldWord).set('newPassword', newWord);
+        return this.httpClient.put < Role > (this.apiURL + '/ChangePassword',userName, { params }).pipe(catchError(this.errorHandler));
     }
 
     getRoles(userName: string): Observable < Role[] > {

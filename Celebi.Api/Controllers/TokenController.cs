@@ -93,9 +93,9 @@ namespace Celebi.Api.Controllers
         }
 
         [HttpPut("ChangePassword")]
-        public async Task<IActionResult> ChangePassword(string identity, string oldPassword, string newPassword)
+        public async Task<IActionResult> ChangePassword(string userName, string oldPassword, string newPassword)
         {
-            bool result = await _userService.UpdatePassword(identity, oldPassword, newPassword);
+            bool result = await _userService.UpdatePassword(userName, oldPassword, newPassword);
             Role role = new();
             if (result)
             {
