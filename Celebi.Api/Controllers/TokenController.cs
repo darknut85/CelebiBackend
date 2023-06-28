@@ -92,7 +92,7 @@ namespace Celebi.Api.Controllers
             return Ok("User created");
         }
 
-        [HttpPut("Change Password")]
+        [HttpPut("ChangePassword")]
         public async Task<IActionResult> ChangePassword([FromBody] string identity, string oldPassword, string newPassword)
         {
             bool result = await _userService.UpdatePassword(identity, oldPassword, newPassword);
@@ -100,11 +100,18 @@ namespace Celebi.Api.Controllers
 
         }
 
-        [HttpPut("Change Email")]
-        public async Task<IActionResult> ChangeEmail([FromBody] string identity, string newEmail)
+        [HttpPut("ChangeEmail")]
+        public async Task<IActionResult> ChangeEmail(string userName, string newEmail)
         {
-            bool result = await _userService.UpdateEmail(identity, newEmail);
-            return Ok(result);
+            bool result = await _userService.UpdateEmail(userName, newEmail);
+            Role role = new();
+            if(result) 
+            {
+                role.Name = "Email changed";
+                return Ok(role);
+            }
+            role.Name = "Email not changed";
+            return Ok(role);
         }
 
         [HttpGet("Roles")]

@@ -33,11 +33,9 @@ export class AdminService {
         return this.httpClient.get < User > (this.apiURL + '/GetOneUser', { params }).pipe(catchError(this.errorHandler));
     }
 
-    updateEmail(userName: string, newMail: string)
-    {
+    updateEmail(userName: string, newMail: string): Observable < Role > {
         let params = new HttpParams().set('userName', userName).set('newEmail', newMail);
-            console.log(params);
-            this.httpClient.put(this.apiURL + '/Change Email', { params }).pipe(catchError(this.errorHandler));
+        return this.httpClient.put < Role > (this.apiURL + '/ChangeEmail',userName, { params }).pipe(catchError(this.errorHandler));
     }
 
     updatePassword()

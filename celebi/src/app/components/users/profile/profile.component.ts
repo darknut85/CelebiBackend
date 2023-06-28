@@ -32,9 +32,8 @@ export class ProfileComponent implements OnInit {
   }
 
   AddUsersToSelectionBox(){
-    this.route.paramMap.subscribe((params) =>
+    this.route.paramMap.subscribe(() =>
     { 
-      const id = params.get('id');
       this.adminService.getSelf(this.userName).subscribe((data: User) => { 
         this.user = data;
         this.adminService.getRoles(String(data.userName)).subscribe((role: Role[]) => {
@@ -47,6 +46,13 @@ export class ProfileComponent implements OnInit {
   }
 
   ChangeMail(){
-    this.adminService.updateEmail(this.userName, this.newMail);
+
+    this.route.paramMap.subscribe(() =>
+    { 
+      this.adminService.updateEmail(this.userName, this.newMail).subscribe((data: Role) => {
+        console.log(data);
+        location.reload();
+      });
+    });
   }
 }

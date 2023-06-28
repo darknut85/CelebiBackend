@@ -55,21 +55,9 @@ namespace Services
 
             user.Email = newMail;
 
-            await _userManager.UpdateAsync(user);
+            var updated = await _userManager.UpdateAsync(user);
 
-            return true;
-
-            //await _userManager.SetEmailAsync(user, newMail);
-            //var newToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            //await _userManager.ConfirmEmailAsync(user, newToken);.
-
-
-            //var tokenMail = await _userManager.GenerateChangeEmailTokenAsync(user, newMail);
-            //IdentityResult identity = await _userManager.ChangeEmailAsync(user, newMail, tokenMail);
-            //return identity.Succeeded;
-            //return true;
-
-            //method does not work yet
+            return updated.Succeeded;
         }
 
         public async Task<bool> UpdatePassword(string userName, string currentPassword, string newPassword)
