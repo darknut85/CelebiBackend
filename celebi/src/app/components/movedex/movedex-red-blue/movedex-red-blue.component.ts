@@ -50,9 +50,12 @@ export class MovedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.move = result;
-      this.message = "You added " + this.move.name;
-      this.addMove(result);
+      if(result != null)
+      {
+        this.move = result;
+        this.message = "You added " + this.move.name;
+        this.addMove(result);
+      }
     });
   }
 
@@ -65,9 +68,12 @@ export class MovedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.move = result;
-      this.message = "You updated " + this.move.name;
-      this.updateMove(result);
+      if(result != null)
+      {
+        this.move = result;
+        this.message = "You updated " + this.move.name;
+        this.updateMove(result);
+      }
     });
   }
 
@@ -77,8 +83,11 @@ export class MovedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if(result != null)
+      {
       this.message = "You deleted " + result;
       this.removeMove(result);
+      }
     });
   }
 

@@ -51,9 +51,12 @@ export class PokedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.pokemon = result;
-      this.message = "You added " + this.pokemon.name;
-      this.addPokemon(result);
+      if(result != null)
+      {
+        this.pokemon = result;
+        this.message = "You added " + this.pokemon.name;
+        this.addPokemon(result);
+      }
     });
   }
 
@@ -63,9 +66,12 @@ export class PokedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.pokemon.id = result;
-      this.message = "You deleted " + this.pokemon.id;
-      this.removePokemon(result);
+      if(result != null)
+      {
+        this.pokemon.id = result;
+        this.message = "You deleted " + this.pokemon.id;
+        this.removePokemon(result);
+      }
     });
   }
 
@@ -78,9 +84,12 @@ export class PokedexRedBlueComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.pokemon = result;
-      this.message = "You updated " + this.pokemon.name;
-      this.updatePokemon(result);
+      if(result != null)
+      {
+        this.pokemon = result;
+        this.message = "You updated " + this.pokemon.name;
+        this.updatePokemon(result);
+      }
     });
   }
 
