@@ -6,8 +6,10 @@ using Migrations;
 using Objects;
 using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Services
 {
@@ -105,7 +107,7 @@ namespace Services
 
             IdentityUser? userExists = await _userManager.FindByNameAsync(register.Username);
 
-            if (register.Username == null)
+            if (register.Username == null || register.Email == null)
             {
                 return false;
             }
@@ -124,6 +126,14 @@ namespace Services
             {
                 return false;
             }
+
+            var regex = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
+            bool isValid = Regex.IsMatch(register.Email, regex, RegexOptions.IgnoreCase);
+            if (!isValid)
+            {
+                return false;
+            }
+
             IdentityRole? roleExists = await _roleManager.FindByNameAsync(register.Role);
             if (roleExists == null)
             {
