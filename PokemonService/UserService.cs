@@ -89,8 +89,6 @@ namespace Services
             var updated = await _userManager.ChangePasswordAsync(user, currentPassword,newPassword);
 
             return updated.Succeeded;
-
-            //password not hashed
         }
 
         public IList<string> GetRoles(IdentityUser user)
