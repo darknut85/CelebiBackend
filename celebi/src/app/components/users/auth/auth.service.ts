@@ -13,6 +13,7 @@ export class AuthService {
     logout() {
         localStorage.removeItem("token_Id");
         localStorage.removeItem("username");
+        window.location.href='/login';
     }
 
     public isLoggedIn() {

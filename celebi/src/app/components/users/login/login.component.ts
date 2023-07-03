@@ -34,8 +34,7 @@ export class LoginComponent {
       .subscribe( res => 
         {
           this.authService.login(res, this.form.controls['userName'].value);
-          this.router.navigate(['/home']);
-
+          window.location.href='/home';
         },() => this.router.navigate(['/login']));
   }
 }
