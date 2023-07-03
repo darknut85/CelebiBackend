@@ -104,6 +104,22 @@ namespace Services
             await CreateStandardRoles();
 
             IdentityUser? userExists = await _userManager.FindByNameAsync(register.Username);
+
+            if (register.Username == null)
+            {
+                return false;
+            }
+
+            if (register.Username.Length < 6)
+            {
+                return false;
+            }
+
+            if (!register.Username.Any(char.IsUpper))
+            {
+                return false;
+            }
+
             if (userExists != null)
             {
                 return false;
