@@ -8,6 +8,7 @@ export class AuthService {
     login(res: string, user: string){
         localStorage.setItem("token_Id",res);
         localStorage.setItem("username",user);
+        window.location.href='/home';
     }
 
     logout() {
