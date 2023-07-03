@@ -5,14 +5,14 @@
     </mat-sidenav-content>
     <mat-sidenav mode="side" opened>
         <mat-action-list>
-            <mat-list-item [routerLink]="'/register'">Register</mat-list-item>
-            <mat-list-item [routerLink]="'/login'">Login</mat-list-item>
+            <mat-list-item [routerLink]="'/login'" *ngIf="turnOn === false">Login</mat-list-item>
+            <mat-list-item [routerLink]="'/register'" *ngIf="turnOn === false">Register</mat-list-item>
             <mat-list-item [routerLink]="'/home'">Home</mat-list-item>
             <mat-list-item [routerLink]="'/pokedexRedBlue'">Pokedex Red/Blue</mat-list-item>
             <mat-list-item [routerLink]="'/movedexRedBlue'">Movedex Red/Blue</mat-list-item>
-            <mat-list-item [routerLink]="'/admin'">Admin</mat-list-item>
-            <mat-list-item [routerLink]="'/profile'">Profile</mat-list-item>
-            <mat-list-item [routerLink]="'/logout'">Logout</mat-list-item>
+            <mat-list-item [routerLink]="'/admin'" *ngIf="turnOn === true">Admin</mat-list-item>
+            <mat-list-item [routerLink]="'/profile'" *ngIf="turnOn === true">Profile</mat-list-item>
+            <mat-list-item [routerLink]="'/logout'" *ngIf="turnOn === true">Logout</mat-list-item>
         </mat-action-list>
     </mat-sidenav>
 </mat-sidenav-container>
