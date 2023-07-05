@@ -2,7 +2,7 @@
   <p>Add a new Pokemon</p>
   <mat-form-field appearance="fill">
     Name:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.name">
+    <input matInput [(ngModel)]="data.name" (ngModelChange)="nameMade()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
@@ -48,5 +48,5 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Undo</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add the move</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial *ngIf="currentMove != ''">Add the move</button>
 </div>

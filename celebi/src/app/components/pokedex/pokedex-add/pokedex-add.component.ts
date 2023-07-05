@@ -11,6 +11,14 @@ export class PokedexAddComponent {
   constructor(
     public dialogRef: MatDialogRef<PokedexAddComponent>,@Inject(MAT_DIALOG_DATA) public data: Pokemon){
   }
+  
+  currentPokemon = "";
+  
+  nameMade()
+  {
+    this.currentPokemon = this.data.name;
+  }
+
   onNoClick(): void{
     this.dialogRef.close();
   }
