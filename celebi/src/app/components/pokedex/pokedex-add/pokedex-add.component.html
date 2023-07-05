@@ -3,111 +3,112 @@
   <p>Add a new Pokemon</p>
   <mat-form-field appearance="fill">
     Name:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.name" (ngModelChange)="nameMade()">
+    <input matInput [(ngModel)]="pokemon.name" (ngModelChange)="nameMade()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     DexNumber:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.dexEntry">
+    <input matInput [(ngModel)]="pokemon.dexEntry" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     Type1:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.type1">
+    <input matInput [(ngModel)]="pokemon.type1" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     Type2:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.type2">
+    <input matInput [(ngModel)]="pokemon.type2" (ngModelChange)="dataCheck()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     Height:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.height">
+    <input matInput [(ngModel)]="pokemon.height" (ngModelChange)="dataCheck()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     Weight:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.weight">
+    <input matInput [(ngModel)]="pokemon.weight" (ngModelChange)="dataCheck()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     Classification:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.classification">
+    <input matInput [(ngModel)]="pokemon.classification" (ngModelChange)="dataCheck()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     DexEntry:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.pokedexEntry">
+    <input matInput [(ngModel)]="pokemon.pokedexEntry" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     Growth rate:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.growthRate">
+    <input matInput [(ngModel)]="pokemon.growthRate" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     HPEV:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.hpev">
+    <input matInput [(ngModel)]="pokemon.hpev" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     ATKEV:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.atkev">
+    <input matInput [(ngModel)]="pokemon.atkev" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     DEFEV:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.defev">
+    <input matInput [(ngModel)]="pokemon.defev" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     SPATKEV:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.spatkev">
+    <input matInput [(ngModel)]="pokemon.spatkev" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     SPDEFEV:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.spdefev">
+    <input matInput [(ngModel)]="pokemon.spdefev" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     SPDEV:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.spdev">
+    <input matInput [(ngModel)]="pokemon.spdev" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     HP:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.hp">
+    <input matInput [(ngModel)]="pokemon.hp" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     ATK:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.atk">
+    <input matInput [(ngModel)]="pokemon.atk" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     DEF:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.def">
+    <input matInput [(ngModel)]="pokemon.def" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     SPATK:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.spatk">
+    <input matInput [(ngModel)]="pokemon.spatk" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     SPDEF:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.spdef">
+    <input matInput [(ngModel)]="pokemon.spdef" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     SPD:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.spd">
+    <input matInput [(ngModel)]="pokemon.spd" (ngModelChange)="dataCheck()">
   </mat-form-field>
 </div>
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Undo</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial *ngIf="currentPokemon != ''">Add the pokemon</button>
+  <button mat-button [mat-dialog-close]="pokemon" cdkFocusInitial *ngIf="currentPokemon != '' && dataCheck()">Add the pokemon</button>
 </div>
+<div>{{message}}</div>
