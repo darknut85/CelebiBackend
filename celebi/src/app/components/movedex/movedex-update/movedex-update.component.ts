@@ -15,6 +15,7 @@ export class MovedexUpdateComponent
       @Inject(MAT_DIALOG_DATA) public data: Move){}
 
   selectedMove = 'selectedMove';
+  currentMove = -1;
   marray: Move[] = [];
   move: Move = <Move>{ };
 
@@ -29,6 +30,7 @@ export class MovedexUpdateComponent
     if( move != undefined)
     {
       this.move = move;
+      this.currentMove = move.id;
     }
   }
 

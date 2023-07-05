@@ -60,5 +60,5 @@
   
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Undo</button>
-    <button mat-button [mat-dialog-close]="move" cdkFocusInitial>Update the move</button>
+    <button mat-button [mat-dialog-close]="move" cdkFocusInitial *ngIf="currentMove != -1">Update the move</button>
   </div>

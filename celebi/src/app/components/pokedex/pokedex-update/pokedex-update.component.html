@@ -119,5 +119,5 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Undo</button>
-  <button mat-button [mat-dialog-close]="pokemon" cdkFocusInitial>Update the pokemon</button>
+  <button mat-button [mat-dialog-close]="pokemon" cdkFocusInitial *ngIf="currentPokemon != -1">Update the pokemon</button>
 </div>

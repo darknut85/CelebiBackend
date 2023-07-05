@@ -18,6 +18,7 @@ export class PokedexUpdateComponent
   selectedPokemon = 'selectedPokemon';
   parray: Pokemon[] = [];
   pokemon: Pokemon = <Pokemon>{ };
+  currentPokemon = -1;
 
   ngOnInit() {
     this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
@@ -30,6 +31,7 @@ export class PokedexUpdateComponent
     if( pokemon != undefined)
     {
       this.pokemon = pokemon;
+      this.currentPokemon = pokemon.id;
     }
   }
 
