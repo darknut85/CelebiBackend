@@ -53,14 +53,12 @@ export class LoginComponent {
     }
   }
 
-  errorHandler(error: {error: { message: string; }; status: any;message: any; }) 
+  errorHandler(error: {status: any;}) 
   {
-    console.log(error);
-    let errorMessage = '';
     if(error.toString() == "400")
     {
       this.message = "You cannot log in using this combination of username and password";
     }
-    return throwError(errorMessage);
+    return throwError(error);
 }
 }
