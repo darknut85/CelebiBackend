@@ -18,6 +18,7 @@ export class PokedexDeleteComponent
   selectedPokemon = 'selectedPokemon';
   parray: Pokemon[] = [];
   pokemonId: number = -1;
+  pokemonSelected = -1;
 
   ngOnInit() {
       this.pokemonService.getPokemon().subscribe((data: Pokemon[]) => {
@@ -30,6 +31,7 @@ export class PokedexDeleteComponent
     if( pokemon != undefined)
     {
       this.pokemonId = pokemon.id;
+      this.pokemonSelected = pokemon.id;
     }
   }
 

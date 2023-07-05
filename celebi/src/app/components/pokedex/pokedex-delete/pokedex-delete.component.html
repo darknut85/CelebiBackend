@@ -14,5 +14,6 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Undo</button>
-    <button mat-button [mat-dialog-close]="pokemonId" cdkFocusInitial>Delete the pokemon</button>
+    <button mat-button [mat-dialog-close]="pokemonId" *ngIf="pokemonSelected != -1" cdkFocusInitial>Delete the pokemon</button>
+    <div *ngIf="pokemonSelected == -1"> Select a move</div>
 </div>

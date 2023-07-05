@@ -18,6 +18,7 @@ export class MovedexDeleteComponent {
   selectedMove = 'selectedMove';
   marray: Move[] = [];
   moveId: number = -1;
+  moveSelected = -1;
 
   ngOnInit() {
     this.moveService.getMove().subscribe((data: Move[]) => {
@@ -30,6 +31,7 @@ export class MovedexDeleteComponent {
     if( move != undefined)
     {
       this.moveId = move.id;
+      this.moveSelected = move.id;
     }
   }
 

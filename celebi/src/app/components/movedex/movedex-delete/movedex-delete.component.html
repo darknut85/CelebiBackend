@@ -14,5 +14,6 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Undo</button>
-    <button mat-button [mat-dialog-close]="moveId" cdkFocusInitial>Delete the move</button>
+    <button mat-button [mat-dialog-close]="moveId" *ngIf="moveSelected != -1" cdkFocusInitial>Delete the move</button>
+    <div *ngIf="moveSelected == -1"> Select a move</div>
 </div>
