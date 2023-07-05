@@ -211,7 +211,7 @@ namespace Services
         public async Task<string> RemoveRoleFromUser(string role, string userName)
         {
             IdentityUser? user = await _userManager.FindByNameAsync(userName);
-            if (user.UserName == "")
+            if (user.UserName == "" || user.UserName == null || user == null)
                 return "The user does not exist";
 
             IList<string> roles = GetRoles(user);

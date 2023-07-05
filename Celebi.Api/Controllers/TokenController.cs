@@ -72,13 +72,22 @@ namespace Celebi.Api.Controllers
         [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] UserCredential userCredential) 
         {
-            string token = await _userService.Login(userCredential);
-            
-            if (token == "")
+            try
             {
-                return Unauthorized();
+
+                string token = await _userService.Login(userCredential);
+
+                if (token == "")
+                {
+                    return BadRequest("Combination of username and password is invalid");
+                }
+                return Ok(token);
             }
-            return Ok(token);
+            catch (Exception ex) 
+            {
+                return BadRequest(ex.Message);
+            
+            }
         }
 
         [HttpPost("Register")]
