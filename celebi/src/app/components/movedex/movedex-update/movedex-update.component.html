@@ -14,51 +14,52 @@
     <p>Update a Pokemon</p>
     <mat-form-field appearance="fill">
       Name:<mat-label></mat-label>
-      <input matInput [(ngModel)]="move.name">
+      <input matInput [(ngModel)]="move.name" (ngModelChange)="nameMade()">
     </mat-form-field>
     
     <mat-form-field appearance="fill">
       Type:<mat-label></mat-label>
-      <input matInput [(ngModel)]="move.type">
+      <input matInput [(ngModel)]="move.type" (ngModelChange)="dataCheck()">
     </mat-form-field>
   
     <mat-form-field appearance="fill">
       Power Points:<mat-label></mat-label>
-      <input matInput [(ngModel)]="move.powerPoints">
+      <input matInput [(ngModel)]="move.powerPoints" (ngModelChange)="dataCheck()">
     </mat-form-field>
   
     <mat-form-field appearance="fill">
       Base Power:<mat-label></mat-label>
-      <input matInput [(ngModel)]="move.basePower">
+      <input matInput [(ngModel)]="move.basePower" (ngModelChange)="dataCheck()">
     </mat-form-field>
     
     <mat-form-field appearance="fill">
       Accuracy:<mat-label></mat-label>
-      <input matInput [(ngModel)]="move.accuracy">
+      <input matInput [(ngModel)]="move.accuracy" (ngModelChange)="dataCheck()">
     </mat-form-field>
     
     <mat-form-field appearance="fill">
       Battle Effect:<mat-label></mat-label>
-      <input matInput [(ngModel)]="move.battleEffect">
+      <input matInput [(ngModel)]="move.battleEffect" (ngModelChange)="dataCheck()">
     </mat-form-field>
     
     <mat-form-field appearance="fill">
       Effect Rate:<mat-label></mat-label>
-      <input matInput [(ngModel)]="move.effectRate">
+      <input matInput [(ngModel)]="move.effectRate" (ngModelChange)="dataCheck()">
     </mat-form-field>
     
     <mat-form-field appearance="fill">
       Priority:<mat-label></mat-label>
-      <input matInput [(ngModel)]="move.priority">
+      <input matInput [(ngModel)]="move.priority" (ngModelChange)="dataCheck()">
     </mat-form-field>
   
     <mat-form-field appearance="fill">
       Target:<mat-label></mat-label>
-      <input matInput [(ngModel)]="move.target">
+      <input matInput [(ngModel)]="move.target" (ngModelChange)="dataCheck()">
     </mat-form-field>
   </div>
   
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Undo</button>
-    <button mat-button [mat-dialog-close]="move" cdkFocusInitial *ngIf="currentMove != -1">Update the move</button>
+    <button mat-button [mat-dialog-close]="move" cdkFocusInitial *ngIf="currentMove != '' && dataCheck()">Update the move</button>
   </div>
+  <div>{{message}}</div>
