@@ -14,7 +14,6 @@ export class PokedexAddComponent {
   
   currentPokemon = "";
   message = "";
-  placeHolder = "";
   pokemon: Pokemon = <Pokemon>
   {
     id: 0, name: "", dexEntry: 0, 

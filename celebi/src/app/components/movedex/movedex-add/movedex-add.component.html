@@ -2,51 +2,52 @@
   <p>Add a new Pokemon</p>
   <mat-form-field appearance="fill">
     Name:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.name" (ngModelChange)="nameMade()">
+    <input matInput [(ngModel)]="move.name" (ngModelChange)="nameMade()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     Type:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.type">
+    <input matInput [(ngModel)]="move.type" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     Power Points:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.powerPoints">
+    <input matInput [(ngModel)]="move.powerPoints" (ngModelChange)="dataCheck()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     Base Power:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.basePower">
+    <input matInput [(ngModel)]="move.basePower" (ngModelChange)="dataCheck()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
       Accuracy:<mat-label></mat-label>
-      <input matInput [(ngModel)]="data.accuracy">
+      <input matInput [(ngModel)]="move.accuracy" (ngModelChange)="dataCheck()">
     </mat-form-field>
 
   <mat-form-field appearance="fill">
     Battle Effect:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.battleEffect">
+    <input matInput [(ngModel)]="move.battleEffect" (ngModelChange)="dataCheck()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     Effect Rate:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.effectRate">
+    <input matInput [(ngModel)]="move.effectRate" (ngModelChange)="dataCheck()">
   </mat-form-field>
   
   <mat-form-field appearance="fill">
     Priority:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.priority">
+    <input matInput [(ngModel)]="move.priority" (ngModelChange)="dataCheck()">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     Target:<mat-label></mat-label>
-    <input matInput [(ngModel)]="data.target">
+    <input matInput [(ngModel)]="move.target" (ngModelChange)="dataCheck()">
   </mat-form-field>
 </div>
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Undo</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial *ngIf="currentMove != ''">Add the move</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial *ngIf="currentMove != '' && dataCheck()">Add the move</button>
 </div>
+<div>{{message}}</div>
