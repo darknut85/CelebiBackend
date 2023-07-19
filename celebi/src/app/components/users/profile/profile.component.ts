@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
     password: "",
     role: ""
   };
+
+  mailMessage = "";
   message = "";
   newMail = "";
   oldPassword = "";
@@ -63,7 +65,11 @@ export class ProfileComponent implements OnInit {
     this.route.paramMap.subscribe(() =>
     { 
       this.adminService.updateEmail(this.userName, this.newMail).subscribe((data: Role) => {
-        location.reload();
+        this.mailMessage = data.name;
+        if(data.name == "Email changed")
+        {
+          location.reload();
+        }
       });
     });
   }

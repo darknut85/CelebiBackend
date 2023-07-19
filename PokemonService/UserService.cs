@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
 using Migrations;
 using Objects;
 using System.Diagnostics;
@@ -51,6 +52,14 @@ namespace Services
             var user = await _userManager.FindByNameAsync(userName);
 
             if (user == null)
+            {
+                return false;
+            }
+
+            var regex = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
+            bool isValid = Regex.IsMatch(newMail, regex, RegexOptions.IgnoreCase);
+
+            if (!isValid) 
             {
                 return false;
             }
