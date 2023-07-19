@@ -21,6 +21,8 @@ export class PokedexPageComponent implements OnInit {
   constructor(private pokemonService: PokemonService, private route: ActivatedRoute, private moveService: MoveService,
     private levelupService: LevelupService, private adminService: AdminService) { }
   userName = "";
+  addMessage = "";
+  removeMessage = "";
   selectedMove = 'selectedMove';
   marray: Move[] = [];
   typing1: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -176,18 +178,34 @@ export class PokedexPageComponent implements OnInit {
       levelUpMove.isTm = true;
     }
     this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
-      location.reload();
+      if(response.id != 0)
+      {
+        this.addMessage = "Move has been added to pokemon";
+        location.reload();
+      }
+      else
+      {
+        this.addMessage = "Move has not been added to pokemon";
+      }
     });
   }
 
   removeLevelupMove(): void{
 
     let levelupMove = Number(this.selectedMove);
-    if(levelupMove != undefined)
+    if(levelupMove.toString() == 'NaN')
+    {
+      this.removeMessage = "Move could selected";
+    }
+    else if(levelupMove != undefined && levelupMove != null)
     {
       this.levelupService.removeLevelupMove(levelupMove).subscribe(response => {
+        this.removeMessage = "Move has been removed";
         location.reload();
       });
+    }
+    else{
+      this.removeMessage = "Move could not be removed";
     }
   }
 
