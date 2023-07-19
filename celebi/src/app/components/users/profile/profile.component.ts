@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
     role: ""
   };
 
+  userMessage = "";
   mailMessage = "";
   message = "";
   newMail = "";
@@ -56,7 +57,11 @@ export class ProfileComponent implements OnInit {
     this.route.paramMap.subscribe(() =>
     { 
       this.adminService.updateUsername(this.userName, this.newUsername).subscribe((data: Role) => {
-        location.reload();
+        this.userMessage = data.name;
+        if(data.name == "Username was changed")
+        {
+          location.reload();
+        }
       });
     });
   }
@@ -80,7 +85,11 @@ export class ProfileComponent implements OnInit {
       this.route.paramMap.subscribe(() =>
       { 
         this.adminService.updatePassword(this.userName, this.oldPassword, this.newPassword).subscribe((data: Role) => {
+          this.passwordMessage = data.name;
+        if(data.name == "password is changed")
+        {
           location.reload();
+        }
         });
       });
     }

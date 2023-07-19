@@ -5,11 +5,14 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Win32;
 using Migrations;
 using Objects;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mail;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -47,13 +50,13 @@ namespace Services
             return _dataContext.Set<IdentityUser>().OrderBy(x => x.Id).ToList();
         }
 
-        public async Task<bool> UpdateEmail(string userName, string newMail)
+        public async Task<string> UpdateEmail(string userName, string newMail)
         {
             var user = await _userManager.FindByNameAsync(userName);
 
             if (user == null)
             {
-                return false;
+                return "something went wrong";
             }
 
             var regex = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
@@ -61,44 +64,84 @@ namespace Services
 
             if (!isValid) 
             {
-                return false;
+                return "new email is not a valid email address";
             }
 
             user.Email = newMail;
 
             var updated = await _userManager.UpdateAsync(user);
 
-            return updated.Succeeded;
+            if(updated.Succeeded)
+            {
+                return "Email changed";
+            }
+            return "Email not changed";
         }
 
-        public async Task<bool> UpdateUsername(string userName, string newName)
+        public async Task<string> UpdateUsername(string userName, string newName)
         {
+            if(newName == "")
+            {
+                return "New username is empty";
+            }
+
+            if (!newName.Any(char.IsUpper))
+            {
+                return "New username does not contain any capital letters";
+            }
+
+            if (newName.Length < 6)
+            {
+                return "New username must be at least 6 characters";
+            }
+
+            var nuser = await _userManager.FindByNameAsync(newName);
+
+            if(nuser != null) 
+            {
+                return "New username cannot be used";
+            }
+
             var user = await _userManager.FindByNameAsync(userName);
 
             if (user == null)
             {
-                return false;
+                return "Something went wrong";
             }
 
             user.UserName = newName;
 
             var updated = await _userManager.UpdateAsync(user);
 
-            return updated.Succeeded;
+            if(updated.Succeeded)
+            {
+                return "Username was changed";
+            }
+
+            return "Username was not changed";
         }
 
-        public async Task<bool> UpdatePassword(string userName, string currentPassword, string newPassword)
+        public async Task<string> UpdatePassword(string userName, string currentPassword, string newPassword)
         {
+            if (newPassword == "")
+            {
+                return "The new password cannot be empty";
+            }
+
             var user = await _userManager.FindByNameAsync(userName);
 
             if (user == null)
             {
-                return false;
+                return "something went wrong";
             }
 
             var updated = await _userManager.ChangePasswordAsync(user, currentPassword,newPassword);
 
-            return updated.Succeeded;
+            if(updated.Succeeded)
+            {
+                return "password is changed";
+            }
+            return "password is not changed";
         }
 
         public IList<string> GetRoles(IdentityUser user)

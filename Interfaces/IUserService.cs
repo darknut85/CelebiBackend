@@ -24,13 +24,13 @@ namespace Interfaces
         string Authenticate(string username, string password, string role = "User");
 
         //update password
-        Task<bool> UpdatePassword(string userName, string currentPassword, string newPassword);
+        Task<string> UpdatePassword(string userName, string currentPassword, string newPassword);
 
         //update email
-        Task<bool> UpdateEmail(string userName, string newMail);
+        Task<string> UpdateEmail(string userName, string newMail);
 
         //update username
-        Task<bool> UpdateUsername(string userName, string newName);
+        Task<string> UpdateUsername(string userName, string newName);
 
         //add role to user
         Task<string> AddRoleToUser(string role, string userName);
