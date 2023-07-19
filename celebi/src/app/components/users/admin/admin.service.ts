@@ -52,6 +52,10 @@ export class AdminService {
         return this.httpClient.get < Role[] > (this.apiURL + '/GetRolesOfUser?userName=' + userName).pipe(catchError(this.errorHandler));
     }
 
+    getAllRoles(): Observable < Role[] > {
+        return this.httpClient.get < Role[] > (this.apiURL + '/GetAllRoles').pipe(catchError(this.errorHandler));
+    }
+
     addRole(role: string, userName: string): Observable < Role >{
         let params = new HttpParams().set('role', role).set('userName', userName);
         return this.httpClient.get <Role> (this.apiURL + '/Roles', { params } ).pipe(catchError(this.errorHandler));

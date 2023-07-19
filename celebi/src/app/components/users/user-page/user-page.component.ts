@@ -13,6 +13,7 @@ export class UserPageComponent {
   constructor(private adminService: AdminService, private route: ActivatedRoute) { }
 
   userName = "";
+  selectedRole = "selectedRole";
   uarray: User[] = [];
   user: User = 
   {
@@ -23,6 +24,7 @@ export class UserPageComponent {
   };
   message = "";
   roles: Role[] = [];
+  allRoles: Role[] = [];
 
   ngOnInit()
   {
@@ -42,6 +44,11 @@ export class UserPageComponent {
         this.adminService.getRoles(String(data.userName)).subscribe((role: Role[]) => {
           role.forEach(element => {
             this.roles.push({name:element.toString()});
+          });
+        });
+        this.adminService.getAllRoles().subscribe((role: Role[]) => {
+          role.forEach(element => {
+            this.allRoles.push({name:element.toString()});
           });
         });
       });
@@ -69,6 +76,10 @@ export class UserPageComponent {
       }
     });
   };
+
+  findRole(roleName: string): void{
+    this.user.role = roleName;
+  }
 
   refresh(): void{
     window.location.reload();

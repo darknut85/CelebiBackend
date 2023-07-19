@@ -68,6 +68,19 @@ namespace Celebi.Api.Controllers
             return BadRequest("User does not exist");
         }
 
+        [HttpGet("GetAllRoles")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAllRoles()
+        {
+            IList<string> roles = _userService.GetRoles();
+
+            if (roles != null)
+            {
+                return Ok(roles);
+            }
+            return BadRequest("User does not exist");
+        }
+
         [AllowAnonymous]
         [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] UserCredential userCredential) 
@@ -145,7 +158,7 @@ namespace Celebi.Api.Controllers
 
             if (mess.Name != "The role has been removed from the user")
             {
-                return BadRequest(mess);
+                return Ok(mess);
             }
             return Ok(mess);
         }

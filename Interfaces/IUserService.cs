@@ -14,6 +14,9 @@ namespace Interfaces
         //get all roles of user
         IList<string> GetRoles(IdentityUser user);
 
+        //get all roles
+        IList<string> GetRoles();
+
         //register user
         Task<string> Register(Register register);
 

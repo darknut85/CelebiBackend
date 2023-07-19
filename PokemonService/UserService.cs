@@ -152,6 +152,18 @@ namespace Services
             return result;
         }
 
+        public IList<string> GetRoles()
+        {
+            var roles = _roleManager.Roles;
+            var result = new List<string>();
+            foreach (var item in roles)
+            {
+                result.Add(item.Name);
+            }
+            
+            return result;
+        }
+
         public async Task<string> Register(Register register)
         {
             await CreateStandardRoles();

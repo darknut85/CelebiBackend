@@ -14,9 +14,13 @@
         </div>
         <div>
             <p>Add a role to the user</p>
-            <mat-form-field appearance="fill">
-            Name of role:<mat-label></mat-label>
-            <input matInput [(ngModel)]="user.role">
+            <mat-form-field>
+                Name of role:<mat-label></mat-label>
+            <mat-select [(value)]="selectedRole" (selectionChange)="findRole(selectedRole)">
+                <div *ngFor="let role of allRoles">
+                    <mat-option value={{role.name}}>{{role.name}}</mat-option>
+                </div>
+            </mat-select>
             </mat-form-field>
             
             <div mat-dialog-actions>
@@ -25,8 +29,12 @@
 
             <p>Remove a role from the user</p>
             <mat-form-field appearance="fill">
-            Name of role:<mat-label></mat-label>
-            <input matInput [(ngModel)]="user.role">
+                Name of role:<mat-label></mat-label>
+                <mat-select [(value)]="selectedRole" (selectionChange)="findRole(selectedRole)">
+                    <div *ngFor="let role of roles">
+                        <mat-option value={{role.name}}>{{role.name}}</mat-option>
+                    </div>
+                </mat-select>
             </mat-form-field>
 
             <div mat-dialog-actions>
