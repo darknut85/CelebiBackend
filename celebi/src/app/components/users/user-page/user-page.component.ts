@@ -3,7 +3,6 @@ import { AdminService } from '../admin/admin.service';
 import { User } from 'src/app/objects/user';
 import { ActivatedRoute } from '@angular/router';
 import { Role } from 'src/app/objects/role';
-import { PokemonService } from '../../pokedex/pokedexRedBlue/pokedexRedBlue.service';
 
 @Component({
   selector: 'app-user-page',
@@ -11,7 +10,7 @@ import { PokemonService } from '../../pokedex/pokedexRedBlue/pokedexRedBlue.serv
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent {
-  constructor(private adminService: AdminService, private route: ActivatedRoute, private pokemonService: PokemonService) { }
+  constructor(private adminService: AdminService, private route: ActivatedRoute) { }
 
   userName = "";
   uarray: User[] = [];
