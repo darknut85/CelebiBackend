@@ -25,6 +25,8 @@ export class MovedexPageComponent implements OnInit, DoCheck{
   lbe: LevelByEntry = {level: 0, dexEntry: 0};
 
   userName = "";
+  addMessage = "";
+  removeMessage = "";
   selectedPokemon = 'selectedPokemon';
   lPokemon: Pokemon[] = [];
   tPokemon: Pokemon[] = [];
@@ -144,18 +146,34 @@ export class MovedexPageComponent implements OnInit, DoCheck{
       levelUpMove.isTm = true;
     }
     this.levelupService.addLevelupMove(levelUpMove).subscribe(response => {
-      location.reload();
+      if(response.id == 0)
+      {
+        this.addMessage = "Pokemon was not added to move";
+      }
+      else
+      {
+        this.addMessage = "Pokemon was added to move";
+        location.reload();
+      }
     });
   }
 
   removeLevelupMove(): void{
-    let levelupMove = Number(this.selectedPokemon);
 
-    if(levelupMove != undefined)
+    let levelupMove = Number(this.selectedPokemon);
+    if(levelupMove.toString() == 'NaN')
+    {
+      this.removeMessage = "No pokemon was selected";
+    }
+    else if(levelupMove != undefined && levelupMove != null)
     {
       this.levelupService.removeLevelupMove(levelupMove).subscribe(response => {
+        this.removeMessage = "Pokemon has been removed";
         location.reload();
       });
+    }
+    else{
+      this.removeMessage = "Pokemon could not be removed";
     }
   }
 

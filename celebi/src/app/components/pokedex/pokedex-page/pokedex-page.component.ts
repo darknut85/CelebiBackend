@@ -195,7 +195,7 @@ export class PokedexPageComponent implements OnInit {
     let levelupMove = Number(this.selectedMove);
     if(levelupMove.toString() == 'NaN')
     {
-      this.removeMessage = "Move could selected";
+      this.removeMessage = "No Move was selected";
     }
     else if(levelupMove != undefined && levelupMove != null)
     {
