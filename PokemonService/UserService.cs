@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Migrations;
 using Objects;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mail;
@@ -179,6 +180,10 @@ namespace Services
             try
             {
                 IdentityUser? user = await _userManager.FindByNameAsync(userName);
+                if(user == null)
+                {
+                    return "The user does not exist";
+                }
                 if (user.UserName == "")
                     return "The user does not exist";
 

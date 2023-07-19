@@ -53,8 +53,10 @@ export class UserPageComponent {
   {
     this.adminService.addRole(this.user.role,this.user.userName).subscribe((role: Role) => {
       this.message = role.name;
-      this.refresh();
-      
+      if(this.message == 'The role has been added to the user')
+      {
+        this.refresh();
+      }
     });
   };
 
@@ -62,7 +64,10 @@ export class UserPageComponent {
   {
     this.adminService.removeRole(this.user.role,this.user.userName).subscribe((role: Role) => {
       this.message = role.name;
-      this.refresh();
+      if(this.message == 'The role has been removed from the user')
+      {
+        this.refresh();
+      }
     });
   };
 

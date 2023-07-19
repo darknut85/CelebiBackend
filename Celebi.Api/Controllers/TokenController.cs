@@ -151,10 +151,6 @@ namespace Celebi.Api.Controllers
 
             Role mess = new() { Name = message };
 
-            if (mess.Name != "The role has been added to the user")
-            {
-                return BadRequest(mess);
-            }
             return Ok(mess);
         }
 
