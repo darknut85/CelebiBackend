@@ -152,7 +152,7 @@ namespace Services
             return result;
         }
 
-        public async Task<bool> Register(Register register)
+        public async Task<string> Register(Register register)
         {
             await CreateStandardRoles();
 
@@ -160,35 +160,35 @@ namespace Services
 
             if (register.Username == null || register.Email == null)
             {
-                return false;
-            }
-
-            if (register.Username.Length < 6)
-            {
-                return false;
+                return "some fields are empty";
             }
 
             if (!register.Username.Any(char.IsUpper))
             {
-                return false;
+                return "New username does not contain any capital letters";
+            }
+
+            if (register.Username.Length < 6)
+            {
+                return "New username must be at least 6 characters";
             }
 
             if (userExists != null)
             {
-                return false;
+                return "The username cannot be used";
             }
 
             var regex = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
             bool isValid = Regex.IsMatch(register.Email, regex, RegexOptions.IgnoreCase);
             if (!isValid)
             {
-                return false;
+                return "new email is not a valid email address";
             }
 
             IdentityRole? roleExists = await _roleManager.FindByNameAsync(register.Role);
             if (roleExists == null)
             {
-                return false;
+                return "The role does not exist";
             }
             else
             {
@@ -204,12 +204,21 @@ namespace Services
 
                 await result;
 
+                if(result.Result != IdentityResult.Success)
+                {
+                    return "Password did not meet restrictions";
+                }
+
                 IdentityUser? newUser = await _userManager.FindByNameAsync(register.Username);
                 Task<IdentityResult> irole = _userManager.AddToRoleAsync(newUser, register.Role);
 
                 irole.Wait();
 
-                return irole.IsCompletedSuccessfully;           
+                if(irole.IsCompletedSuccessfully)
+                {
+                    return "User created";
+                }
+                return "User wasn't created";
             }
         }
 

@@ -15,7 +15,7 @@ namespace Interfaces
         IList<string> GetRoles(IdentityUser user);
 
         //register user
-        Task<bool> Register(Register register);
+        Task<string> Register(Register register);
 
         //login user
         Task<string> Login(UserCredential userCredential);

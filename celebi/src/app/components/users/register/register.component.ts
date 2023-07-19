@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit{
   constructor(private formBuilder: FormBuilder, private http: HttpClient, 
     private router: Router, private adminService: AdminService) { }
   userName = "";
+  registerMessage = "";
+
   ngOnInit(): void {
     this.userName = this.adminService.displayLogin();
   }
@@ -38,6 +40,18 @@ export class RegisterComponent implements OnInit{
   
   
     submit(): void {
+      const confirm: User = 
+      {
+        userName: this.form.controls['userName'].value, 
+        email: this.form.controls['email'].value,
+        password: this.form.controls['password'].value,
+        role: 'User'
+      }
+      if(confirm.email == '' || confirm.password == '' || confirm.userName == '')
+      {
+        this.registerMessage = 'One or more fields is empty';
+      }
+
       this.http.post(this.apiURL, this.form.getRawValue(),{responseType:'text'})
         .subscribe( res => 
           {
@@ -49,7 +63,11 @@ export class RegisterComponent implements OnInit{
               role: 'User'
             };
             this.addUser(user);
-            this.router.navigate(['/home']);
+            this.registerMessage = res;
+            if(res == "User created")
+            {
+              this.router.navigate(['/home']);
+            }
   
           },() => this.router.navigate(['/register']));
   }

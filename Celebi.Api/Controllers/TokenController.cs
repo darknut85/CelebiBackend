@@ -93,12 +93,8 @@ namespace Celebi.Api.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] Register register)
         {
-            bool completed = await _userService.Register(register);
-            if (!completed)
-            {
-                return BadRequest("User wasn't created");
-            }
-            return Ok("User created");
+            string result = await _userService.Register(register);
+            return Ok(result);
         }
 
         [HttpPut("ChangePassword")]
